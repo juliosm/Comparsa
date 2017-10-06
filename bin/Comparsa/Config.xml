@@ -1,0 +1,9 @@
+<xml>
+  <DBConnection>
+    <DBShowConfig value="True" />
+    <DBServer value="localhost" />
+    <DBName value="c:\data\comparsa\COMPARSA.FDB" />
+    <DBUser value="SYSDBA" />
+    <DBPass value="4D147Xr3eDxa6k/HXXn5aw==" />
+  </DBConnection>
+</xml>
