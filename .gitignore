@@ -1,0 +1,14 @@
+/lib/Linq2DB/net40/*.pdb
+/lib/Linq2DB/net45/*.pdb
+/code/.vs
+/code/Comparsa/obj
+/code/Comparsa.Data/obj
+/bin/Comparsa/*.dll
+/bin/Comparsa/*.pdb
+/bin/Comparsa/*.exe
+/bin/Comparsa/*.config
+/bin/Comparsa/*.manifest
+/bin/Comparsa.Data/Comparsa.Data.dll
+/bin/Comparsa.Data/Comparsa.Data.pdb
+/bin/Comparsa.Data/*.dll
+/bin/Comparsa.Data/*.pdb
