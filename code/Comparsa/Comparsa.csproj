@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Comparsa</RootNamespace>
     <AssemblyName>Comparsa</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -41,10 +41,7 @@
     </Reference>
     <Reference Include="linq2db, Version=1.9.0.0, Culture=neutral, PublicKeyToken=f19f8aed7feff67e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Linq2DB\net45\linq2db.dll</HintPath>
-    </Reference>
-    <Reference Include="QuanterLibNET">
-      <HintPath>..\..\lib\QuanterLibNET\QuanterLibNET.dll</HintPath>
+      <HintPath>..\..\lib\Linq2DB\net40\linq2db.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -87,6 +84,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\XmlConfig\ConfigSetting.cs" />
+    <Compile Include="Utils\XmlConfig\XmlConfig.cs" />
     <EmbeddedResource Include="Catalogos\frmDetColaborador.resx">
       <DependentUpon>frmDetColaborador.cs</DependentUpon>
     </EmbeddedResource>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using QuanterLibNET;
 using System.IO;
 using System.Windows.Forms;
-using QuanterLibNET.Security;
+using System.Drawing;
 using Comparsa.Data;
 
 namespace Comparsa
@@ -181,6 +181,7 @@ namespace Comparsa
             dbParams.Server = Globals.GXmlConfig.Settings["DBConnection"]["DBServer"].Value;
             dbParams.DBName = Globals.GXmlConfig.Settings["DBConnection"]["DBName"].Value;
             dbParams.User = Globals.GXmlConfig.Settings["DBConnection"]["DBUser"].Value;
+            /*
             if (Globals.GXmlConfig.Settings["DBConnection"]["DBPass"].Value != "")
             {
                 dbParams.Password = SecurityUtils.DecryptString(Globals.GXmlConfig.Settings["DBConnection"]["DBPass"].Value);
@@ -189,6 +190,8 @@ namespace Comparsa
             {
                 dbParams.Password = "";
             }
+            */
+            dbParams.Password = Globals.GXmlConfig.Settings["DBConnection"]["DBPass"].Value;
             if (Globals.GXmlConfig.Settings["DBConnection"]["DBShowConfig"].Value != "")
             {
                 dbParams.ShowConfigDB = Globals.GXmlConfig.Settings["DBConnection"]["DBShowConfig"].boolValue;
@@ -211,8 +214,9 @@ namespace Comparsa
                 Globals.GXmlConfig.Settings["DBConnection"]["DBServer"].Value = dbParams.Server;
                 Globals.GXmlConfig.Settings["DBConnection"]["DBName"].Value = dbParams.DBName;
                 Globals.GXmlConfig.Settings["DBConnection"]["DBUser"].Value = dbParams.User;
-                Globals.GXmlConfig.Settings["DBConnection"]["DBPass"].Value =
-                    SecurityUtils.EncryptString(dbParams.Password);
+                /*Globals.GXmlConfig.Settings["DBConnection"]["DBPass"].Value =
+                    SecurityUtils.EncryptString(dbParams.Password);*/
+                Globals.GXmlConfig.Settings["DBConnection"]["DBPass"].Value = dbParams.Password;
                 Globals.GXmlConfig.Settings["DBConnection"]["DBShowConfig"].boolValue = dbParams.ShowConfigDB;
 
                 Globals.GXmlConfig.Commit();
@@ -258,6 +262,115 @@ namespace Comparsa
         }
 
         #endregion
+
+        public static void LoadWindowConfig(XmlConfig xmlConfig, Form window, bool loadSize, bool loadLocation, bool loadState)
+        {
+
+            Point pointLocation = new Point();
+            Size windowSize = new Size();
+            int windowState = 0;
+
+            if (loadLocation)
+            {
+
+                // Cargar la posición de la ventana
+
+                if (xmlConfig.Settings[window.Name]["Location"]["X"].Value != "")
+                {
+                    if (xmlConfig.Settings[window.Name]["Location"]["X"].intValue > 0)
+                    {
+                        pointLocation.X = xmlConfig.Settings[window.Name]["Location"]["X"].intValue;
+                    }
+                    else
+                    {
+                        pointLocation.X = 0;
+                    }
+                }
+                if (xmlConfig.Settings[window.Name]["Location"]["Y"].Value != "")
+                {
+                    if (xmlConfig.Settings[window.Name]["Location"]["Y"].intValue > 0)
+                    {
+                        pointLocation.Y = xmlConfig.Settings[window.Name]["Location"]["Y"].intValue;
+                    }
+                    else
+                    {
+                        pointLocation.Y = 0;
+                    }
+                }
+
+                if ((pointLocation.X != 0) && (pointLocation.Y != 0))
+                {
+                    window.Location = pointLocation;
+                }
+
+            }
+
+            if (loadSize)
+            {
+
+                // Cargar el tamaño de la ventana
+
+                if (xmlConfig.Settings[window.Name]["Size"]["Height"].Value != "")
+                {
+                    windowSize.Height = xmlConfig.Settings[window.Name]["Size"]["Height"].intValue;
+                }
+                if (xmlConfig.Settings[window.Name]["Size"]["Width"].Value != "")
+                {
+                    windowSize.Width = xmlConfig.Settings[window.Name]["Size"]["Width"].intValue;
+                }
+
+                if ((windowSize.Height > 0) && (windowSize.Width > 0))
+                {
+                    window.Size = windowSize;
+                }
+
+            }
+
+            if (loadState)
+            {
+
+                // Cargar el estado de la ventana
+
+                if (xmlConfig.Settings[window.Name]["State"].intValue != 0)
+                {
+                    windowState = xmlConfig.Settings[window.Name]["State"].intValue;
+                }
+
+                if ((windowState >= 0) && (windowState <= 2))
+                {
+                    window.WindowState = (FormWindowState)windowState;
+                }
+
+            }
+
+        }
+
+        public static void SaveWindowConfig(XmlConfig xmlConfig, Form window, bool saveSize, bool saveLocation, bool saveState)
+        {
+
+            if (saveLocation)
+            {
+                // Guardar la posición de la ventana 
+                xmlConfig.Settings[window.Name]["Location"]["X"].intValue = window.Location.X;
+                xmlConfig.Settings[window.Name]["Location"]["Y"].intValue = window.Location.Y;
+            }
+
+            if (saveSize)
+            {
+                // Guardar el tamaño de la ventana
+                xmlConfig.Settings[window.Name]["Size"]["Height"].intValue = window.Size.Height;
+                xmlConfig.Settings[window.Name]["Size"]["Width"].intValue = window.Size.Width;
+            }
+
+            if (saveState)
+            {
+                // Guardar el estado de la ventana
+                xmlConfig.Settings[window.Name]["State"].intValue = (int)window.WindowState;
+            }
+
+            xmlConfig.Commit();
+
+        }
 
     }
 

@@ -161,12 +161,12 @@ namespace Comparsa
 
         private void LoadWindowConfig()
         {
-            QuanterUtils.LoadWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
+            AppUtils.LoadWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
         }
 
         private void SaveWindowConfig()
         {
-            QuanterUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
+            AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
         }
 
         private void frmDetColaborador_FormClosed(object sender, FormClosedEventArgs e)
