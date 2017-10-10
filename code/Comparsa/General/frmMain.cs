@@ -60,6 +60,16 @@ namespace Comparsa
             this.Close();
         }
 
+        private void localidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMDIChild(typeof(frmListaLocalidad));
+        }
+
+        private void afectadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMDIChild(typeof(frmListaAfectado));
+        }
+
     }
 
 }

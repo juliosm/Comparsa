@@ -1,6 +1,6 @@
 ﻿namespace Comparsa
 {
-    partial class frmListaColaborador
+    partial class frmListaLocalidad
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaColaborador));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaLocalidad));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,20 +39,11 @@
             this.btnBorrar = new System.Windows.Forms.ToolStripButton();
             this.btnCerrar = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.DataGridView();
-            this.colCOLABORADORID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
+            this.colLOCALIDADID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCALLE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNUMEXT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNUMINT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCOLONIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMUNICIPIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colESTADO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTELEFONO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colINSTITUCION = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colESBRIGADISTA = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colESDONANTEN = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -140,19 +131,10 @@
             this.gridView.AutoGenerateColumns = false;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCOLABORADORID,
-            this.colCODIGO,
+            this.colLOCALIDADID,
             this.colNOMBRE,
-            this.colCALLE,
-            this.colNUMEXT,
-            this.colNUMINT,
-            this.colCOLONIA,
             this.colMUNICIPIO,
-            this.colESTADO,
-            this.colTELEFONO,
-            this.colINSTITUCION,
-            this.colESBRIGADISTA,
-            this.colESDONANTEN});
+            this.colESTADO});
             this.gridView.DataSource = this.bindingSourceGrid;
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.Location = new System.Drawing.Point(0, 62);
@@ -174,20 +156,13 @@
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
             // 
-            // colCOLABORADORID
+            // colLOCALIDADID
             // 
-            this.colCOLABORADORID.DataPropertyName = "COLABORADORID";
-            this.colCOLABORADORID.HeaderText = "Id";
-            this.colCOLABORADORID.Name = "colCOLABORADORID";
-            this.colCOLABORADORID.ReadOnly = true;
-            this.colCOLABORADORID.Visible = false;
-            // 
-            // colCODIGO
-            // 
-            this.colCODIGO.DataPropertyName = "CODIGO";
-            this.colCODIGO.HeaderText = "Código";
-            this.colCODIGO.Name = "colCODIGO";
-            this.colCODIGO.ReadOnly = true;
+            this.colLOCALIDADID.DataPropertyName = "LOCALIDADID";
+            this.colLOCALIDADID.HeaderText = "Id";
+            this.colLOCALIDADID.Name = "colLOCALIDADID";
+            this.colLOCALIDADID.ReadOnly = true;
+            this.colLOCALIDADID.Visible = false;
             // 
             // colNOMBRE
             // 
@@ -196,36 +171,6 @@
             this.colNOMBRE.Name = "colNOMBRE";
             this.colNOMBRE.ReadOnly = true;
             this.colNOMBRE.Width = 300;
-            // 
-            // colCALLE
-            // 
-            this.colCALLE.DataPropertyName = "CALLE";
-            this.colCALLE.HeaderText = "Calle";
-            this.colCALLE.Name = "colCALLE";
-            this.colCALLE.ReadOnly = true;
-            this.colCALLE.Width = 200;
-            // 
-            // colNUMEXT
-            // 
-            this.colNUMEXT.DataPropertyName = "NUMEXT";
-            this.colNUMEXT.HeaderText = "Núm. ext.";
-            this.colNUMEXT.Name = "colNUMEXT";
-            this.colNUMEXT.ReadOnly = true;
-            // 
-            // colNUMINT
-            // 
-            this.colNUMINT.DataPropertyName = "NUMINT";
-            this.colNUMINT.HeaderText = "Núm. int.";
-            this.colNUMINT.Name = "colNUMINT";
-            this.colNUMINT.ReadOnly = true;
-            // 
-            // colCOLONIA
-            // 
-            this.colCOLONIA.DataPropertyName = "COLONIA";
-            this.colCOLONIA.HeaderText = "Colonia";
-            this.colCOLONIA.Name = "colCOLONIA";
-            this.colCOLONIA.ReadOnly = true;
-            this.colCOLONIA.Width = 200;
             // 
             // colMUNICIPIO
             // 
@@ -243,48 +188,7 @@
             this.colESTADO.ReadOnly = true;
             this.colESTADO.Width = 200;
             // 
-            // colTELEFONO
-            // 
-            this.colTELEFONO.DataPropertyName = "TELEFONO";
-            this.colTELEFONO.HeaderText = "Teléfono";
-            this.colTELEFONO.Name = "colTELEFONO";
-            this.colTELEFONO.ReadOnly = true;
-            // 
-            // colINSTITUCION
-            // 
-            this.colINSTITUCION.DataPropertyName = "Institución";
-            this.colINSTITUCION.HeaderText = "Institución";
-            this.colINSTITUCION.Name = "colINSTITUCION";
-            this.colINSTITUCION.ReadOnly = true;
-            this.colINSTITUCION.Width = 200;
-            // 
-            // colESBRIGADISTA
-            // 
-            this.colESBRIGADISTA.DataPropertyName = "ESBRIGADISTA";
-            this.colESBRIGADISTA.FalseValue = "0";
-            this.colESBRIGADISTA.HeaderText = "Brigadista";
-            this.colESBRIGADISTA.Name = "colESBRIGADISTA";
-            this.colESBRIGADISTA.ReadOnly = true;
-            this.colESBRIGADISTA.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colESBRIGADISTA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colESBRIGADISTA.TrueValue = "1";
-            // 
-            // colESDONANTEN
-            // 
-            this.colESDONANTEN.DataPropertyName = "ESDONANTE";
-            this.colESDONANTEN.FalseValue = "0";
-            this.colESDONANTEN.HeaderText = "Donante";
-            this.colESDONANTEN.Name = "colESDONANTEN";
-            this.colESDONANTEN.ReadOnly = true;
-            this.colESDONANTEN.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colESDONANTEN.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colESDONANTEN.TrueValue = "1";
-            // 
-            // bindingSourceGrid
-            // 
-            this.bindingSourceGrid.Sort = "NOMBRE";
-            // 
-            // frmListaColaborador
+            // frmListaLocalidad
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(671, 425);
@@ -293,10 +197,10 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
-            this.Name = "frmListaColaborador";
+            this.Name = "frmListaLocalidad";
             this.Text = "Colaboradores";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaColaborador_FormClosed);
-            this.Load += new System.EventHandler(this.frmListaColaborador_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaLocalidad_FormClosed);
+            this.Load += new System.EventHandler(this.frmListaLocalidad_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -319,18 +223,9 @@
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.BindingSource bindingSourceGrid;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCOLABORADORID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCODIGO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLOCALIDADID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNOMBRE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCALLE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNUMEXT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNUMINT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCOLONIA;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMUNICIPIO;
         private System.Windows.Forms.DataGridViewTextBoxColumn colESTADO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTELEFONO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colINSTITUCION;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colESBRIGADISTA;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colESDONANTEN;
     }
 }

@@ -8,6 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using Comparsa.Data;
+using System.Reflection;
 
 namespace Comparsa
 {
@@ -369,6 +370,76 @@ namespace Comparsa
             }
 
             xmlConfig.Commit();
+
+        }
+
+        public static string BindProperty(object property, string propertyName)
+        {
+
+            string retValue;
+
+            retValue = "";
+
+            if (propertyName.Contains("."))
+            {
+                PropertyInfo[] arrayProperties;
+                string leftPropertyName;
+
+                leftPropertyName = propertyName.Substring(0, propertyName.IndexOf("."));
+                arrayProperties = property.GetType().GetProperties();
+
+                foreach (PropertyInfo propertyInfo in arrayProperties)
+                {
+                    if (propertyInfo.Name == leftPropertyName)
+                    {
+                        retValue = BindProperty(propertyInfo.GetValue(property, null), propertyName.Substring(propertyName.IndexOf(".") + 1));
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Type propertyType;
+                PropertyInfo propertyInfo;
+
+                propertyType = property.GetType();
+                propertyInfo = propertyType.GetProperty(propertyName);
+                retValue = propertyInfo.GetValue(property, null).ToString();
+            }
+
+            return retValue;
+
+        }
+
+        public static string GetNombreEstatusAfectado(int estatus)
+        {
+
+            string result = "";
+
+            switch (estatus)
+            {
+
+                case Consts.ESTATUS_AFECTADO_POR_REVISAR:
+                    result = "Por revisar";
+                    break;
+                case Consts.ESTATUS_AFECTADO_AFECTACION_MENOR:
+                    result = "Afectación menor";
+                    break;
+                case Consts.ESTATUS_AFECTADO_AFECTACION_MAYOR:
+                    result = "Afectación mayor";
+                    break;
+                case Consts.ESTATUS_AFECTADO_SIN_DANOS:
+                    result = "Sin daños";
+                    break;
+                case Consts.ESTATUS_AFECTADO_ATENDIDO:
+                    result = "Atendido";
+                    break;
+
+                default:
+                    break;
+            }
+
+            return result;
 
         }
 

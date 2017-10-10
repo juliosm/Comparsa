@@ -1,6 +1,6 @@
 ﻿namespace Comparsa
 {
-    partial class frmListaColaborador
+    partial class frmListaAfectado
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaColaborador));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaAfectado));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,20 +39,20 @@
             this.btnBorrar = new System.Windows.Forms.ToolStripButton();
             this.btnCerrar = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.DataGridView();
-            this.colCOLABORADORID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colESTATUS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCALLE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNUMEXT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNUMINT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCOLONIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMUNICIPIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colESTADO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTELEFONO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colINSTITUCION = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colESBRIGADISTA = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colESDONANTEN = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -76,9 +76,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 17);
+            this.label1.Size = new System.Drawing.Size(76, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Colaboradores";
+            this.label1.Text = "Afectados";
             // 
             // toolStrip
             // 
@@ -140,19 +140,19 @@
             this.gridView.AutoGenerateColumns = false;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCOLABORADORID,
+            this.colID,
             this.colCODIGO,
             this.colNOMBRE,
+            this.colESTATUS,
             this.colCALLE,
             this.colNUMEXT,
             this.colNUMINT,
             this.colCOLONIA,
+            this.Localidad,
             this.colMUNICIPIO,
             this.colESTADO,
             this.colTELEFONO,
-            this.colINSTITUCION,
-            this.colESBRIGADISTA,
-            this.colESDONANTEN});
+            this.Email});
             this.gridView.DataSource = this.bindingSourceGrid;
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.Location = new System.Drawing.Point(0, 62);
@@ -172,15 +172,16 @@
             this.gridView.Size = new System.Drawing.Size(671, 363);
             this.gridView.TabIndex = 2;
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
+            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridView_CellFormatting);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
             // 
-            // colCOLABORADORID
+            // colID
             // 
-            this.colCOLABORADORID.DataPropertyName = "COLABORADORID";
-            this.colCOLABORADORID.HeaderText = "Id";
-            this.colCOLABORADORID.Name = "colCOLABORADORID";
-            this.colCOLABORADORID.ReadOnly = true;
-            this.colCOLABORADORID.Visible = false;
+            this.colID.DataPropertyName = "AFECTADOID";
+            this.colID.HeaderText = "Id";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Visible = false;
             // 
             // colCODIGO
             // 
@@ -196,6 +197,14 @@
             this.colNOMBRE.Name = "colNOMBRE";
             this.colNOMBRE.ReadOnly = true;
             this.colNOMBRE.Width = 300;
+            // 
+            // colESTATUS
+            // 
+            this.colESTATUS.HeaderText = "Estatus";
+            this.colESTATUS.Name = "colESTATUS";
+            this.colESTATUS.ReadOnly = true;
+            this.colESTATUS.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colESTATUS.Width = 150;
             // 
             // colCALLE
             // 
@@ -227,9 +236,16 @@
             this.colCOLONIA.ReadOnly = true;
             this.colCOLONIA.Width = 200;
             // 
+            // Localidad
+            // 
+            this.Localidad.DataPropertyName = "LOCALIDAD.NOMBRE";
+            this.Localidad.HeaderText = "Localidad";
+            this.Localidad.Name = "Localidad";
+            this.Localidad.ReadOnly = true;
+            // 
             // colMUNICIPIO
             // 
-            this.colMUNICIPIO.DataPropertyName = "MUNICIPIO";
+            this.colMUNICIPIO.DataPropertyName = "LOCALIDAD.MUNICIPIO";
             this.colMUNICIPIO.HeaderText = "Municipio";
             this.colMUNICIPIO.Name = "colMUNICIPIO";
             this.colMUNICIPIO.ReadOnly = true;
@@ -237,7 +253,7 @@
             // 
             // colESTADO
             // 
-            this.colESTADO.DataPropertyName = "ESTADO";
+            this.colESTADO.DataPropertyName = "LOCALIDAD.ESTADO";
             this.colESTADO.HeaderText = "Estado";
             this.colESTADO.Name = "colESTADO";
             this.colESTADO.ReadOnly = true;
@@ -249,42 +265,17 @@
             this.colTELEFONO.HeaderText = "Teléfono";
             this.colTELEFONO.Name = "colTELEFONO";
             this.colTELEFONO.ReadOnly = true;
+            this.colTELEFONO.Width = 150;
             // 
-            // colINSTITUCION
+            // Email
             // 
-            this.colINSTITUCION.DataPropertyName = "Institución";
-            this.colINSTITUCION.HeaderText = "Institución";
-            this.colINSTITUCION.Name = "colINSTITUCION";
-            this.colINSTITUCION.ReadOnly = true;
-            this.colINSTITUCION.Width = 200;
+            this.Email.DataPropertyName = "EMAIL";
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            this.Email.Width = 200;
             // 
-            // colESBRIGADISTA
-            // 
-            this.colESBRIGADISTA.DataPropertyName = "ESBRIGADISTA";
-            this.colESBRIGADISTA.FalseValue = "0";
-            this.colESBRIGADISTA.HeaderText = "Brigadista";
-            this.colESBRIGADISTA.Name = "colESBRIGADISTA";
-            this.colESBRIGADISTA.ReadOnly = true;
-            this.colESBRIGADISTA.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colESBRIGADISTA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colESBRIGADISTA.TrueValue = "1";
-            // 
-            // colESDONANTEN
-            // 
-            this.colESDONANTEN.DataPropertyName = "ESDONANTE";
-            this.colESDONANTEN.FalseValue = "0";
-            this.colESDONANTEN.HeaderText = "Donante";
-            this.colESDONANTEN.Name = "colESDONANTEN";
-            this.colESDONANTEN.ReadOnly = true;
-            this.colESDONANTEN.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colESDONANTEN.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colESDONANTEN.TrueValue = "1";
-            // 
-            // bindingSourceGrid
-            // 
-            this.bindingSourceGrid.Sort = "NOMBRE";
-            // 
-            // frmListaColaborador
+            // frmListaAfectado
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(671, 425);
@@ -293,10 +284,10 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
-            this.Name = "frmListaColaborador";
-            this.Text = "Colaboradores";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaColaborador_FormClosed);
-            this.Load += new System.EventHandler(this.frmListaColaborador_Load);
+            this.Name = "frmListaAfectado";
+            this.Text = "Afectados";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaAfectado_FormClosed);
+            this.Load += new System.EventHandler(this.frmListaAfectado_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -319,18 +310,18 @@
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.BindingSource bindingSourceGrid;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCOLABORADORID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCODIGO;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNOMBRE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colESTATUS;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCALLE;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNUMEXT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNUMINT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCOLONIA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Localidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMUNICIPIO;
         private System.Windows.Forms.DataGridViewTextBoxColumn colESTADO;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTELEFONO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colINSTITUCION;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colESBRIGADISTA;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colESDONANTEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
     }
 }

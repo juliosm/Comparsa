@@ -47,7 +47,14 @@ namespace Comparsa.Data
 		[PrimaryKey, NotNull    ] public int    AFECTADOID  { get; set; } // integer
 		[Column,        Nullable] public string CODIGO      { get; set; } // varchar(10)
 		[Column,        Nullable] public string NOMBRE      { get; set; } // varchar(100)
-		[Column,        Nullable] public short? ESTATUS     { get; set; } // smallint
+		/// <summary>
+		/// 1=Por revisar
+		/// 2=Afectación menor
+		/// 3=Afectación mayor
+		/// 4=Sin daños
+		/// 5=Atendido
+		/// </summary>
+		[Column,        Nullable] public int?   ESTATUS     { get; set; } // integer
 		[Column,        Nullable] public string CALLE       { get; set; } // varchar(50)
 		[Column,        Nullable] public string NUMEXT      { get; set; } // varchar(10)
 		[Column,        Nullable] public string NUMINT      { get; set; } // varchar(10)
