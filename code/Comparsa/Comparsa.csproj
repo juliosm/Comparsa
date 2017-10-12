@@ -60,6 +60,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Catalogos\frmBuscarAfectado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmBuscarAfectado.Designer.cs">
+      <DependentUpon>frmBuscarAfectado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Catalogos\frmDetAfectado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,12 @@
     </Compile>
     <Compile Include="Catalogos\frmListaAfectado.Designer.cs">
       <DependentUpon>frmListaAfectado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\frmBuscarColaborador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmBuscarColaborador.Designer.cs">
+      <DependentUpon>frmBuscarColaborador.cs</DependentUpon>
     </Compile>
     <Compile Include="Catalogos\frmListaTipoInsumo.cs">
       <SubType>Form</SubType>
@@ -141,6 +153,9 @@
     <Compile Include="Utils\ListItem.cs" />
     <Compile Include="Utils\XmlConfig\ConfigSetting.cs" />
     <Compile Include="Utils\XmlConfig\XmlConfig.cs" />
+    <EmbeddedResource Include="Catalogos\frmBuscarAfectado.resx">
+      <DependentUpon>frmBuscarAfectado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmDetAfectado.resx">
       <DependentUpon>frmDetAfectado.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmListaAfectado.resx">
       <DependentUpon>frmListaAfectado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\frmBuscarColaborador.resx">
+      <DependentUpon>frmBuscarColaborador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmListaTipoInsumo.resx">
       <DependentUpon>frmListaTipoInsumo.cs</DependentUpon>

@@ -139,16 +139,20 @@ namespace Comparsa
             if (ValidarCaptura())
             {
 
+                int id = 0;
+
                 MapearPantallaAObjeto();
 
                 if (mode == CRUDMode.Create)
                 {
-                    Globals.DataContext.DataConnection.Insert(registro);
+                    id = Globals.DataContext.DataConnection.InsertWithInt32Identity(registro);
+                    registro.AFECTADOID = id;
                 }
                 else if (mode == CRUDMode.Update)
                 {
                     Globals.DataContext.DataConnection.Update(registro);
                 }
+
 
                 GuardarRequerimientosAfectado();
 
@@ -269,29 +273,34 @@ namespace Comparsa
 
             var reg = Globals.DataContext.AFECTADOS.LoadWith(a => a.AFECTADOREQs).FirstOrDefault(x => x.AFECTADOID == registro.AFECTADOID);
 
-            foreach (var afectadoReq in reg.AFECTADOREQs)
+            if (reg.AFECTADOREQs != null)
             {
 
-                var tipoInsumo = (
-                    from t in Globals.DataContext.TIPOSINSUMOS
-                    where t.TIPOINSUMOID == afectadoReq.TIPOINSUMOID
-                    select t).FirstOrDefault();
-
-                int itemIndex = checkListReqs.FindStringExact(tipoInsumo.NOMBRE);
-
-                if (itemIndex != -1)
+                foreach (var afectadoReq in reg.AFECTADOREQs)
                 {
-                    if (checkListReqs.GetItemChecked(itemIndex) == false)
+
+                    var tipoInsumo = (
+                        from t in Globals.DataContext.TIPOSINSUMOS
+                        where t.TIPOINSUMOID == afectadoReq.TIPOINSUMOID
+                        select t).FirstOrDefault();
+
+                    int itemIndex = checkListReqs.FindStringExact(tipoInsumo.NOMBRE);
+
+                    if (itemIndex != -1)
                     {
-                        deleteList.Add(afectadoReq);
+                        if (checkListReqs.GetItemChecked(itemIndex) == false)
+                        {
+                            deleteList.Add(afectadoReq);
+                        }
                     }
+
                 }
 
-            }
+                foreach (AFECTADOREQ afectadoReq in deleteList)
+                {
+                    Globals.DataContext.DataConnection.Delete(afectadoReq);
+                }
 
-            foreach (AFECTADOREQ afectadoReq in deleteList)
-            {
-                Globals.DataContext.DataConnection.Delete(afectadoReq);
             }
 
             // Guardar los proyectos relacionados que se hayan marcado
@@ -302,8 +311,13 @@ namespace Comparsa
 
                 tipoInsumoId = ((TIPOINSUMO)item).TIPOINSUMOID;
 
-                AFECTADOREQ afectadoReq = reg.AFECTADOREQs.FirstOrDefault(
-                    x => x.TIPOINSUMOID == tipoInsumoId);
+                AFECTADOREQ afectadoReq = null;
+
+                if (reg.AFECTADOREQs != null)
+                {
+                    afectadoReq = reg.AFECTADOREQs.FirstOrDefault(
+                        x => x.TIPOINSUMOID == tipoInsumoId);
+                }
 
                 if (afectadoReq == null)
                 {

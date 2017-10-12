@@ -297,6 +297,56 @@ namespace Comparsa
             }
             */
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            BuscarRegistro();
+        }
+
+        private void BuscarRegistro()
+        {
+
+            DialogResult dr = DialogResult.Cancel;
+            AFECTADO registro = null;
+
+            frmBuscarAfectado frmBuscarAfectado = new frmBuscarAfectado();
+            dr = frmBuscarAfectado.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                registro = frmBuscarAfectado.registro;
+            }
+            frmBuscarAfectado.Dispose();
+            frmBuscarAfectado = null;
+
+            if (registro != null)
+            {
+                SeleccionarRegistro(registro.AFECTADOID);
+            }
+
+        }
+
+        private void SeleccionarRegistro(int id)
+        {
+
+            // Quick and dirty sequential search
+
+            int idRow = 0;
+
+            foreach (DataGridViewRow row in gridView.Rows)
+            {
+
+                idRow = Convert.ToInt32(row.Cells["colID"].Value);
+
+                if (idRow == id)
+                {
+                    row.Selected = true;
+                    break;
+                }
+
+            }
+
+        }
+
     }
 
 }

@@ -1,6 +1,6 @@
 ﻿namespace Comparsa
 {
-    partial class frmListaAfectado
+    partial class frmBuscarAfectado
     {
         /// <summary>
         /// Required designer variable.
@@ -29,15 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaAfectado));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnAgregar = new System.Windows.Forms.ToolStripButton();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnBorrar = new System.Windows.Forms.ToolStripButton();
-            this.btnCerrar = new System.Windows.Forms.ToolStripButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.edLocalidad = new System.Windows.Forms.ComboBox();
+            this.bindingSourceLocalidad = new System.Windows.Forms.BindingSource(this.components);
+            this.cbLocalidad = new System.Windows.Forms.CheckBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.edNombre = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.gridView = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,13 +57,12 @@
             this.colESTADO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTELEFONO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnBuscar = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
-            this.toolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -78,69 +82,121 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 17);
+            this.label1.Size = new System.Drawing.Size(116, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Afectados";
+            this.label1.Text = "Buscar afectado";
             // 
-            // toolStrip
+            // panel2
             // 
-            this.toolStrip.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAgregar,
-            this.btnModificar,
-            this.btnBorrar,
-            this.btnCerrar,
-            this.toolStripSeparator1,
-            this.btnBuscar});
-            this.toolStrip.Location = new System.Drawing.Point(0, 37);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(671, 25);
-            this.toolStrip.TabIndex = 1;
-            this.toolStrip.Text = "toolStrip1";
+            this.panel2.Controls.Add(this.edLocalidad);
+            this.panel2.Controls.Add(this.cbLocalidad);
+            this.panel2.Controls.Add(this.btnBuscar);
+            this.panel2.Controls.Add(this.edNombre);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 37);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(671, 78);
+            this.panel2.TabIndex = 3;
             // 
-            // btnAgregar
+            // edLocalidad
             // 
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(69, 22);
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.edLocalidad.DataSource = this.bindingSourceLocalidad;
+            this.edLocalidad.DisplayMember = "NOMBRE";
+            this.edLocalidad.FormattingEnabled = true;
+            this.edLocalidad.Location = new System.Drawing.Point(93, 41);
+            this.edLocalidad.Name = "edLocalidad";
+            this.edLocalidad.Size = new System.Drawing.Size(269, 23);
+            this.edLocalidad.TabIndex = 28;
+            this.edLocalidad.ValueMember = "LOCALIDADID";
+            this.edLocalidad.SelectedIndexChanged += new System.EventHandler(this.edNombre_TextChanged);
             // 
-            // btnModificar
+            // bindingSourceLocalidad
             // 
-            this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(78, 22);
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            this.bindingSourceLocalidad.DataSource = typeof(Comparsa.Data.LOCALIDAD);
             // 
-            // btnBorrar
+            // cbLocalidad
             // 
-            this.btnBorrar.Image = ((System.Drawing.Image)(resources.GetObject("btnBorrar.Image")));
-            this.btnBorrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(59, 22);
-            this.btnBorrar.Text = "Borrar";
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            this.cbLocalidad.AutoSize = true;
+            this.cbLocalidad.Location = new System.Drawing.Point(10, 43);
+            this.cbLocalidad.Name = "cbLocalidad";
+            this.cbLocalidad.Size = new System.Drawing.Size(80, 19);
+            this.cbLocalidad.TabIndex = 27;
+            this.cbLocalidad.Text = "Localidad:";
+            this.cbLocalidad.UseVisualStyleBackColor = true;
+            this.cbLocalidad.CheckedChanged += new System.EventHandler(this.cbLocalidad_CheckedChanged);
             // 
-            // btnCerrar
+            // btnBuscar
             // 
-            this.btnCerrar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnCerrar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
-            this.btnCerrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(43, 22);
-            this.btnCerrar.Text = "Cerrar";
-            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            this.btnBuscar.Location = new System.Drawing.Point(368, 8);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(90, 31);
+            this.btnBuscar.TabIndex = 26;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // edNombre
+            // 
+            this.edNombre.Location = new System.Drawing.Point(93, 12);
+            this.edNombre.Name = "edNombre";
+            this.edNombre.Size = new System.Drawing.Size(269, 23);
+            this.edNombre.TabIndex = 1;
+            this.edNombre.TextChanged += new System.EventHandler(this.edNombre_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Nombre:";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnCancelar);
+            this.panel3.Controls.Add(this.btnAceptar);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 367);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(671, 58);
+            this.panel3.TabIndex = 5;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.Location = new System.Drawing.Point(569, 15);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(90, 31);
+            this.btnCancelar.TabIndex = 26;
+            this.btnCancelar.Text = "&Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAceptar.Location = new System.Drawing.Point(473, 15);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(90, 31);
+            this.btnAceptar.TabIndex = 25;
+            this.btnAceptar.Text = "&Seleccionar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // bindingSourceGrid
+            // 
+            this.bindingSourceGrid.Sort = "";
             // 
             // gridView
             // 
             this.gridView.AllowUserToAddRows = false;
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToOrderColumns = true;
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.AutoGenerateColumns = false;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -158,25 +214,23 @@
             this.colTELEFONO,
             this.Email});
             this.gridView.DataSource = this.bindingSourceGrid;
-            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridView.Location = new System.Drawing.Point(0, 62);
+            this.gridView.Location = new System.Drawing.Point(8, 121);
             this.gridView.MultiSelect = false;
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(671, 363);
-            this.gridView.TabIndex = 2;
+            this.gridView.Size = new System.Drawing.Size(651, 239);
+            this.gridView.TabIndex = 6;
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
-            this.gridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridView_CellFormatting);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
             // 
             // colID
@@ -279,55 +333,50 @@
             this.Email.ReadOnly = true;
             this.Email.Width = 200;
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
-            this.btnBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(62, 22);
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // frmListaAfectado
+            // frmBuscarAfectado
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(671, 425);
             this.Controls.Add(this.gridView);
-            this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
-            this.Name = "frmListaAfectado";
-            this.Text = "Afectados";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaAfectado_FormClosed);
-            this.Load += new System.EventHandler(this.frmListaAfectado_Load);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmBuscarAfectado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Buscar afectado";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmBuscarAfectado_FormClosed);
+            this.Load += new System.EventHandler(this.frmBuscarAfectado_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).EndInit();
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripButton btnAgregar;
-        private System.Windows.Forms.ToolStripButton btnModificar;
-        private System.Windows.Forms.ToolStripButton btnBorrar;
-        private System.Windows.Forms.ToolStripButton btnCerrar;
-        private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.BindingSource bindingSourceGrid;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox edNombre;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.CheckBox cbLocalidad;
+        private System.Windows.Forms.ComboBox edLocalidad;
+        private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCODIGO;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNOMBRE;
@@ -341,7 +390,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colESTADO;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTELEFONO;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnBuscar;
+        private System.Windows.Forms.BindingSource bindingSourceLocalidad;
     }
 }

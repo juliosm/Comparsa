@@ -1,6 +1,6 @@
 ﻿namespace Comparsa
 {
-    partial class frmListaColaborador
+    partial class frmBuscarColaborador
     {
         /// <summary>
         /// Required designer variable.
@@ -29,15 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaColaborador));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnAgregar = new System.Windows.Forms.ToolStripButton();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnBorrar = new System.Windows.Forms.ToolStripButton();
-            this.btnCerrar = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.DataGridView();
             this.colCOLABORADORID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,15 +47,17 @@
             this.colESBRIGADISTA = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colESDONANTEN = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.edNombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
-            this.btnBuscar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
-            this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,69 +78,18 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 17);
+            this.label1.Size = new System.Drawing.Size(141, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Colaboradores";
-            // 
-            // toolStrip
-            // 
-            this.toolStrip.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAgregar,
-            this.btnModificar,
-            this.btnBorrar,
-            this.btnCerrar,
-            this.toolStripSeparator1,
-            this.btnBuscar});
-            this.toolStrip.Location = new System.Drawing.Point(0, 37);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(671, 25);
-            this.toolStrip.TabIndex = 1;
-            this.toolStrip.Text = "toolStrip1";
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(69, 22);
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(78, 22);
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnBorrar
-            // 
-            this.btnBorrar.Image = ((System.Drawing.Image)(resources.GetObject("btnBorrar.Image")));
-            this.btnBorrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(59, 22);
-            this.btnBorrar.Text = "Borrar";
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
-            // 
-            // btnCerrar
-            // 
-            this.btnCerrar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnCerrar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
-            this.btnCerrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(43, 22);
-            this.btnCerrar.Text = "Cerrar";
-            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            this.label1.Text = "Buscar colaborador";
             // 
             // gridView
             // 
             this.gridView.AllowUserToAddRows = false;
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToOrderColumns = true;
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.AutoGenerateColumns = false;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -162,8 +107,7 @@
             this.colESBRIGADISTA,
             this.colESDONANTEN});
             this.gridView.DataSource = this.bindingSourceGrid;
-            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridView.Location = new System.Drawing.Point(0, 109);
+            this.gridView.Location = new System.Drawing.Point(10, 93);
             this.gridView.MultiSelect = false;
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
@@ -177,7 +121,7 @@
             this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(671, 316);
+            this.gridView.Size = new System.Drawing.Size(650, 263);
             this.gridView.TabIndex = 2;
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
@@ -290,84 +234,109 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.btnBuscar);
+            this.panel2.Controls.Add(this.edNombre);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 62);
+            this.panel2.Location = new System.Drawing.Point(0, 37);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(671, 47);
             this.panel2.TabIndex = 3;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(368, 8);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(90, 31);
+            this.btnBuscar.TabIndex = 26;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // edNombre
+            // 
+            this.edNombre.Location = new System.Drawing.Point(70, 12);
+            this.edNombre.Name = "edNombre";
+            this.edNombre.Size = new System.Drawing.Size(292, 23);
+            this.edNombre.TabIndex = 1;
+            this.edNombre.TextChanged += new System.EventHandler(this.edNombre_TextChanged);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 14);
+            this.label2.Location = new System.Drawing.Point(10, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 15);
+            this.label2.Size = new System.Drawing.Size(54, 15);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Buscar:";
+            this.label2.Text = "Nombre:";
             // 
-            // textBox1
+            // panel3
             // 
-            this.textBox1.Location = new System.Drawing.Point(60, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(208, 23);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.panel3.Controls.Add(this.btnCancelar);
+            this.panel3.Controls.Add(this.btnAceptar);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 367);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(671, 58);
+            this.panel3.TabIndex = 5;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.Location = new System.Drawing.Point(569, 15);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(90, 31);
+            this.btnCancelar.TabIndex = 26;
+            this.btnCancelar.Text = "&Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAceptar.Location = new System.Drawing.Point(473, 15);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(90, 31);
+            this.btnAceptar.TabIndex = 25;
+            this.btnAceptar.Text = "&Seleccionar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // bindingSourceGrid
             // 
             this.bindingSourceGrid.Sort = "";
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
-            this.btnBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(62, 22);
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // frmListaColaborador
+            // frmBuscarColaborador
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(671, 425);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
-            this.Name = "frmListaColaborador";
-            this.Text = "Colaboradores";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaColaborador_FormClosed);
-            this.Load += new System.EventHandler(this.frmListaColaborador_Load);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmBuscarColaborador";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Buscar colaborador";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmBuscarColaborador_FormClosed);
+            this.Load += new System.EventHandler(this.frmBuscarColaborador_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripButton btnAgregar;
-        private System.Windows.Forms.ToolStripButton btnModificar;
-        private System.Windows.Forms.ToolStripButton btnBorrar;
-        private System.Windows.Forms.ToolStripButton btnCerrar;
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.BindingSource bindingSourceGrid;
         private System.Windows.Forms.Label label1;
@@ -385,9 +354,11 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colESBRIGADISTA;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colESDONANTEN;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox edNombre;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnBuscar;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }
