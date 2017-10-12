@@ -61,7 +61,7 @@ namespace Comparsa
 
         private void LoadGridData()
         {
-            bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORs;
+            bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -129,7 +129,7 @@ namespace Comparsa
 
                 row = gridView.SelectedRows[0];
                 id = Convert.ToInt32(row.Cells["colCOLABORADORID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.COLABORADORs, id);
+                registro = TableExtensions.Find(Globals.DataContext.COLABORADORES, id);
 
                 if (registro != null)
                 {
@@ -168,7 +168,7 @@ namespace Comparsa
 
                 row = gridView.SelectedRows[0];
                 id = Convert.ToInt32(row.Cells["colCOLABORADORID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.COLABORADORs, id);
+                registro = TableExtensions.Find(Globals.DataContext.COLABORADORES, id);
 
                 frmDetColaborador.registro = registro;
 

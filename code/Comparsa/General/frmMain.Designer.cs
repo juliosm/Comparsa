@@ -102,13 +102,15 @@
             // 
             this.tiposDeArtículosToolStripMenuItem.Name = "tiposDeArtículosToolStripMenuItem";
             this.tiposDeArtículosToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.tiposDeArtículosToolStripMenuItem.Text = "Tipos de artículos";
+            this.tiposDeArtículosToolStripMenuItem.Text = "Tipos de insumos";
+            this.tiposDeArtículosToolStripMenuItem.Click += new System.EventHandler(this.tiposDeArtículosToolStripMenuItem_Click);
             // 
             // articulosToolStripMenuItem
             // 
             this.articulosToolStripMenuItem.Name = "articulosToolStripMenuItem";
             this.articulosToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.articulosToolStripMenuItem.Text = "Artículos";
+            this.articulosToolStripMenuItem.Text = "Insumos";
+            this.articulosToolStripMenuItem.Click += new System.EventHandler(this.articulosToolStripMenuItem_Click);
             // 
             // localidadesToolStripMenuItem
             // 

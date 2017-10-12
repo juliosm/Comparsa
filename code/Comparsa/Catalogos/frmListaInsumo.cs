@@ -14,12 +14,12 @@ using LinqToDB.Data;
 
 namespace Comparsa
 {
-    public partial class frmListaLocalidad : Form
+    public partial class frmListaInsumo : Form
     {
 
-        private static frmListaLocalidad Instance = null;
+        private static frmListaInsumo Instance = null;
 
-        public frmListaLocalidad()
+        public frmListaInsumo()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace Comparsa
         {
             if (Instance == null)
             {
-                Instance = new frmListaLocalidad { MdiParent = mdiParent };
+                Instance = new frmListaInsumo { MdiParent = mdiParent };
                 Instance.Show();
             }
             else
@@ -37,13 +37,13 @@ namespace Comparsa
             }
         }
 
-        private void frmListaLocalidad_Load(object sender, EventArgs e)
+        private void frmListaInsumo_Load(object sender, EventArgs e)
         {
             LoadWindowConfig();
             LoadGridData();
         }
 
-        private void frmListaLocalidad_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmListaInsumo_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveWindowConfig();
             Instance = null;
@@ -61,7 +61,24 @@ namespace Comparsa
 
         private void LoadGridData()
         {
-            bindingSourceGrid.DataSource = Globals.DataContext.LOCALIDADES;
+
+            var queryInsumos = (
+                from a in Globals.DataContext.INSUMOS
+                join ti in Globals.DataContext.TIPOSINSUMOS on a.TIPOINSUMOID equals ti.TIPOINSUMOID
+                select new
+                {
+                    a.INSUMOID,
+                    a.CODIGO,
+                    a.NOMBRE,
+                    a.TOTALENTRADAS,
+                    a.TOTALSALIDAS,
+                    a.EXISTENCIA,
+                    a.TIPOINSUMOID,
+                    NOMBRETIPOINSUMO = ti.NOMBRE
+                });
+
+            bindingSourceGrid.DataSource = queryInsumos;
+
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -125,11 +142,11 @@ namespace Comparsa
 
                 DataGridViewRow row = null;
                 int id = 0;
-                LOCALIDAD registro = null;
+                INSUMO registro = null;
 
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colLOCALIDADID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.LOCALIDADES, id);
+                id = Convert.ToInt32(row.Cells["colINSUMOID"].Value);
+                registro = TableExtensions.Find(Globals.DataContext.INSUMOS, id);
 
                 if (registro != null)
                 {
@@ -137,7 +154,7 @@ namespace Comparsa
                     if (AppUtils.MsgConfirmation("¿Desea borrar el registro seleccionado?", "Por favor confirme"))
                     {
 
-                        Globals.DataContext.DataConnection.Delete<LOCALIDAD>(registro);
+                        Globals.DataContext.DataConnection.Delete(registro);
 
                         LoadGridData();
 
@@ -159,24 +176,24 @@ namespace Comparsa
 
             DataGridViewRow row = null;
             int id = 0;
-            LOCALIDAD registro = null;
+            INSUMO registro = null;
 
             if (mode == CRUDMode.Update)
             {
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colLOCALIDADID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.LOCALIDADES, id);
+                id = Convert.ToInt32(row.Cells["colINSUMOID"].Value);
+                registro = TableExtensions.Find(Globals.DataContext.INSUMOS, id);
             }
 
-            frmDetLocalidad frmDetLocalidad = new frmDetLocalidad();
-            frmDetLocalidad.mode = mode;
+            frmDetInsumo frmDetInsumo = new frmDetInsumo();
+            frmDetInsumo.mode = mode;
             if (mode == CRUDMode.Update)
             {
-                frmDetLocalidad.registro = registro;
+                frmDetInsumo.registro = registro;
             }
-            dr = frmDetLocalidad.ShowDialog();
-            frmDetLocalidad.Dispose();
-            frmDetLocalidad = null;
+            dr = frmDetInsumo.ShowDialog();
+            frmDetInsumo.Dispose();
+            frmDetInsumo = null;
 
             result = dr == DialogResult.OK;
 

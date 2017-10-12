@@ -1,6 +1,6 @@
 ﻿namespace Comparsa
 {
-    partial class frmListaLocalidad
+    partial class frmListaTipoInsumo
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaLocalidad));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaTipoInsumo));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,11 +39,9 @@
             this.btnBorrar = new System.Windows.Forms.ToolStripButton();
             this.btnCerrar = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.DataGridView();
-            this.colLOCALIDADID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMUNICIPIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colESTADO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
+            this.colTIPOINSUMOID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -67,9 +65,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 17);
+            this.label1.Size = new System.Drawing.Size(129, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Colaboradores";
+            this.label1.Text = "Tipos de insumos";
             // 
             // toolStrip
             // 
@@ -131,10 +129,8 @@
             this.gridView.AutoGenerateColumns = false;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colLOCALIDADID,
-            this.colNOMBRE,
-            this.colMUNICIPIO,
-            this.colESTADO});
+            this.colTIPOINSUMOID,
+            this.colNOMBRE});
             this.gridView.DataSource = this.bindingSourceGrid;
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.Location = new System.Drawing.Point(0, 62);
@@ -156,13 +152,13 @@
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
             // 
-            // colLOCALIDADID
+            // colTIPOINSUMOID
             // 
-            this.colLOCALIDADID.DataPropertyName = "LOCALIDADID";
-            this.colLOCALIDADID.HeaderText = "Id";
-            this.colLOCALIDADID.Name = "colLOCALIDADID";
-            this.colLOCALIDADID.ReadOnly = true;
-            this.colLOCALIDADID.Visible = false;
+            this.colTIPOINSUMOID.DataPropertyName = "TIPOINSUMOID";
+            this.colTIPOINSUMOID.HeaderText = "Id";
+            this.colTIPOINSUMOID.Name = "colTIPOINSUMOID";
+            this.colTIPOINSUMOID.ReadOnly = true;
+            this.colTIPOINSUMOID.Visible = false;
             // 
             // colNOMBRE
             // 
@@ -172,23 +168,7 @@
             this.colNOMBRE.ReadOnly = true;
             this.colNOMBRE.Width = 300;
             // 
-            // colMUNICIPIO
-            // 
-            this.colMUNICIPIO.DataPropertyName = "MUNICIPIO";
-            this.colMUNICIPIO.HeaderText = "Municipio";
-            this.colMUNICIPIO.Name = "colMUNICIPIO";
-            this.colMUNICIPIO.ReadOnly = true;
-            this.colMUNICIPIO.Width = 200;
-            // 
-            // colESTADO
-            // 
-            this.colESTADO.DataPropertyName = "ESTADO";
-            this.colESTADO.HeaderText = "Estado";
-            this.colESTADO.Name = "colESTADO";
-            this.colESTADO.ReadOnly = true;
-            this.colESTADO.Width = 200;
-            // 
-            // frmListaLocalidad
+            // frmListaTipoInsumo
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(671, 425);
@@ -197,10 +177,10 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
-            this.Name = "frmListaLocalidad";
-            this.Text = "Colaboradores";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaLocalidad_FormClosed);
-            this.Load += new System.EventHandler(this.frmListaLocalidad_Load);
+            this.Name = "frmListaTipoInsumo";
+            this.Text = "Tipos de insumos";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaTipoInsumo_FormClosed);
+            this.Load += new System.EventHandler(this.frmListaTipoInsumo_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -223,9 +203,7 @@
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.BindingSource bindingSourceGrid;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLOCALIDADID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTIPOINSUMOID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNOMBRE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMUNICIPIO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colESTADO;
     }
 }

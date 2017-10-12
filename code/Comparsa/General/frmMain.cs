@@ -70,6 +70,16 @@ namespace Comparsa
             ShowMDIChild(typeof(frmListaAfectado));
         }
 
+        private void tiposDeArtículosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMDIChild(typeof(frmListaTipoInsumo));
+        }
+
+        private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMDIChild(typeof(frmListaInsumo));
+        }
+
     }
 
 }

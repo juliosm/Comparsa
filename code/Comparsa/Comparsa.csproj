@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Comparsa</RootNamespace>
     <AssemblyName>Comparsa</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -45,6 +45,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +55,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Catalogos\frmDetAfectado.cs">
@@ -60,6 +65,18 @@
     </Compile>
     <Compile Include="Catalogos\frmDetAfectado.Designer.cs">
       <DependentUpon>frmDetAfectado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\frmDetTipoInsumo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmDetTipoInsumo.Designer.cs">
+      <DependentUpon>frmDetTipoInsumo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\frmDetInsumo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmDetInsumo.Designer.cs">
+      <DependentUpon>frmDetInsumo.cs</DependentUpon>
     </Compile>
     <Compile Include="Catalogos\frmDetLocalidad.cs">
       <SubType>Form</SubType>
@@ -78,6 +95,18 @@
     </Compile>
     <Compile Include="Catalogos\frmListaAfectado.Designer.cs">
       <DependentUpon>frmListaAfectado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\frmListaTipoInsumo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmListaTipoInsumo.Designer.cs">
+      <DependentUpon>frmListaTipoInsumo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\frmListaInsumo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmListaInsumo.Designer.cs">
+      <DependentUpon>frmListaInsumo.cs</DependentUpon>
     </Compile>
     <Compile Include="Catalogos\frmListaLocalidad.cs">
       <SubType>Form</SubType>
@@ -115,6 +144,12 @@
     <EmbeddedResource Include="Catalogos\frmDetAfectado.resx">
       <DependentUpon>frmDetAfectado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\frmDetTipoInsumo.resx">
+      <DependentUpon>frmDetTipoInsumo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\frmDetInsumo.resx">
+      <DependentUpon>frmDetInsumo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmDetLocalidad.resx">
       <DependentUpon>frmDetLocalidad.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +158,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmListaAfectado.resx">
       <DependentUpon>frmListaAfectado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\frmListaTipoInsumo.resx">
+      <DependentUpon>frmListaTipoInsumo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\frmListaInsumo.resx">
+      <DependentUpon>frmListaInsumo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmListaLocalidad.resx">
       <DependentUpon>frmListaLocalidad.cs</DependentUpon>
@@ -148,6 +189,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="Properties\DataSources\Comparsa.Data.LOCALIDAD.datasource" />
+    <None Include="Properties\DataSources\Comparsa.Data.TIPOINSUMO.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -164,7 +206,9 @@
       <Name>Comparsa.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Inventario\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

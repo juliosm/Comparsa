@@ -55,7 +55,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.edLocalidad = new System.Windows.Forms.ComboBox();
-            this.bindingSourceLocalidad = new System.Windows.Forms.BindingSource(this.components);
             this.edColonia = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.edNumInt = new System.Windows.Forms.TextBox();
@@ -64,13 +63,19 @@
             this.label4 = new System.Windows.Forms.Label();
             this.edCalle = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.checkListReqs = new System.Windows.Forms.CheckedListBox();
+            this.bindingSourceReq = new System.Windows.Forms.BindingSource(this.components);
             this.edEstatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.bindingSourceLocalidad = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,16 +97,16 @@
             this.lbTitulo.ForeColor = System.Drawing.Color.White;
             this.lbTitulo.Location = new System.Drawing.Point(8, 10);
             this.lbTitulo.Name = "lbTitulo";
-            this.lbTitulo.Size = new System.Drawing.Size(95, 17);
+            this.lbTitulo.Size = new System.Drawing.Size(69, 17);
             this.lbTitulo.TabIndex = 2;
-            this.lbTitulo.Text = "Colaborador";
+            this.lbTitulo.Text = "Afectado";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Controls.Add(this.btnAceptar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 453);
+            this.panel2.Location = new System.Drawing.Point(0, 445);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(509, 58);
             this.panel2.TabIndex = 4;
@@ -167,10 +172,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 95);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(488, 350);
+            this.tabControl1.Size = new System.Drawing.Size(488, 342);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage2
@@ -186,7 +192,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(480, 322);
+            this.tabPage2.Size = new System.Drawing.Size(480, 314);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Generales";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -273,10 +279,10 @@
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.edCalle);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(480, 322);
+            this.tabPage1.Size = new System.Drawing.Size(480, 316);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Domicilio";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -335,10 +341,6 @@
             this.edLocalidad.TabIndex = 18;
             this.edLocalidad.ValueMember = "LOCALIDADID";
             this.edLocalidad.SelectedIndexChanged += new System.EventHandler(this.edLocalidad_SelectedIndexChanged);
-            // 
-            // bindingSourceLocalidad
-            // 
-            this.bindingSourceLocalidad.DataSource = typeof(Comparsa.Data.LOCALIDAD);
             // 
             // edColonia
             // 
@@ -404,6 +406,28 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Calle";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.checkListReqs);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(480, 314);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Requerimientos";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // checkListReqs
+            // 
+            this.checkListReqs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkListReqs.CheckOnClick = true;
+            this.checkListReqs.FormattingEnabled = true;
+            this.checkListReqs.Location = new System.Drawing.Point(11, 10);
+            this.checkListReqs.Name = "checkListReqs";
+            this.checkListReqs.Size = new System.Drawing.Size(297, 274);
+            this.checkListReqs.TabIndex = 0;
+            // 
             // edEstatus
             // 
             this.edEstatus.DisplayMember = "Display";
@@ -429,10 +453,14 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Estatus";
             // 
+            // bindingSourceLocalidad
+            // 
+            this.bindingSourceLocalidad.DataSource = typeof(Comparsa.Data.LOCALIDAD);
+            // 
             // frmDetAfectado
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(509, 511);
+            this.ClientSize = new System.Drawing.Size(509, 503);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.edEstatus);
             this.Controls.Add(this.tabControl1);
@@ -447,7 +475,7 @@
             this.MinimizeBox = false;
             this.Name = "frmDetAfectado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Colaborador";
+            this.Text = "Afectado";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDetAfectado_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDetAfectado_FormClosed);
             this.Load += new System.EventHandler(this.frmDetAfectado_Load);
@@ -459,6 +487,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -504,5 +534,8 @@
         private System.Windows.Forms.TextBox edMunicipio;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.BindingSource bindingSourceLocalidad;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.BindingSource bindingSourceReq;
+        private System.Windows.Forms.CheckedListBox checkListReqs;
     }
 }

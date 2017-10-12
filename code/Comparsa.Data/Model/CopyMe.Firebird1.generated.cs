@@ -20,12 +20,13 @@ namespace Comparsa.Data
 	/// </summary>
 	public partial class COMPARSADB : LinqToDB.Data.DataConnection
 	{
-		public ITable<AFECTADO>     AFECTADOes     { get { return this.GetTable<AFECTADO>(); } }
-		public ITable<ARTICULO>     ARTICULOes     { get { return this.GetTable<ARTICULO>(); } }
-		public ITable<COLABORADOR>  COLABORADORs   { get { return this.GetTable<COLABORADOR>(); } }
-		public ITable<ENTRADA>      ENTRADAs       { get { return this.GetTable<ENTRADA>(); } }
-		public ITable<LOCALIDAD>    LOCALIDADs     { get { return this.GetTable<LOCALIDAD>(); } }
-		public ITable<TIPOARTICULO> TIPOARTICULOes { get { return this.GetTable<TIPOARTICULO>(); } }
+		public ITable<AFECTADO>    AFECTADOes   { get { return this.GetTable<AFECTADO>(); } }
+		public ITable<AFECTADOREQ> AFECTADOREQs { get { return this.GetTable<AFECTADOREQ>(); } }
+		public ITable<COLABORADOR> COLABORADORs { get { return this.GetTable<COLABORADOR>(); } }
+		public ITable<ENTRADA>     ENTRADAs     { get { return this.GetTable<ENTRADA>(); } }
+		public ITable<INSUMO>      INSUMOes     { get { return this.GetTable<INSUMO>(); } }
+		public ITable<LOCALIDAD>   LOCALIDADs   { get { return this.GetTable<LOCALIDAD>(); } }
+		public ITable<TIPOINSUMO>  TIPOINSUMOes { get { return this.GetTable<TIPOINSUMO>(); } }
 
 		public COMPARSADB()
 		{
@@ -59,6 +60,7 @@ namespace Comparsa.Data
 		[Column,        Nullable] public string NUMEXT      { get; set; } // varchar(10)
 		[Column,        Nullable] public string NUMINT      { get; set; } // varchar(10)
 		[Column,        Nullable] public string COLONIA     { get; set; } // varchar(50)
+		[Column,        Nullable] public int?   LOCALIDADID { get; set; } // integer
 		[Column,        Nullable] public string MUNICIPIO   { get; set; } // varchar(50)
 		[Column,        Nullable] public string ESTADO      { get; set; } // varchar(50)
 		[Column,        Nullable] public string TELEFONO    { get; set; } // varchar(50)
@@ -67,9 +69,14 @@ namespace Comparsa.Data
 		[Column,        Nullable] public string FACEBOOK    { get; set; } // varchar(200)
 		[Column,        Nullable] public string DICTAMEN    { get; set; } // blob sub_type 1
 		[Column,        Nullable] public string NOTAS       { get; set; } // blob sub_type 1
-		[Column,        Nullable] public int?   LOCALIDADID { get; set; } // integer
 
 		#region Associations
+
+		/// <summary>
+		/// FK_AFECTADOREQ_AFECTADO_BackReference
+		/// </summary>
+		[Association(ThisKey="AFECTADOID", OtherKey="AFECTADOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<AFECTADOREQ> AFECTADOREQs { get; set; }
 
 		/// <summary>
 		/// FK_AFECTADO_LOCALIDAD
@@ -80,23 +87,26 @@ namespace Comparsa.Data
 		#endregion
 	}
 
-	[Table("ARTICULO")]
-	public partial class ARTICULO
+	[Table("AFECTADOREQ")]
+	public partial class AFECTADOREQ
 	{
-		[PrimaryKey, NotNull    ] public int    ARTICULOID     { get; set; } // integer
-		[Column,        Nullable] public string CODIGO         { get; set; } // varchar(20)
-		[Column,        Nullable] public string NOMBRE         { get; set; } // varchar(100)
-		[Column,        Nullable] public int?   TIPOARTICULOID { get; set; } // integer
-		[Column,        Nullable] public int?   TOTALENTRADAS  { get; set; } // integer
-		[Column,        Nullable] public int?   TOTALSALIDAS   { get; set; } // integer
+		[PrimaryKey, NotNull    ] public int  AFECTADOREQID { get; set; } // integer
+		[Column,        Nullable] public int? AFECTADOID    { get; set; } // integer
+		[Column,        Nullable] public int? TIPOINSUMOID  { get; set; } // integer
 
 		#region Associations
 
 		/// <summary>
-		/// FK_ARTICULO_TIPOARTICULO
+		/// FK_AFECTADOREQ_AFECTADO
 		/// </summary>
-		[Association(ThisKey="TIPOARTICULOID", OtherKey="TIPOARTICULOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_ARTICULO_TIPOARTICULO", BackReferenceName="ARTICULOes")]
-		public TIPOARTICULO TIPOARTICULO { get; set; }
+		[Association(ThisKey="AFECTADOID", OtherKey="AFECTADOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_AFECTADOREQ_AFECTADO", BackReferenceName="AFECTADOREQs")]
+		public AFECTADO AFECTADO { get; set; }
+
+		/// <summary>
+		/// FK_AFECTADOREQ_TIPOINSUMO
+		/// </summary>
+		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_AFECTADOREQ_TIPOINSUMO", BackReferenceName="AFECTADOREQs")]
+		public TIPOINSUMO TIPOINSUMO { get; set; }
 
 		#endregion
 	}
@@ -137,6 +147,29 @@ namespace Comparsa.Data
 		[Column,        Nullable] public string    NOTAS         { get; set; } // blob sub_type 1
 	}
 
+	[Table("INSUMO")]
+	public partial class INSUMO
+	{
+		[PrimaryKey, NotNull    ] public int    INSUMOID      { get; set; } // integer
+		[Column,        Nullable] public string CODIGO        { get; set; } // varchar(20)
+		[Column,        Nullable] public string NOMBRE        { get; set; } // varchar(100)
+		[Column,        Nullable] public int?   TIPOINSUMOID  { get; set; } // integer
+		[Column,        Nullable] public int?   TOTALENTRADAS { get; set; } // integer
+		[Column,        Nullable] public int?   TOTALSALIDAS  { get; set; } // integer
+		[Column,        Nullable] public int?   EXISTENCIA    { get; set; } // integer
+		[Column,        Nullable] public string NOTAS         { get; set; } // blob sub_type 1
+
+		#region Associations
+
+		/// <summary>
+		/// FK_INSUMO
+		/// </summary>
+		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_INSUMO", BackReferenceName="INSUMOes")]
+		public TIPOINSUMO TIPOINSUMO { get; set; }
+
+		#endregion
+	}
+
 	[Table("LOCALIDAD")]
 	public partial class LOCALIDAD
 	{
@@ -157,19 +190,25 @@ namespace Comparsa.Data
 		#endregion
 	}
 
-	[Table("TIPOARTICULO")]
-	public partial class TIPOARTICULO
+	[Table("TIPOINSUMO")]
+	public partial class TIPOINSUMO
 	{
-		[PrimaryKey, NotNull    ] public int    TIPOARTICULOID { get; set; } // integer
-		[Column,        Nullable] public string NOMBRE         { get; set; } // varchar(100)
+		[PrimaryKey, NotNull    ] public int    TIPOINSUMOID { get; set; } // integer
+		[Column,        Nullable] public string NOMBRE       { get; set; } // varchar(100)
 
 		#region Associations
 
 		/// <summary>
-		/// FK_ARTICULO_TIPOARTICULO_BackReference
+		/// FK_AFECTADOREQ_TIPOINSUMO_BackReference
 		/// </summary>
-		[Association(ThisKey="TIPOARTICULOID", OtherKey="TIPOARTICULOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<ARTICULO> ARTICULOes { get; set; }
+		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<AFECTADOREQ> AFECTADOREQs { get; set; }
+
+		/// <summary>
+		/// FK_INSUMO_BackReference
+		/// </summary>
+		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<INSUMO> INSUMOes { get; set; }
 
 		#endregion
 	}
@@ -182,10 +221,10 @@ namespace Comparsa.Data
 				t.AFECTADOID == AFECTADOID);
 		}
 
-		public static ARTICULO Find(this ITable<ARTICULO> table, int ARTICULOID)
+		public static AFECTADOREQ Find(this ITable<AFECTADOREQ> table, int AFECTADOREQID)
 		{
 			return table.FirstOrDefault(t =>
-				t.ARTICULOID == ARTICULOID);
+				t.AFECTADOREQID == AFECTADOREQID);
 		}
 
 		public static COLABORADOR Find(this ITable<COLABORADOR> table, int COLABORADORID)
@@ -200,16 +239,22 @@ namespace Comparsa.Data
 				t.ENTRADAID == ENTRADAID);
 		}
 
+		public static INSUMO Find(this ITable<INSUMO> table, int INSUMOID)
+		{
+			return table.FirstOrDefault(t =>
+				t.INSUMOID == INSUMOID);
+		}
+
 		public static LOCALIDAD Find(this ITable<LOCALIDAD> table, int LOCALIDADID)
 		{
 			return table.FirstOrDefault(t =>
 				t.LOCALIDADID == LOCALIDADID);
 		}
 
-		public static TIPOARTICULO Find(this ITable<TIPOARTICULO> table, int TIPOARTICULOID)
+		public static TIPOINSUMO Find(this ITable<TIPOINSUMO> table, int TIPOINSUMOID)
 		{
 			return table.FirstOrDefault(t =>
-				t.TIPOARTICULOID == TIPOARTICULOID);
+				t.TIPOINSUMOID == TIPOINSUMOID);
 		}
 	}
 }

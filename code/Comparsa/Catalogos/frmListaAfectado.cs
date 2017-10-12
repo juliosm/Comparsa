@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 using QuanterLibNET;
 using Comparsa.Data;
 using LinqToDB;
@@ -61,7 +62,29 @@ namespace Comparsa
 
         private void LoadGridData()
         {
-            bindingSourceGrid.DataSource = Globals.DataContext.AFECTADOes;
+
+            var queryAfectados = (
+                from a in Globals.DataContext.AFECTADOS
+                join l in Globals.DataContext.LOCALIDADES on a.LOCALIDADID equals l.LOCALIDADID
+                select new
+                {
+                    a.AFECTADOID,
+                    a.CODIGO,
+                    a.NOMBRE,
+                    a.ESTATUS,
+                    a.CALLE,
+                    a.NUMEXT,
+                    a.NUMINT,
+                    a.COLONIA,
+                    NOMBRELOCALIDAD = l.NOMBRE,
+                    l.MUNICIPIO,
+                    l.ESTADO,
+                    a.TELEFONO,
+                    a.EMAIL
+                });
+
+            bindingSourceGrid.DataSource = queryAfectados;
+
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -129,7 +152,7 @@ namespace Comparsa
 
                 row = gridView.SelectedRows[0];
                 id = Convert.ToInt32(row.Cells["colID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.AFECTADOes, id);
+                registro = TableExtensions.Find(Globals.DataContext.AFECTADOS, id);
 
                 if (registro != null)
                 {
@@ -164,7 +187,7 @@ namespace Comparsa
             {
                 row = gridView.SelectedRows[0];
                 id = Convert.ToInt32(row.Cells["colID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.AFECTADOes, id);
+                registro = TableExtensions.Find(Globals.DataContext.AFECTADOS, id);
             }
 
             if ((mode == CRUDMode.Create) || ((registro != null) && (mode != CRUDMode.Create)))
@@ -239,32 +262,40 @@ namespace Comparsa
 
         private void gridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            /*
+            var registro = gridView.Rows[e.RowIndex].DataBoundItem;
 
-            AFECTADO registro = (AFECTADO)gridView.Rows[e.RowIndex].DataBoundItem;
-
-            var reg = Globals.DataContext.AFECTADOes.LoadWith(a => a.LOCALIDAD).FirstOrDefault(x => x.AFECTADOID == registro.AFECTADOID);
+            //var reg = Globals.DataContext.AFECTADOes.LoadWith(a => a.LOCALIDAD).FirstOrDefault(x => x.AFECTADOID == registro);
 
             if ((gridView.Rows[e.RowIndex].DataBoundItem != null) &&
                 (gridView.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
             {
                 e.Value = AppUtils.BindProperty(
-                        reg,
+                        registro,
                         gridView.Columns[e.ColumnIndex].DataPropertyName
                       );
             }
             else
             {
 
+                Type propertyType;
+                PropertyInfo propertyInfo;
+                string estatus = "";
+
+                propertyType = registro.GetType();
+                propertyInfo = propertyType.GetProperty("ESTATUS");
+                estatus = propertyInfo.GetValue(registro, null).ToString();
+
                 if (e.ColumnIndex == colESTATUS.Index)
                 {
-                    if (registro.ESTATUS != null)
+                    if (estatus != null)
                     {
-                        e.Value = AppUtils.GetNombreEstatusAfectado(registro.ESTATUS.Value);
+                        e.Value = AppUtils.GetNombreEstatusAfectado(Convert.ToInt32(estatus));
                     }
                 }
 
             }
-
+            */
         }
     }
 

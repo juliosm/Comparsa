@@ -39,7 +39,6 @@
             this.btnBorrar = new System.Windows.Forms.ToolStripButton();
             this.btnCerrar = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.DataGridView();
-            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +52,7 @@
             this.colESTADO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTELEFONO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -238,14 +238,14 @@
             // 
             // Localidad
             // 
-            this.Localidad.DataPropertyName = "LOCALIDAD.NOMBRE";
+            this.Localidad.DataPropertyName = "NOMBRELOCALIDAD";
             this.Localidad.HeaderText = "Localidad";
             this.Localidad.Name = "Localidad";
             this.Localidad.ReadOnly = true;
             // 
             // colMUNICIPIO
             // 
-            this.colMUNICIPIO.DataPropertyName = "LOCALIDAD.MUNICIPIO";
+            this.colMUNICIPIO.DataPropertyName = "MUNICIPIO";
             this.colMUNICIPIO.HeaderText = "Municipio";
             this.colMUNICIPIO.Name = "colMUNICIPIO";
             this.colMUNICIPIO.ReadOnly = true;
@@ -253,7 +253,7 @@
             // 
             // colESTADO
             // 
-            this.colESTADO.DataPropertyName = "LOCALIDAD.ESTADO";
+            this.colESTADO.DataPropertyName = "ESTADO";
             this.colESTADO.HeaderText = "Estado";
             this.colESTADO.Name = "colESTADO";
             this.colESTADO.ReadOnly = true;

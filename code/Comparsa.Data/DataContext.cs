@@ -18,12 +18,13 @@ namespace Comparsa.Data
         public DataConnection DataConnection = null;
         public bool IsConnected = false;
 
-        public ITable<AFECTADO> AFECTADOes { get { return this.DataConnection.GetTable<AFECTADO>(); } }
-        public ITable<ARTICULO> ARTICULOes { get { return this.DataConnection.GetTable<ARTICULO>(); } }
-        public ITable<COLABORADOR> COLABORADORs { get { return this.DataConnection.GetTable<COLABORADOR>(); } }
-        public ITable<ENTRADA> ENTRADAs { get { return this.DataConnection.GetTable<ENTRADA>(); } }
-        public ITable<LOCALIDAD> LOCALIDADs { get { return this.DataConnection.GetTable<LOCALIDAD>(); } }
-        public ITable<TIPOARTICULO> TIPOARTICULOes { get { return this.DataConnection.GetTable<TIPOARTICULO>(); } }
+        public ITable<AFECTADO> AFECTADOS { get { return this.DataConnection.GetTable<AFECTADO>(); } }
+        public ITable<AFECTADOREQ> AFECTADOREQS { get { return this.DataConnection.GetTable<AFECTADOREQ>(); } }
+        public ITable<INSUMO> INSUMOS { get { return this.DataConnection.GetTable<INSUMO>(); } }
+        public ITable<COLABORADOR> COLABORADORES { get { return this.DataConnection.GetTable<COLABORADOR>(); } }
+        public ITable<ENTRADA> ENTRADAS { get { return this.DataConnection.GetTable<ENTRADA>(); } }
+        public ITable<LOCALIDAD> LOCALIDADES { get { return this.DataConnection.GetTable<LOCALIDAD>(); } }
+        public ITable<TIPOINSUMO> TIPOSINSUMOS { get { return this.DataConnection.GetTable<TIPOINSUMO>(); } }
 
         public DataConnection GetFirebirdConnection(string connectionString)
         {
@@ -46,6 +47,9 @@ namespace Comparsa.Data
 
                 if (this.DataConnection.Connection != null)
                 {
+
+                    LinqToDB.Common.Configuration.Linq.AllowMultipleQuery = true;
+
                     IsConnected = true;
                 }
 

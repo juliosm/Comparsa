@@ -14,12 +14,12 @@ using LinqToDB.Data;
 
 namespace Comparsa
 {
-    public partial class frmListaLocalidad : Form
+    public partial class frmListaTipoInsumo : Form
     {
 
-        private static frmListaLocalidad Instance = null;
+        private static frmListaTipoInsumo Instance = null;
 
-        public frmListaLocalidad()
+        public frmListaTipoInsumo()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace Comparsa
         {
             if (Instance == null)
             {
-                Instance = new frmListaLocalidad { MdiParent = mdiParent };
+                Instance = new frmListaTipoInsumo { MdiParent = mdiParent };
                 Instance.Show();
             }
             else
@@ -37,13 +37,13 @@ namespace Comparsa
             }
         }
 
-        private void frmListaLocalidad_Load(object sender, EventArgs e)
+        private void frmListaTipoInsumo_Load(object sender, EventArgs e)
         {
             LoadWindowConfig();
             LoadGridData();
         }
 
-        private void frmListaLocalidad_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmListaTipoInsumo_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveWindowConfig();
             Instance = null;
@@ -61,7 +61,7 @@ namespace Comparsa
 
         private void LoadGridData()
         {
-            bindingSourceGrid.DataSource = Globals.DataContext.LOCALIDADES;
+            bindingSourceGrid.DataSource = Globals.DataContext.TIPOSINSUMOS;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -125,11 +125,11 @@ namespace Comparsa
 
                 DataGridViewRow row = null;
                 int id = 0;
-                LOCALIDAD registro = null;
+                TIPOINSUMO registro = null;
 
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colLOCALIDADID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.LOCALIDADES, id);
+                id = Convert.ToInt32(row.Cells["colTIPOINSUMOID"].Value);
+                registro = TableExtensions.Find(Globals.DataContext.TIPOSINSUMOS, id);
 
                 if (registro != null)
                 {
@@ -137,7 +137,7 @@ namespace Comparsa
                     if (AppUtils.MsgConfirmation("¿Desea borrar el registro seleccionado?", "Por favor confirme"))
                     {
 
-                        Globals.DataContext.DataConnection.Delete<LOCALIDAD>(registro);
+                        Globals.DataContext.DataConnection.Delete(registro);
 
                         LoadGridData();
 
@@ -159,24 +159,24 @@ namespace Comparsa
 
             DataGridViewRow row = null;
             int id = 0;
-            LOCALIDAD registro = null;
+            TIPOINSUMO registro = null;
 
             if (mode == CRUDMode.Update)
             {
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colLOCALIDADID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.LOCALIDADES, id);
+                id = Convert.ToInt32(row.Cells["colTIPOINSUMOID"].Value);
+                registro = TableExtensions.Find(Globals.DataContext.TIPOSINSUMOS, id);
             }
 
-            frmDetLocalidad frmDetLocalidad = new frmDetLocalidad();
-            frmDetLocalidad.mode = mode;
+            frmDetTipoInsumo frmDetTipoInsumo = new frmDetTipoInsumo();
+            frmDetTipoInsumo.mode = mode;
             if (mode == CRUDMode.Update)
             {
-                frmDetLocalidad.registro = registro;
+                frmDetTipoInsumo.registro = registro;
             }
-            dr = frmDetLocalidad.ShowDialog();
-            frmDetLocalidad.Dispose();
-            frmDetLocalidad = null;
+            dr = frmDetTipoInsumo.ShowDialog();
+            frmDetTipoInsumo.Dispose();
+            frmDetTipoInsumo = null;
 
             result = dr == DialogResult.OK;
 
