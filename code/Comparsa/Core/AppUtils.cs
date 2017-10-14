@@ -151,18 +151,6 @@ namespace Comparsa
                     AppUtils.MsgError(errorMessage, "error");
                 }
 
-                /*
-                if (Globals.DataContext.ConnectDatabase(connectionString, ref errorMessage))
-                {
-                    Globals.GDBParams = dbParams;
-                    result = true;
-                }
-                else
-                {
-                    MessageBox.Show(errorMessage);
-                }
-                */
-
             }
             catch (Exception e)
             {

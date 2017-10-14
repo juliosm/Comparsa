@@ -77,13 +77,18 @@ namespace Comparsa
 
                 MapearPantallaAObjeto();
 
-                if (mode == CRUDMode.Create)
+                using (var db = Globals.DataContext.CreateDataConnection())
                 {
-                    Globals.DataContext.DataConnection.Insert<COLABORADOR>(registro);
-                }
-                else if (mode == CRUDMode.Update)
-                {
-                    Globals.DataContext.DataConnection.Update<COLABORADOR>(registro);
+
+                    if (mode == CRUDMode.Create)
+                    {
+                        db.InsertWithIdentity(registro);
+                    }
+                    else if (mode == CRUDMode.Update)
+                    {
+                        db.Update(registro);
+                    }
+
                 }
 
                 this.DialogResult = DialogResult.OK;

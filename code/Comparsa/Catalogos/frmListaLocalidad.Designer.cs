@@ -67,9 +67,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(8, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 17);
+            this.label1.Size = new System.Drawing.Size(88, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Colaboradores";
+            this.label1.Text = "Localidades";
             // 
             // toolStrip
             // 
@@ -198,7 +198,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
             this.Name = "frmListaLocalidad";
-            this.Text = "Colaboradores";
+            this.Text = "Localidades";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaLocalidad_FormClosed);
             this.Load += new System.EventHandler(this.frmListaLocalidad_Load);
             this.panel1.ResumeLayout(false);

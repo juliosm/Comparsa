@@ -38,6 +38,8 @@
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnBorrar = new System.Windows.Forms.ToolStripButton();
             this.btnCerrar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnBuscar = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.DataGridView();
             this.colCOLABORADORID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,17 +54,15 @@
             this.colINSTITUCION = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colESBRIGADISTA = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colESDONANTEN = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
-            this.btnBuscar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.edBusqueda = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -140,6 +140,20 @@
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
+            this.btnBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(62, 22);
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // gridView
             // 
             this.gridView.AllowUserToAddRows = false;
@@ -163,7 +177,7 @@
             this.colESDONANTEN});
             this.gridView.DataSource = this.bindingSourceGrid;
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridView.Location = new System.Drawing.Point(0, 109);
+            this.gridView.Location = new System.Drawing.Point(0, 107);
             this.gridView.MultiSelect = false;
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
@@ -177,7 +191,7 @@
             this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(671, 316);
+            this.gridView.Size = new System.Drawing.Size(671, 318);
             this.gridView.TabIndex = 2;
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
@@ -288,15 +302,27 @@
             this.colESDONANTEN.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colESDONANTEN.TrueValue = "1";
             // 
+            // bindingSourceGrid
+            // 
+            this.bindingSourceGrid.Sort = "";
+            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.edBusqueda);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 62);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(671, 47);
+            this.panel2.Size = new System.Drawing.Size(671, 45);
             this.panel2.TabIndex = 3;
+            // 
+            // edBusqueda
+            // 
+            this.edBusqueda.Location = new System.Drawing.Point(60, 10);
+            this.edBusqueda.Name = "edBusqueda";
+            this.edBusqueda.Size = new System.Drawing.Size(208, 23);
+            this.edBusqueda.TabIndex = 1;
+            this.edBusqueda.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 
@@ -306,32 +332,6 @@
             this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "Buscar:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(60, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(208, 23);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // bindingSourceGrid
-            // 
-            this.bindingSourceGrid.Sort = "";
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
-            this.btnBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(62, 22);
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // frmListaColaborador
             // 
@@ -352,9 +352,9 @@
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -385,7 +385,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colESBRIGADISTA;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colESDONANTEN;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox edBusqueda;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnBuscar;

@@ -61,7 +61,12 @@ namespace Comparsa
 
         private void LoadGridData()
         {
-            bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
+
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                bindingSourceGrid.DataSource = db.GetTable<COLABORADOR>().ToList();
+            }
+
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -168,7 +173,7 @@ namespace Comparsa
 
                 row = gridView.SelectedRows[0];
                 id = Convert.ToInt32(row.Cells["colCOLABORADORID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.COLABORADORES, id);
+                registro = (COLABORADOR)row.DataBoundItem;
 
                 frmDetColaborador.registro = registro;
 
@@ -234,10 +239,12 @@ namespace Comparsa
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string keyword = textBox1.Text.ToUpper();
+
+            string keyword = edBusqueda.Text.ToUpper();
 
             if (keyword.Length > 0)
             {
+
                 var query = (
                     from c in Globals.DataContext.COLABORADORES
                     where
@@ -245,11 +252,13 @@ namespace Comparsa
                     select c);
 
                 bindingSourceGrid.DataSource = query;
-            } else
-            {
-                bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
 
             }
+            else
+            {
+                bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
+            }
+
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
