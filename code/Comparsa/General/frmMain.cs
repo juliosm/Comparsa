@@ -80,6 +80,25 @@ namespace Comparsa
             ShowMDIChild(typeof(frmListaInsumo));
         }
 
+        private void pingConnexion_Tick(object sender, EventArgs e)
+        {
+            // Timer para mantener "viva" la conexión a la base de datos.
+
+            // Envía una query simple que no consume muchos datos cada 2 minutos
+            if (Globals.DataContext.IsConnected)
+            {
+                var query = (
+                    from c in Globals.DataContext.TIPOSINSUMOS
+                    where
+                    c.TIPOINSUMOID == 1
+                    select c.TIPOINSUMOID);
+
+                //if (query.First<int>() != 1)
+                {
+                    //MessageBox.Show("wow OMG!!");
+                }
+            }
+        }
     }
 
 }

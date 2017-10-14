@@ -234,23 +234,13 @@ namespace Comparsa
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string keyword = textBox1.Text.ToUpper();
-
-            if (keyword.Length > 0)
-            {
-                var query = (
-                    from c in Globals.DataContext.COLABORADORES
-                    where
-                        c.NOMBRE.ToUpper().Contains(keyword) || c.CALLE.ToUpper().Contains(keyword) || c.COLONIA.ToUpper().Contains(keyword)
-                    select c);
-
-                bindingSourceGrid.DataSource = query;
-            } else
-            {
-                bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
-
-            }
+            demoraBusqueda.Enabled = false;
+            demoraBusqueda.Enabled = true;
+            
+            
         }
+
+        
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -301,6 +291,48 @@ namespace Comparsa
 
         }
 
+        private void demoraBusqueda_Tick(object sender, EventArgs e)
+        {
+            demoraBusqueda.Enabled = false;
+            FiltrarPorPalabra(palabraClave.Text.ToUpper());
+        }
+
+        private void palabraClave_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                demoraBusqueda.Enabled = false; // No enviar doble petición
+                FiltrarPorPalabra(palabraClave.Text.ToUpper());
+
+                e.SuppressKeyPress = true; // Evitar el sonido de "DING!" al presionar ENTER
+            }
+        }
+
+        private void FiltrarPorPalabra(String palabraClave)
+        {
+            Cursor cursorActual = Cursor.Current;
+            Cursor.Current = Cursors.AppStarting;
+
+            if (palabraClave.Length > 0)
+            {
+                var query = (
+                    from c in Globals.DataContext.COLABORADORES
+                    where
+                        c.NOMBRE.ToUpper().Contains(palabraClave) ||
+                        c.CALLE.ToUpper().Contains(palabraClave) ||
+                        c.COLONIA.ToUpper().Contains(palabraClave)
+                    select c);
+
+                bindingSourceGrid.DataSource = query;
+            }
+            else
+            {
+                bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
+
+            }
+            Cursor.Current = cursorActual;
+
+        }
     }
 
 }

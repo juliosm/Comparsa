@@ -347,6 +347,61 @@ namespace Comparsa
 
         }
 
+        private void palabraClave_TextChanged(object sender, EventArgs e)
+        {
+            // REiniciar el timer
+            demoraBusqueda.Enabled = false;
+            demoraBusqueda.Enabled = true;
+        }
+
+        private void FiltrarPorPalabra(String palabraClave)
+        {
+            Cursor cursorActual = Cursor.Current;
+            Cursor.Current = Cursors.AppStarting;
+
+            if (palabraClave.Length > 0)
+            {
+                var query = (
+                    from c in Globals.DataContext.AFECTADOS
+                    where
+                        c.NOMBRE.ToUpper().Contains(palabraClave) ||
+                        c.CALLE.ToUpper().Contains(palabraClave) ||
+                        c.COLONIA.ToUpper().Contains(palabraClave) ||
+                        c.ESTADO.ToUpper().Contains(palabraClave) ||
+                        c.TELEFONO.ToUpper().Contains(palabraClave) ||
+                        c.EMAIL.ToUpper().Contains(palabraClave) ||
+                        c.TWITTER.ToUpper().Contains(palabraClave)
+                    select c);
+
+                bindingSourceGrid.DataSource = query;
+            }
+            else
+            {
+                bindingSourceGrid.DataSource = Globals.DataContext.AFECTADOS;
+
+            }
+
+            Cursor.Current = cursorActual;
+        }
+
+        private void demoraBusqueda_Tick(object sender, EventArgs e)
+        {
+            demoraBusqueda.Enabled = false;
+            
+            FiltrarPorPalabra(palabraClave.Text.ToUpper());
+            
+        }
+
+        private void palabraClave_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                demoraBusqueda.Enabled = false; // No enviar doble petición
+                FiltrarPorPalabra(palabraClave.Text.ToUpper());
+
+                e.SuppressKeyPress = true; // Evitar el sonido de "DING!" al presionar ENTER
+            }
+        }
     }
 
 }
