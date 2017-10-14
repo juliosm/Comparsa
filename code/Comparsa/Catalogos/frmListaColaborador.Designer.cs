@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaColaborador));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -56,8 +56,9 @@
             this.colESDONANTEN = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
-            this.edBusqueda = new System.Windows.Forms.TextBox();
+            this.palabraClave = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.demoraBusqueda = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -177,21 +178,21 @@
             this.colESDONANTEN});
             this.gridView.DataSource = this.bindingSourceGrid;
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridView.Location = new System.Drawing.Point(0, 107);
+            this.gridView.Location = new System.Drawing.Point(0, 109);
             this.gridView.MultiSelect = false;
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(671, 318);
+            this.gridView.Size = new System.Drawing.Size(671, 316);
             this.gridView.TabIndex = 2;
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
@@ -308,21 +309,22 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.edBusqueda);
+            this.panel2.Controls.Add(this.palabraClave);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 62);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(671, 45);
+            this.panel2.Size = new System.Drawing.Size(671, 47);
             this.panel2.TabIndex = 3;
             // 
-            // edBusqueda
+            // palabraClave
             // 
-            this.edBusqueda.Location = new System.Drawing.Point(60, 10);
-            this.edBusqueda.Name = "edBusqueda";
-            this.edBusqueda.Size = new System.Drawing.Size(208, 23);
-            this.edBusqueda.TabIndex = 1;
-            this.edBusqueda.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.palabraClave.Location = new System.Drawing.Point(60, 10);
+            this.palabraClave.Name = "palabraClave";
+            this.palabraClave.Size = new System.Drawing.Size(208, 23);
+            this.palabraClave.TabIndex = 1;
+            this.palabraClave.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.palabraClave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.palabraClave_KeyDown);
             // 
             // label2
             // 
@@ -332,6 +334,11 @@
             this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "Buscar:";
+            // 
+            // demoraBusqueda
+            // 
+            this.demoraBusqueda.Interval = 800;
+            this.demoraBusqueda.Tick += new System.EventHandler(this.demoraBusqueda_Tick);
             // 
             // frmListaColaborador
             // 
@@ -385,9 +392,10 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colESBRIGADISTA;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colESDONANTEN;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox edBusqueda;
+        private System.Windows.Forms.TextBox palabraClave;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnBuscar;
+        private System.Windows.Forms.Timer demoraBusqueda;
     }
 }
