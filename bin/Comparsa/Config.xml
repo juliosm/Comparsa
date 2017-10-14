@@ -1,9 +1,0 @@
-<xml>
-  <DBConnection>
-    <DBShowConfig value="True" />
-    <DBServer value="julio-pc" />
-    <DBName value="c:\data\comparsa\COMPARSA.FDB" />
-    <DBUser value="SYSDBA" />
-    <DBPass value="masterkey" />
-  </DBConnection>
-</xml>

@@ -18,6 +18,8 @@ namespace Comparsa.Data
         public DataConnection DataConnection = null;
         public bool IsConnected = false;
 
+        private string ConnectionString { get; set; }
+
         public ITable<AFECTADO> AFECTADOS { get { return this.DataConnection.GetTable<AFECTADO>(); } }
         public ITable<AFECTADOREQ> AFECTADOREQS { get { return this.DataConnection.GetTable<AFECTADOREQ>(); } }
         public ITable<INSUMO> INSUMOS { get { return this.DataConnection.GetTable<INSUMO>(); } }
@@ -42,18 +44,31 @@ namespace Comparsa.Data
             try
             {
 
-                this.DataConnection = GetFirebirdConnection(
-                    connectionString);
-
-                if (this.DataConnection.Connection != null)
+                try
                 {
 
-                    LinqToDB.Common.Configuration.Linq.AllowMultipleQuery = true;
+                    this.DataConnection = GetFirebirdConnection(
+                        connectionString);
 
-                    IsConnected = true;
+                    if (this.DataConnection.Connection != null)
+                    {
+
+                        ConnectionString = connectionString;
+
+                        LinqToDB.Common.Configuration.Linq.AllowMultipleQuery = true;
+
+                        IsConnected = true;
+
+                    }
+
+                    return true;
+
                 }
-
-                return true;
+                finally
+                {
+                    this.DataConnection.Dispose();
+                    this.DataConnection = null;
+                }
 
             }
             catch (Exception e)
@@ -61,6 +76,17 @@ namespace Comparsa.Data
                 messageError = e.Message;
                 return false;
             }
+
+        }
+
+        public DataConnection CreateDataConnection()
+        {
+
+            DataConnection connection = null;
+
+            connection = GetFirebirdConnection(ConnectionString);
+
+            return connection;
 
         }
 
