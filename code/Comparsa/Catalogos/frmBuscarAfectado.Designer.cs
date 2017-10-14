@@ -142,7 +142,6 @@
             this.edNombre.Name = "edNombre";
             this.edNombre.Size = new System.Drawing.Size(269, 23);
             this.edNombre.TabIndex = 1;
-            this.edNombre.TextChanged += new System.EventHandler(this.edNombre_TextChanged);
             // 
             // label2
             // 

@@ -62,29 +62,7 @@ namespace Comparsa
 
         private void LoadGridData()
         {
-
-            var queryAfectados = (
-                from a in Globals.DataContext.AFECTADOS
-                join l in Globals.DataContext.LOCALIDADES on a.LOCALIDADID equals l.LOCALIDADID
-                select new
-                {
-                    a.AFECTADOID,
-                    a.CODIGO,
-                    a.NOMBRE,
-                    a.ESTATUS,
-                    a.CALLE,
-                    a.NUMEXT,
-                    a.NUMINT,
-                    a.COLONIA,
-                    NOMBRELOCALIDAD = l.NOMBRE,
-                    l.MUNICIPIO,
-                    l.ESTADO,
-                    a.TELEFONO,
-                    a.EMAIL
-                });
-
-            bindingSourceGrid.DataSource = queryAfectados;
-
+            LoadGridDataWithKeyword();
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -147,12 +125,13 @@ namespace Comparsa
             {
 
                 DataGridViewRow row = null;
-                int id = 0;
+                //int id = 0;
                 AFECTADO registro = null;
 
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.AFECTADOS, id);
+                //id = Convert.ToInt32(row.Cells["colID"].Value);
+                //registro = TableExtensions.Find(Globals.DataContext.AFECTADOS, id);
+                registro = (AFECTADO)row.DataBoundItem;
 
                 if (registro != null)
                 {
@@ -160,7 +139,10 @@ namespace Comparsa
                     if (AppUtils.MsgConfirmation("¿Desea borrar el registro seleccionado?", "Por favor confirme"))
                     {
 
-                        Globals.DataContext.DataConnection.Delete(registro);
+                        using (var db = Globals.DataContext.CreateDataConnection())
+                        {
+                            db.Delete(registro);
+                        }
 
                         LoadGridData();
 
@@ -180,14 +162,15 @@ namespace Comparsa
             bool result = false;
             DialogResult dr = DialogResult.Cancel;
             DataGridViewRow row = null;
-            int id = 0;
+            //int id = 0;
             AFECTADO registro = null;
 
             if (mode == CRUDMode.Update)
             {
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.AFECTADOS, id);
+                //id = Convert.ToInt32(row.Cells["colID"].Value);
+                //registro = TableExtensions.Find(Globals.DataContext.AFECTADOS, id);
+                registro = (AFECTADO)row.DataBoundItem;
             }
 
             if ((mode == CRUDMode.Create) || ((registro != null) && (mode != CRUDMode.Create)))
@@ -350,58 +333,151 @@ namespace Comparsa
         private void palabraClave_TextChanged(object sender, EventArgs e)
         {
             // REiniciar el timer
-            demoraBusqueda.Enabled = false;
-            demoraBusqueda.Enabled = true;
+            timerDemoraBusqueda.Enabled = false;
+            timerDemoraBusqueda.Enabled = true;
         }
 
-        private void FiltrarPorPalabra(String palabraClave)
-        {
-            Cursor cursorActual = Cursor.Current;
-            Cursor.Current = Cursors.AppStarting;
+        //private void FiltrarPorPalabra(String palabraClave)
+        //{
+        //    Cursor cursorActual = Cursor.Current;
+        //    Cursor.Current = Cursors.AppStarting;
 
-            if (palabraClave.Length > 0)
-            {
-                var query = (
-                    from c in Globals.DataContext.AFECTADOS
-                    where
-                        c.NOMBRE.ToUpper().Contains(palabraClave) ||
-                        c.CALLE.ToUpper().Contains(palabraClave) ||
-                        c.COLONIA.ToUpper().Contains(palabraClave) ||
-                        c.ESTADO.ToUpper().Contains(palabraClave) ||
-                        c.TELEFONO.ToUpper().Contains(palabraClave) ||
-                        c.EMAIL.ToUpper().Contains(palabraClave) ||
-                        c.TWITTER.ToUpper().Contains(palabraClave)
-                    select c);
+        //    if (palabraClave.Length > 0)
+        //    {
+        //        var query = (
+        //            from c in Globals.DataContext.AFECTADOS
+        //            where
+        //                c.NOMBRE.ToUpper().Contains(palabraClave) ||
+        //                c.CALLE.ToUpper().Contains(palabraClave) ||
+        //                c.COLONIA.ToUpper().Contains(palabraClave) ||
+        //                c.ESTADO.ToUpper().Contains(palabraClave) ||
+        //                c.TELEFONO.ToUpper().Contains(palabraClave) ||
+        //                c.EMAIL.ToUpper().Contains(palabraClave) ||
+        //                c.TWITTER.ToUpper().Contains(palabraClave)
+        //            select c);
 
-                bindingSourceGrid.DataSource = query;
-            }
-            else
-            {
-                bindingSourceGrid.DataSource = Globals.DataContext.AFECTADOS;
+        //        bindingSourceGrid.DataSource = query;
+        //    }
+        //    else
+        //    {
+        //        bindingSourceGrid.DataSource = Globals.DataContext.AFECTADOS;
 
-            }
+        //    }
 
-            Cursor.Current = cursorActual;
-        }
+        //    Cursor.Current = cursorActual;
+        //}
 
         private void demoraBusqueda_Tick(object sender, EventArgs e)
         {
-            demoraBusqueda.Enabled = false;
-            
-            FiltrarPorPalabra(palabraClave.Text.ToUpper());
-            
+            timerDemoraBusqueda.Enabled = false;
+            LoadGridDataWithKeyword();
         }
 
-        private void palabraClave_KeyDown(object sender, KeyEventArgs e)
+        private void edPalabraClave_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                demoraBusqueda.Enabled = false; // No enviar doble petición
-                FiltrarPorPalabra(palabraClave.Text.ToUpper());
-
+                timerDemoraBusqueda.Enabled = false; // No enviar doble petición
+                LoadGridDataWithKeyword();
                 e.SuppressKeyPress = true; // Evitar el sonido de "DING!" al presionar ENTER
             }
         }
+
+        private void LoadGridDataWithKeyword()
+        {
+
+            try
+            {
+
+                Cursor.Current = Cursors.WaitCursor;
+
+                string keyword = edPalabraClave.Text.ToUpper();
+
+                using (var db = Globals.DataContext.CreateDataConnection())
+                {
+
+                    if (keyword.Length > 0)
+                    {
+
+                        var query = (
+                            from a in db.GetTable<AFECTADO>()
+                            join l in db.GetTable<LOCALIDAD>() on a.LOCALIDADID equals l.LOCALIDADID
+                            where
+                                a.NOMBRE.ToUpper().Contains(keyword) ||
+                                a.CALLE.ToUpper().Contains(keyword) ||
+                                a.COLONIA.ToUpper().Contains(keyword)
+                            select new AFECTADO_EXT
+                            {
+                                AFECTADOID = a.AFECTADOID,
+                                CODIGO = a.CODIGO,
+                                NOMBRE = a.NOMBRE,
+                                ESTATUS = a.ESTATUS,
+                                CALLE = a.CALLE,
+                                NUMEXT = a.NUMEXT,
+                                NUMINT = a.NUMINT,
+                                COLONIA = a.COLONIA,
+                                NOMBRELOCALIDAD = l.NOMBRE,
+                                MUNICIPIO = l.MUNICIPIO,
+                                ESTADO = l.ESTADO,
+                                TELEFONO = a.TELEFONO,
+                                EMAIL = a.EMAIL
+                            });
+
+                        bindingSourceGrid.DataSource = query.ToList();
+
+                    }
+                    else
+                    {
+
+                        var query = (
+                            from a in db.GetTable<AFECTADO>()
+                            join l in db.GetTable<LOCALIDAD>() on a.LOCALIDADID equals l.LOCALIDADID
+                            select new AFECTADO_EXT
+                            {
+                                AFECTADOID = a.AFECTADOID,
+                                CODIGO = a.CODIGO,
+                                NOMBRE = a.NOMBRE,
+                                ESTATUS = a.ESTATUS,
+                                CALLE = a.CALLE,
+                                NUMEXT = a.NUMEXT,
+                                NUMINT = a.NUMINT,
+                                COLONIA = a.COLONIA,
+                                NOMBRELOCALIDAD = l.NOMBRE,
+                                MUNICIPIO = l.MUNICIPIO,
+                                ESTADO = l.ESTADO,
+                                TELEFONO = a.TELEFONO,
+                                EMAIL = a.EMAIL
+                            });
+
+                        bindingSourceGrid.DataSource = query.ToList();
+
+                    }
+
+                }
+
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+
+        }
+
+        private void frmListaAfectado_Resize(object sender, EventArgs e)
+        {
+            this.MdiParent.Refresh();
+        }
+
+        private void btnRefrescar_Click(object sender, EventArgs e)
+        {
+            RefreshGridData();
+        }
+
+        private void RefreshGridData()
+        {
+            LoadGridData();
+        }
+
     }
 
 }

@@ -52,11 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
-    <Compile Include="Model\CopyMe.Firebird1.generated.cs">
+    <Compile Include="Model\AFECTADO_EXT.cs" />
+    <Compile Include="Model\COMPARSA.Firebird.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CopyMe.Firebird.tt</DependentUpon>
+      <DependentUpon>COMPARSA.Firebird.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\INSUMO_EXT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,9 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LinqToDB.Templates\CopyMe.Firebird.tt.txt" />
-    <Content Include="Model\CopyMe.Firebird.tt">
+    <Content Include="Model\COMPARSA.Firebird.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CopyMe.Firebird1.generated.cs</LastGenOutput>
+      <LastGenOutput>COMPARSA.Firebird.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

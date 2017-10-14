@@ -61,7 +61,10 @@ namespace Comparsa
 
         private void LoadGridData()
         {
-            bindingSourceGrid.DataSource = Globals.DataContext.TIPOSINSUMOS;
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                bindingSourceGrid.DataSource = db.GetTable<TIPOINSUMO>();
+            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -124,12 +127,13 @@ namespace Comparsa
             {
 
                 DataGridViewRow row = null;
-                int id = 0;
+                //int id = 0;
                 TIPOINSUMO registro = null;
 
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colTIPOINSUMOID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.TIPOSINSUMOS, id);
+                //id = Convert.ToInt32(row.Cells["colTIPOINSUMOID"].Value);
+                //registro = TableExtensions.Find(Globals.DataContext.TIPOSINSUMOS, id);
+                registro = (TIPOINSUMO)row.DataBoundItem;
 
                 if (registro != null)
                 {
@@ -137,7 +141,10 @@ namespace Comparsa
                     if (AppUtils.MsgConfirmation("¿Desea borrar el registro seleccionado?", "Por favor confirme"))
                     {
 
-                        Globals.DataContext.DataConnection.Delete(registro);
+                        using (var db = Globals.DataContext.CreateDataConnection())
+                        {
+                            db.Delete(registro);
+                        }
 
                         LoadGridData();
 
@@ -158,14 +165,15 @@ namespace Comparsa
             DialogResult dr = DialogResult.Cancel;
 
             DataGridViewRow row = null;
-            int id = 0;
+            //int id = 0;
             TIPOINSUMO registro = null;
 
             if (mode == CRUDMode.Update)
             {
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colTIPOINSUMOID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.TIPOSINSUMOS, id);
+                //id = Convert.ToInt32(row.Cells["colTIPOINSUMOID"].Value);
+                //registro = TableExtensions.Find(Globals.DataContext.TIPOSINSUMOS, id);
+                registro = (TIPOINSUMO)row.DataBoundItem;
             }
 
             frmDetTipoInsumo frmDetTipoInsumo = new frmDetTipoInsumo();
@@ -231,6 +239,21 @@ namespace Comparsa
                     break;
             }
 
+        }
+
+        private void btnRefrescar_Click(object sender, EventArgs e)
+        {
+            RefreshGridData();
+        }
+
+        private void RefreshGridData()
+        {
+            LoadGridData();
+        }
+
+        private void frmListaTipoInsumo_Resize(object sender, EventArgs e)
+        {
+            this.MdiParent.Refresh();
         }
     }
 

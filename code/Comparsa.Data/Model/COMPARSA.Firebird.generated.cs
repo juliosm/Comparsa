@@ -16,7 +16,7 @@ namespace Comparsa.Data
 	/// <summary>
 	/// Database       : COMPARSA
 	/// Data Source    : localhost
-	/// Server Version : WI-V2.5.6.27020 Firebird 2.5/tcp (julio-pc)/P12
+	/// Server Version : WI-V2.5.7.27050 Firebird 2.5/tcp (JULIO-TP)/P12
 	/// </summary>
 	public partial class COMPARSADB : LinqToDB.Data.DataConnection
 	{

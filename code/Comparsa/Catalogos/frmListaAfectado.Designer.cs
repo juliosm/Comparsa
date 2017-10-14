@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListaAfectado));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -56,9 +56,10 @@
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
-            this.palabraClave = new System.Windows.Forms.TextBox();
+            this.edPalabraClave = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.demoraBusqueda = new System.Windows.Forms.Timer(this.components);
+            this.timerDemoraBusqueda = new System.Windows.Forms.Timer(this.components);
+            this.btnRefrescar = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -96,7 +97,8 @@
             this.btnBorrar,
             this.btnCerrar,
             this.toolStripSeparator1,
-            this.btnBuscar});
+            this.btnBuscar,
+            this.btnRefrescar});
             this.toolStrip.Location = new System.Drawing.Point(0, 37);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(671, 25);
@@ -153,6 +155,7 @@
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(62, 22);
             this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.Visible = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // gridView
@@ -182,14 +185,14 @@
             this.gridView.MultiSelect = false;
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(671, 316);
@@ -300,7 +303,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.palabraClave);
+            this.panel2.Controls.Add(this.edPalabraClave);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 62);
@@ -308,14 +311,13 @@
             this.panel2.Size = new System.Drawing.Size(671, 47);
             this.panel2.TabIndex = 4;
             // 
-            // palabraClave
+            // edPalabraClave
             // 
-            this.palabraClave.Location = new System.Drawing.Point(60, 10);
-            this.palabraClave.Name = "palabraClave";
-            this.palabraClave.Size = new System.Drawing.Size(208, 23);
-            this.palabraClave.TabIndex = 1;
-            this.palabraClave.TextChanged += new System.EventHandler(this.palabraClave_TextChanged);
-            this.palabraClave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.palabraClave_KeyDown);
+            this.edPalabraClave.Location = new System.Drawing.Point(60, 10);
+            this.edPalabraClave.Name = "edPalabraClave";
+            this.edPalabraClave.Size = new System.Drawing.Size(208, 23);
+            this.edPalabraClave.TabIndex = 1;
+            this.edPalabraClave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edPalabraClave_KeyDown);
             // 
             // label2
             // 
@@ -326,10 +328,19 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Buscar:";
             // 
-            // demoraBusqueda
+            // timerDemoraBusqueda
             // 
-            this.demoraBusqueda.Interval = 800;
-            this.demoraBusqueda.Tick += new System.EventHandler(this.demoraBusqueda_Tick);
+            this.timerDemoraBusqueda.Interval = 800;
+            this.timerDemoraBusqueda.Tick += new System.EventHandler(this.demoraBusqueda_Tick);
+            // 
+            // btnRefrescar
+            // 
+            this.btnRefrescar.Image = ((System.Drawing.Image)(resources.GetObject("btnRefrescar.Image")));
+            this.btnRefrescar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefrescar.Name = "btnRefrescar";
+            this.btnRefrescar.Size = new System.Drawing.Size(75, 22);
+            this.btnRefrescar.Text = "Refrescar";
+            this.btnRefrescar.Click += new System.EventHandler(this.btnRefrescar_Click);
             // 
             // frmListaAfectado
             // 
@@ -345,6 +356,7 @@
             this.Text = "Afectados";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaAfectado_FormClosed);
             this.Load += new System.EventHandler(this.frmListaAfectado_Load);
+            this.Resize += new System.EventHandler(this.frmListaAfectado_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -385,8 +397,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnBuscar;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox palabraClave;
+        private System.Windows.Forms.TextBox edPalabraClave;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Timer demoraBusqueda;
+        private System.Windows.Forms.Timer timerDemoraBusqueda;
+        private System.Windows.Forms.ToolStripButton btnRefrescar;
     }
 }

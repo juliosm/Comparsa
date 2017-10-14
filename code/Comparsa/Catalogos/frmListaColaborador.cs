@@ -352,7 +352,6 @@ namespace Comparsa
                 Cursor.Current = Cursors.Default;
             }
 
-
         }
 
         private void edPalabraClave_TextChanged(object sender, EventArgs e)
@@ -364,6 +363,11 @@ namespace Comparsa
         private void btnRefrescar_Click(object sender, EventArgs e)
         {
             LoadGridData();
+        }
+
+        private void frmListaColaborador_Resize(object sender, EventArgs e)
+        {
+            this.MdiParent.Refresh();
         }
     }
 

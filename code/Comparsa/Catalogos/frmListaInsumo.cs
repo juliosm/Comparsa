@@ -62,22 +62,27 @@ namespace Comparsa
         private void LoadGridData()
         {
 
-            var queryInsumos = (
-                from a in Globals.DataContext.INSUMOS
-                join ti in Globals.DataContext.TIPOSINSUMOS on a.TIPOINSUMOID equals ti.TIPOINSUMOID
-                select new
-                {
-                    a.INSUMOID,
-                    a.CODIGO,
-                    a.NOMBRE,
-                    a.TOTALENTRADAS,
-                    a.TOTALSALIDAS,
-                    a.EXISTENCIA,
-                    a.TIPOINSUMOID,
-                    NOMBRETIPOINSUMO = ti.NOMBRE
-                });
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
 
-            bindingSourceGrid.DataSource = queryInsumos;
+                var queryInsumos = (
+                    from a in db.GetTable<INSUMO>()
+                    join ti in db.GetTable<TIPOINSUMO>() on a.TIPOINSUMOID equals ti.TIPOINSUMOID
+                    select new INSUMO_EXT
+                    {
+                        INSUMOID = a.INSUMOID,
+                        CODIGO = a.CODIGO,
+                        NOMBRE = a.NOMBRE,
+                        TOTALENTRADAS = a.TOTALENTRADAS,
+                        TOTALSALIDAS = a.TOTALSALIDAS,
+                        EXISTENCIA = a.EXISTENCIA,
+                        TIPOINSUMOID = a.TIPOINSUMOID,
+                        NOMBRETIPOINSUMO = ti.NOMBRE
+                    }).ToList();
+
+                bindingSourceGrid.DataSource = queryInsumos;
+
+            }
 
         }
 
@@ -141,12 +146,13 @@ namespace Comparsa
             {
 
                 DataGridViewRow row = null;
-                int id = 0;
+                //int id = 0;
                 INSUMO registro = null;
 
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colINSUMOID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.INSUMOS, id);
+                //id = Convert.ToInt32(row.Cells["colINSUMOID"].Value);
+                //registro = TableExtensions.Find(Globals.DataContext.INSUMOS, id);
+                registro = (INSUMO)row.DataBoundItem;
 
                 if (registro != null)
                 {
@@ -154,7 +160,10 @@ namespace Comparsa
                     if (AppUtils.MsgConfirmation("¿Desea borrar el registro seleccionado?", "Por favor confirme"))
                     {
 
-                        Globals.DataContext.DataConnection.Delete(registro);
+                        using (var db = Globals.DataContext.CreateDataConnection())
+                        {
+                            db.Delete(registro);
+                        }
 
                         LoadGridData();
 
@@ -175,14 +184,15 @@ namespace Comparsa
             DialogResult dr = DialogResult.Cancel;
 
             DataGridViewRow row = null;
-            int id = 0;
+            //int id = 0;
             INSUMO registro = null;
 
             if (mode == CRUDMode.Update)
             {
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colINSUMOID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.INSUMOS, id);
+                //id = Convert.ToInt32(row.Cells["colINSUMOID"].Value);
+                //registro = TableExtensions.Find(Globals.DataContext.INSUMOS, id);
+                registro = (INSUMO)row.DataBoundItem;
             }
 
             frmDetInsumo frmDetInsumo = new frmDetInsumo();
@@ -248,6 +258,21 @@ namespace Comparsa
                     break;
             }
 
+        }
+
+        private void btnRefrescar_Click(object sender, EventArgs e)
+        {
+            RefreshGridData();
+        }
+
+        private void RefreshGridData()
+        {
+            LoadGridData();
+        }
+
+        private void frmListaInsumo_Resize(object sender, EventArgs e)
+        {
+            this.MdiParent.Refresh();
         }
     }
 

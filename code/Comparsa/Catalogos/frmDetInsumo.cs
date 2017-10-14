@@ -32,7 +32,7 @@ namespace Comparsa
 
             LoadWindowConfig();
 
-            CargarComboTiposInsumos();
+            CargarListados();
 
             edTipoInsumo.SelectedIndex = -1;
 
@@ -63,11 +63,20 @@ namespace Comparsa
             CancelarCaptura();
         }
 
-        private void CargarComboTiposInsumos()
+        private void CargarListados()
         {
-            bindingSourceTipoInsumo.DataSource = Globals.DataContext.TIPOSINSUMOS;
+
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                CargarComboTiposInsumos(db);
+            }
+
         }
 
+        private void CargarComboTiposInsumos(DataConnection db)
+        {
+            bindingSourceTipoInsumo.DataSource = db.GetTable<TIPOINSUMO>().ToList();
+        }
 
         private void CancelarCaptura()
         {
@@ -87,13 +96,18 @@ namespace Comparsa
 
                 MapearPantallaAObjeto();
 
-                if (mode == CRUDMode.Create)
+                using (var db = Globals.DataContext.CreateDataConnection())
                 {
-                    Globals.DataContext.DataConnection.Insert(registro);
-                }
-                else if (mode == CRUDMode.Update)
-                {
-                    Globals.DataContext.DataConnection.Update(registro);
+
+                    if (mode == CRUDMode.Create)
+                    {
+                        db.Insert(registro);
+                    }
+                    else if (mode == CRUDMode.Update)
+                    {
+                        db.Update(registro);
+                    }
+
                 }
 
                 this.DialogResult = DialogResult.OK;
@@ -147,12 +161,17 @@ namespace Comparsa
         private void MapearObjetoAPantalla()
         {
 
-            var reg = Globals.DataContext.INSUMOS.LoadWith(a => a.TIPOINSUMO).FirstOrDefault(x => x.INSUMOID == registro.INSUMOID);
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
 
-            edCodigo.Text = registro.CODIGO;
-            edNombre.Text = registro.NOMBRE;
-            edTipoInsumo.SelectedIndex = edTipoInsumo.FindStringExact(reg.TIPOINSUMO.NOMBRE);
-            edNotas.Text = registro.NOTAS;
+                var reg = db.GetTable<INSUMO>().LoadWith(a => a.TIPOINSUMO).FirstOrDefault(x => x.INSUMOID == registro.INSUMOID);
+
+                edCodigo.Text = registro.CODIGO;
+                edNombre.Text = registro.NOMBRE;
+                edTipoInsumo.SelectedIndex = edTipoInsumo.FindStringExact(reg.TIPOINSUMO.NOMBRE);
+                edNotas.Text = registro.NOTAS;
+
+            }
 
         }
 

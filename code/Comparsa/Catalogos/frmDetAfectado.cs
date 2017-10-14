@@ -32,10 +32,7 @@ namespace Comparsa
 
             LoadWindowConfig();
 
-            CargarComboEstatus();
-            CargarComboLocalidades();
-
-            CargarListaRequerimientos();
+            CargarListados();
 
             edEstatus.SelectedIndex = -1;
             edLocalidad.SelectedIndex = -1;
@@ -69,6 +66,21 @@ namespace Comparsa
             CancelarCaptura();
         }
 
+        private void CargarListados()
+        {
+
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+
+                CargarComboEstatus();
+
+                CargarComboLocalidades(db);
+                CargarListaRequerimientos(db);
+
+            }
+
+        }
+
         private void CargarComboEstatus()
         {
 
@@ -93,12 +105,12 @@ namespace Comparsa
 
         }
 
-        private void CargarComboLocalidades()
+        private void CargarComboLocalidades(DataConnection db)
         {
-            bindingSourceLocalidad.DataSource = Globals.DataContext.LOCALIDADES;
+            bindingSourceLocalidad.DataSource = db.GetTable<LOCALIDAD>().ToList();
         }
 
-        private void CargarListaRequerimientos()
+        private void CargarListaRequerimientos(DataConnection db)
         {
             try
             {
@@ -107,7 +119,7 @@ namespace Comparsa
 
                 checkListReqs.Items.Clear();
 
-                foreach (var tipoInsumo in Globals.DataContext.TIPOSINSUMOS)
+                foreach (var tipoInsumo in db.GetTable<TIPOINSUMO>().ToList())
                 {
                     checkListReqs.Items.Add(tipoInsumo, false);
                 }
@@ -143,18 +155,22 @@ namespace Comparsa
 
                 MapearPantallaAObjeto();
 
-                if (mode == CRUDMode.Create)
+                using (var db = Globals.DataContext.CreateDataConnection())
                 {
-                    id = Globals.DataContext.DataConnection.InsertWithInt32Identity(registro);
-                    registro.AFECTADOID = id;
-                }
-                else if (mode == CRUDMode.Update)
-                {
-                    Globals.DataContext.DataConnection.Update(registro);
-                }
 
+                    if (mode == CRUDMode.Create)
+                    {
+                        id = db.InsertWithInt32Identity(registro);
+                        registro.AFECTADOID = id;
+                    }
+                    else if (mode == CRUDMode.Update)
+                    {
+                        db.Update(registro);
+                    }
 
-                GuardarRequerimientosAfectado();
+                    GuardarRequerimientosAfectado(db);
+
+                }
 
                 this.DialogResult = DialogResult.OK;
 
@@ -220,37 +236,42 @@ namespace Comparsa
         private void MapearObjetoAPantalla()
         {
 
-            var reg = Globals.DataContext.AFECTADOS.LoadWith(a => a.LOCALIDAD).FirstOrDefault(x => x.AFECTADOID == registro.AFECTADOID);
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
 
-            edCodigo.Text = registro.CODIGO;
-            edNombre.Text = registro.NOMBRE;
-            edTelefono.Text = registro.TELEFONO;
-            edEmail.Text = registro.EMAIL;
-            edCalle.Text = registro.CALLE;
-            edNumExt.Text = registro.NUMEXT;
-            edNumInt.Text = registro.NUMINT;
-            edColonia.Text = registro.COLONIA;
-            //edMunicipio.Text = registro.MUNICIPIO;
-            //edEstado.Text = registro.ESTADO;
-            edDictamen.Text = registro.DICTAMEN;
-            edNotas.Text = registro.NOTAS;
-            edEstatus.SelectedIndex = edEstatus.FindStringExact(AppUtils.GetNombreEstatusAfectado(registro.ESTATUS.Value));
-            edLocalidad.SelectedIndex = edLocalidad.FindStringExact(reg.LOCALIDAD.NOMBRE);
+                var reg = db.GetTable<AFECTADO>().LoadWith(a => a.LOCALIDAD).FirstOrDefault(x => x.AFECTADOID == registro.AFECTADOID);
 
-            CargarRequerimientosAfectado();
+                edCodigo.Text = registro.CODIGO;
+                edNombre.Text = registro.NOMBRE;
+                edTelefono.Text = registro.TELEFONO;
+                edEmail.Text = registro.EMAIL;
+                edCalle.Text = registro.CALLE;
+                edNumExt.Text = registro.NUMEXT;
+                edNumInt.Text = registro.NUMINT;
+                edColonia.Text = registro.COLONIA;
+                //edMunicipio.Text = registro.MUNICIPIO;
+                //edEstado.Text = registro.ESTADO;
+                edDictamen.Text = registro.DICTAMEN;
+                edNotas.Text = registro.NOTAS;
+                edEstatus.SelectedIndex = edEstatus.FindStringExact(AppUtils.GetNombreEstatusAfectado(registro.ESTATUS.Value));
+                edLocalidad.SelectedIndex = edLocalidad.FindStringExact(reg.LOCALIDAD.NOMBRE);
+
+                CargarRequerimientosAfectado(db);
+
+            }
 
         }
 
-        private void CargarRequerimientosAfectado()
+        private void CargarRequerimientosAfectado(DataConnection db)
         {
 
-            var reg = Globals.DataContext.AFECTADOS.LoadWith(a => a.AFECTADOREQs).FirstOrDefault(x => x.AFECTADOID == registro.AFECTADOID);
+            var reg = db.GetTable<AFECTADO>().LoadWith(a => a.AFECTADOREQs).FirstOrDefault(x => x.AFECTADOID == registro.AFECTADOID);
 
             foreach (var afectadoReq in reg.AFECTADOREQs)
             {
 
                 var tipoInsumo = (
-                    from t in Globals.DataContext.TIPOSINSUMOS
+                    from t in db.GetTable<TIPOINSUMO>()
                     where t.TIPOINSUMOID == afectadoReq.TIPOINSUMOID
                     select t).FirstOrDefault();
 
@@ -265,13 +286,13 @@ namespace Comparsa
 
         }
 
-        private void GuardarRequerimientosAfectado()
+        private void GuardarRequerimientosAfectado(DataConnection db)
         {
 
             // Borrar los proyectos relacionados que se hayan desmarcado
             List<object> deleteList = new List<object>();
 
-            var reg = Globals.DataContext.AFECTADOS.LoadWith(a => a.AFECTADOREQs).FirstOrDefault(x => x.AFECTADOID == registro.AFECTADOID);
+            var reg = db.GetTable<AFECTADO>().LoadWith(a => a.AFECTADOREQs).FirstOrDefault(x => x.AFECTADOID == registro.AFECTADOID);
 
             if (reg.AFECTADOREQs != null)
             {
@@ -280,7 +301,7 @@ namespace Comparsa
                 {
 
                     var tipoInsumo = (
-                        from t in Globals.DataContext.TIPOSINSUMOS
+                        from t in db.GetTable<TIPOINSUMO>()
                         where t.TIPOINSUMOID == afectadoReq.TIPOINSUMOID
                         select t).FirstOrDefault();
 
@@ -298,7 +319,7 @@ namespace Comparsa
 
                 foreach (AFECTADOREQ afectadoReq in deleteList)
                 {
-                    Globals.DataContext.DataConnection.Delete(afectadoReq);
+                    db.Delete(afectadoReq);
                 }
 
             }
@@ -326,7 +347,7 @@ namespace Comparsa
                     afectadoReq.TIPOINSUMOID = tipoInsumoId;
                     afectadoReq.AFECTADOID = reg.AFECTADOID;
 
-                    Globals.DataContext.DataConnection.Insert(afectadoReq);
+                    db.Insert(afectadoReq);
 
                 }
 
@@ -366,11 +387,16 @@ namespace Comparsa
             if (edLocalidad.Text != "")
             {
 
-                int localidadId = Convert.ToInt32(edLocalidad.SelectedValue);
-                LOCALIDAD localidad = TableExtensions.Find(Globals.DataContext.LOCALIDADES, localidadId);
+                using (var db = Globals.DataContext.CreateDataConnection())
+                {
 
-                edMunicipio.Text = localidad.MUNICIPIO;
-                edEstado.Text = localidad.ESTADO;
+                    int localidadId = Convert.ToInt32(edLocalidad.SelectedValue);
+                    LOCALIDAD localidad = TableExtensions.Find(db.GetTable<LOCALIDAD>(), localidadId);
+
+                    edMunicipio.Text = localidad.MUNICIPIO;
+                    edEstado.Text = localidad.ESTADO;
+
+                }
 
             }
             else

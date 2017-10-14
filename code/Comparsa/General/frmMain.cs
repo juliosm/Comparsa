@@ -84,6 +84,7 @@ namespace Comparsa
         {
             // Timer para mantener "viva" la conexión a la base de datos.
 
+            /*
             // Envía una query simple que no consume muchos datos cada 2 minutos
             if (Globals.DataContext.IsConnected)
             {
@@ -98,6 +99,8 @@ namespace Comparsa
                     //MessageBox.Show("wow OMG!!");
                 }
             }
+            */
+
         }
     }
 

@@ -42,7 +42,8 @@ namespace Comparsa
         private void frmBuscarAfectado_Load(object sender, EventArgs e)
         {
 
-            CargarLocalidades();
+            CargarListados();
+
             edLocalidad.SelectedIndex = -1;
 
             LoadWindowConfig();
@@ -70,31 +71,44 @@ namespace Comparsa
             AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
         }
 
-        private void CargarLocalidades()
+        private void CargarListados()
         {
-            bindingSourceLocalidad.DataSource = Globals.DataContext.LOCALIDADES;
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                CargarLocalidades(db);
+            }
+        }
+
+        private void CargarLocalidades(DataConnection db)
+        {
+            bindingSourceLocalidad.DataSource = db.GetTable<LOCALIDAD>().ToList();
         }
 
         private void LoadGridData()
         {
 
-            string nombre = edNombre.Text;
-            int localidadId = 0;
-
-            if (cbLocalidad.Checked)
+            using (var db = Globals.DataContext.CreateDataConnection())
             {
-                localidadId = Convert.ToInt32(edLocalidad.SelectedValue);
+
+                string nombre = edNombre.Text;
+                int localidadId = 0;
+
+                if (cbLocalidad.Checked)
+                {
+                    localidadId = Convert.ToInt32(edLocalidad.SelectedValue);
+                }
+
+                var query = (
+                    from c in db.GetTable<AFECTADO>()
+                    where
+                        c.NOMBRE.ToUpper().Contains(nombre.ToUpper())
+                        &&
+                        (((c.LOCALIDADID == localidadId) && (localidadId != 0)) || (localidadId == 0))
+                    select c);
+
+                bindingSourceGrid.DataSource = query.ToList();
+
             }
-
-            var query = (
-                from c in Globals.DataContext.AFECTADOS
-                where
-                    c.NOMBRE.ToUpper().Contains(nombre.ToUpper())
-                    &&
-                    (((c.LOCALIDADID == localidadId) && (localidadId != 0)) || (localidadId == 0))
-                select c);
-
-            bindingSourceGrid.DataSource = query;
 
         }
 
@@ -187,11 +201,12 @@ namespace Comparsa
             {
 
                 DataGridViewRow row = null;
-                int id = 0;
+                //int id = 0;
 
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.AFECTADOS, id);
+                //id = Convert.ToInt32(row.Cells["colID"].Value);
+                //registro = TableExtensions.Find(Globals.DataContext.AFECTADOS, id);
+                registro = (AFECTADO)row.DataBoundItem;
 
                 if (registro != null)
                 {

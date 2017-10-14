@@ -38,6 +38,8 @@
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnBorrar = new System.Windows.Forms.ToolStripButton();
             this.btnCerrar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnRefrescar = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.DataGridView();
             this.colLOCALIDADID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,7 +80,9 @@
             this.btnAgregar,
             this.btnModificar,
             this.btnBorrar,
-            this.btnCerrar});
+            this.btnCerrar,
+            this.toolStripSeparator1,
+            this.btnRefrescar});
             this.toolStrip.Location = new System.Drawing.Point(0, 37);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(671, 25);
@@ -122,6 +126,20 @@
             this.btnCerrar.Size = new System.Drawing.Size(43, 22);
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnRefrescar
+            // 
+            this.btnRefrescar.Image = ((System.Drawing.Image)(resources.GetObject("btnRefrescar.Image")));
+            this.btnRefrescar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefrescar.Name = "btnRefrescar";
+            this.btnRefrescar.Size = new System.Drawing.Size(75, 22);
+            this.btnRefrescar.Text = "Refrescar";
+            this.btnRefrescar.Click += new System.EventHandler(this.btnRefrescar_Click);
             // 
             // gridView
             // 
@@ -201,6 +219,7 @@
             this.Text = "Localidades";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmListaLocalidad_FormClosed);
             this.Load += new System.EventHandler(this.frmListaLocalidad_Load);
+            this.Resize += new System.EventHandler(this.frmListaLocalidad_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -227,5 +246,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNOMBRE;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMUNICIPIO;
         private System.Windows.Forms.DataGridViewTextBoxColumn colESTADO;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnRefrescar;
     }
 }
