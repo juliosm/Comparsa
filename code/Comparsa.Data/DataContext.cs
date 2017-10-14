@@ -23,7 +23,7 @@ namespace Comparsa.Data
         public ITable<AFECTADO> AFECTADOS { get { return this.DataConnection.GetTable<AFECTADO>(); } }
         public ITable<AFECTADOREQ> AFECTADOREQS { get { return this.DataConnection.GetTable<AFECTADOREQ>(); } }
         public ITable<INSUMO> INSUMOS { get { return this.DataConnection.GetTable<INSUMO>(); } }
-        public ITable<COLABORADOR> COLABORADORES { get { return this.DataConnection.GetTable<COLABORADOR>(); } }
+        //public ITable<COLABORADOR> COLABORADORES { get { return this.DataConnection.GetTable<COLABORADOR>(); } }
         public ITable<ENTRADA> ENTRADAS { get { return this.DataConnection.GetTable<ENTRADA>(); } }
         public ITable<LOCALIDAD> LOCALIDADES { get { return this.DataConnection.GetTable<LOCALIDAD>(); } }
         public ITable<TIPOINSUMO> TIPOSINSUMOS { get { return this.DataConnection.GetTable<TIPOINSUMO>(); } }
@@ -88,6 +88,16 @@ namespace Comparsa.Data
 
             return connection;
 
+        }
+
+        public ITable<COLABORADOR> GetTable<T>(DataConnection connection)
+        {
+            return connection.GetTable<COLABORADOR>();
+        }
+
+        public int Delete<T>(T record, DataConnection connection)
+        {
+            return connection.Delete(record);
         }
 
     }

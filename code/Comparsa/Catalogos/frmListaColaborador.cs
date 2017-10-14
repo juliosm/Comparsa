@@ -61,11 +61,15 @@ namespace Comparsa
 
         private void LoadGridData()
         {
-
+            
+            /*
             using (var db = Globals.DataContext.CreateDataConnection())
             {
                 bindingSourceGrid.DataSource = db.GetTable<COLABORADOR>().ToList();
             }
+            */
+
+            LoadGridDataWithKeyword();
 
         }
 
@@ -129,12 +133,13 @@ namespace Comparsa
             {
 
                 DataGridViewRow row = null;
-                int id = 0;
+                //int id = 0;
                 COLABORADOR registro = null;
 
                 row = gridView.SelectedRows[0];
-                id = Convert.ToInt32(row.Cells["colCOLABORADORID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.COLABORADORES, id);
+                //id = Convert.ToInt32(row.Cells["colCOLABORADORID"].Value);
+                //registro = TableExtensions.Find(Globals.DataContext.COLABORADORES, id);
+                registro = (COLABORADOR)row.DataBoundItem;
 
                 if (registro != null)
                 {
@@ -142,7 +147,10 @@ namespace Comparsa
                     if (AppUtils.MsgConfirmation("¿Desea borrar el registro seleccionado?", "Por favor confirme"))
                     {
 
-                        Globals.DataContext.DataConnection.Delete<COLABORADOR>(registro);
+                        using (var db = Globals.DataContext.CreateDataConnection())
+                        {
+                            Globals.DataContext.Delete(registro, db);
+                        }
 
                         LoadGridData();
 
@@ -237,32 +245,6 @@ namespace Comparsa
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-            string keyword = palabraClave.Text.ToUpper();
-
-            demoraBusqueda.Enabled = false;
-            demoraBusqueda.Enabled = true;
-
-            if (keyword.Length > 0)
-            {
-                var query = (
-                    from c in Globals.DataContext.COLABORADORES
-                    where
-                        c.NOMBRE.ToUpper().Contains(keyword) || c.CALLE.ToUpper().Contains(keyword) || c.COLONIA.ToUpper().Contains(keyword)
-                    select c);
-
-                bindingSourceGrid.DataSource = query;
-            }
-            else
-            {
-                bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
-
-            }
-
-        }
-
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             BuscarRegistro();
@@ -314,45 +296,74 @@ namespace Comparsa
 
         private void demoraBusqueda_Tick(object sender, EventArgs e)
         {
-            demoraBusqueda.Enabled = false;
-            FiltrarPorPalabra(palabraClave.Text.ToUpper());
+            timerDemoraBusqueda.Enabled = false;
+            LoadGridDataWithKeyword();
         }
 
         private void palabraClave_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                demoraBusqueda.Enabled = false; // No enviar doble petición
-                FiltrarPorPalabra(palabraClave.Text.ToUpper());
+                timerDemoraBusqueda.Enabled = false; // No enviar doble petición
+                LoadGridDataWithKeyword();
 
                 e.SuppressKeyPress = true; // Evitar el sonido de "DING!" al presionar ENTER
             }
         }
 
-        private void FiltrarPorPalabra(String palabraClave)
+        private void LoadGridDataWithKeyword()
         {
-            Cursor cursorActual = Cursor.Current;
-            Cursor.Current = Cursors.AppStarting;
 
-            if (palabraClave.Length > 0)
+            try
             {
-                var query = (
-                    from c in Globals.DataContext.COLABORADORES
-                    where
-                        c.NOMBRE.ToUpper().Contains(palabraClave) ||
-                        c.CALLE.ToUpper().Contains(palabraClave) ||
-                        c.COLONIA.ToUpper().Contains(palabraClave)
-                    select c);
 
-                bindingSourceGrid.DataSource = query;
+                Cursor.Current = Cursors.WaitCursor;
+
+                string keyword = edPalabraClave.Text.ToUpper();
+
+                using (var db = Globals.DataContext.CreateDataConnection())
+                {
+
+                    if (keyword.Length > 0)
+                    {
+
+                        var query = (
+                            from c in Globals.DataContext.GetTable<COLABORADOR>(db)
+                            where
+                                c.NOMBRE.ToUpper().Contains(keyword) ||
+                                c.CALLE.ToUpper().Contains(keyword) ||
+                                c.COLONIA.ToUpper().Contains(keyword)
+
+                            select c);
+
+                        bindingSourceGrid.DataSource = query.ToList();
+
+                    }
+                    else
+                    {
+                        bindingSourceGrid.DataSource = Globals.DataContext.GetTable<COLABORADOR>(db).ToList();
+                    }
+
+                }
+
             }
-            else
+            finally
             {
-                bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
-
+                Cursor.Current = Cursors.Default;
             }
-            Cursor.Current = cursorActual;
 
+
+        }
+
+        private void edPalabraClave_TextChanged(object sender, EventArgs e)
+        {
+            //timerDemoraBusqueda.Enabled = true;
+            //FiltrarPalabraClave();
+        }
+
+        private void btnRefrescar_Click(object sender, EventArgs e)
+        {
+            LoadGridData();
         }
     }
 

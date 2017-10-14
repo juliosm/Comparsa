@@ -46,6 +46,7 @@
             this.colINSTITUCION = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colESBRIGADISTA = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colESDONANTEN = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.edNombre = new System.Windows.Forms.TextBox();
@@ -53,12 +54,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -232,6 +232,10 @@
             this.colESDONANTEN.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colESDONANTEN.TrueValue = "1";
             // 
+            // bindingSourceGrid
+            // 
+            this.bindingSourceGrid.Sort = "";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnBuscar);
@@ -259,7 +263,7 @@
             this.edNombre.Name = "edNombre";
             this.edNombre.Size = new System.Drawing.Size(292, 23);
             this.edNombre.TabIndex = 1;
-            this.edNombre.TextChanged += new System.EventHandler(this.edNombre_TextChanged);
+            this.edNombre.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edNombre_KeyDown);
             // 
             // label2
             // 
@@ -302,10 +306,6 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // bindingSourceGrid
-            // 
-            this.bindingSourceGrid.Sort = "";
-            // 
             // frmBuscarColaborador
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -326,10 +326,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).EndInit();
             this.ResumeLayout(false);
 
         }

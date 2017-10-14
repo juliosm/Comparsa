@@ -68,15 +68,20 @@ namespace Comparsa
         private void LoadGridData()
         {
 
-            string nombre = edNombre.Text;
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
 
-            var query = (
-                from c in Globals.DataContext.COLABORADORES
-                where
-                    c.NOMBRE.ToUpper().Contains(nombre.ToUpper())
-                select c);
+                string nombre = edNombre.Text;
 
-            bindingSourceGrid.DataSource = query;
+                var query = (
+                    from c in Globals.DataContext.GetTable<COLABORADOR>(db)
+                    where
+                        c.NOMBRE.ToUpper().Contains(nombre.ToUpper())
+                    select c);
+
+                bindingSourceGrid.DataSource = query.ToList();
+
+            }
 
         }
 
@@ -148,7 +153,7 @@ namespace Comparsa
 
                 row = gridView.SelectedRows[0];
                 id = Convert.ToInt32(row.Cells["colCOLABORADORID"].Value);
-                registro = TableExtensions.Find(Globals.DataContext.COLABORADORES, id);
+                registro = (COLABORADOR)row.DataBoundItem;
 
                 if (registro != null)
                 {
@@ -169,6 +174,13 @@ namespace Comparsa
             LoadGridData();
         }
 
+        private void edNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadGridData();
+            }
+        }
     }
 
 }
