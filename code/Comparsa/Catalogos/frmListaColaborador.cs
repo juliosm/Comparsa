@@ -239,12 +239,29 @@ namespace Comparsa
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+
+            string keyword = palabraClave.Text.ToUpper();
+
             demoraBusqueda.Enabled = false;
             demoraBusqueda.Enabled = true;
-            
-            
+
             if (keyword.Length > 0)
-        
+            {
+                var query = (
+                    from c in Globals.DataContext.COLABORADORES
+                    where
+                        c.NOMBRE.ToUpper().Contains(keyword) || c.CALLE.ToUpper().Contains(keyword) || c.COLONIA.ToUpper().Contains(keyword)
+                    select c);
+
+                bindingSourceGrid.DataSource = query;
+            }
+            else
+            {
+                bindingSourceGrid.DataSource = Globals.DataContext.COLABORADORES;
+
+            }
+
+        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
