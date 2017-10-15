@@ -102,6 +102,12 @@ namespace Comparsa
             */
 
         }
+
+        private void inventariosFísicosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMDIChild(typeof(frmListaInventarioFisico));
+        }
+
     }
 
 }

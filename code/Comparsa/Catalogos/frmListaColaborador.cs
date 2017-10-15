@@ -149,7 +149,7 @@ namespace Comparsa
 
                         using (var db = Globals.DataContext.CreateDataConnection())
                         {
-                            Globals.DataContext.Delete(registro, db);
+                            db.Delete(registro);
                         }
 
                         LoadGridData();
@@ -328,7 +328,7 @@ namespace Comparsa
                     {
 
                         var query = (
-                            from c in Globals.DataContext.GetTable<COLABORADOR>(db)
+                            from c in db.GetTable<COLABORADOR>()
                             where
                                 c.NOMBRE.ToUpper().Contains(keyword) ||
                                 c.CALLE.ToUpper().Contains(keyword) ||
@@ -341,7 +341,7 @@ namespace Comparsa
                     }
                     else
                     {
-                        bindingSourceGrid.DataSource = Globals.DataContext.GetTable<COLABORADOR>(db).ToList();
+                        bindingSourceGrid.DataSource = db.GetTable<COLABORADOR>().ToList();
                     }
 
                 }

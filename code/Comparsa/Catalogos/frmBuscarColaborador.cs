@@ -74,7 +74,7 @@ namespace Comparsa
                 string nombre = edNombre.Text;
 
                 var query = (
-                    from c in Globals.DataContext.GetTable<COLABORADOR>(db)
+                    from c in db.GetTable<COLABORADOR>()
                     where
                         c.NOMBRE.ToUpper().Contains(nombre.ToUpper())
                     select c);

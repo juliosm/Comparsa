@@ -55,6 +55,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.edLocalidad = new System.Windows.Forms.ComboBox();
+            this.bindingSourceLocalidad = new System.Windows.Forms.BindingSource(this.components);
             this.edColonia = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.edNumInt = new System.Windows.Forms.TextBox();
@@ -68,15 +69,14 @@
             this.bindingSourceReq = new System.Windows.Forms.BindingSource(this.components);
             this.edEstatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.bindingSourceLocalidad = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -342,6 +342,10 @@
             this.edLocalidad.ValueMember = "LOCALIDADID";
             this.edLocalidad.SelectedIndexChanged += new System.EventHandler(this.edLocalidad_SelectedIndexChanged);
             // 
+            // bindingSourceLocalidad
+            // 
+            this.bindingSourceLocalidad.DataSource = typeof(Comparsa.Data.LOCALIDAD);
+            // 
             // edColonia
             // 
             this.edColonia.Location = new System.Drawing.Point(19, 174);
@@ -425,7 +429,7 @@
             this.checkListReqs.FormattingEnabled = true;
             this.checkListReqs.Location = new System.Drawing.Point(11, 10);
             this.checkListReqs.Name = "checkListReqs";
-            this.checkListReqs.Size = new System.Drawing.Size(297, 274);
+            this.checkListReqs.Size = new System.Drawing.Size(297, 256);
             this.checkListReqs.TabIndex = 0;
             // 
             // edEstatus
@@ -452,10 +456,6 @@
             this.label1.Size = new System.Drawing.Size(44, 15);
             this.label1.TabIndex = 7;
             this.label1.Text = "Estatus";
-            // 
-            // bindingSourceLocalidad
-            // 
-            this.bindingSourceLocalidad.DataSource = typeof(Comparsa.Data.LOCALIDAD);
             // 
             // frmDetAfectado
             // 
@@ -487,9 +487,9 @@
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
