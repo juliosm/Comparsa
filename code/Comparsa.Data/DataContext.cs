@@ -90,14 +90,59 @@ namespace Comparsa.Data
 
         }
 
-        public ITable<COLABORADOR> GetTable<T>(DataConnection connection)
+        public string GenerarNumero(DataConnection db, int tipoNumero)
         {
-            return connection.GetTable<COLABORADOR>();
+
+            string result = "";
+            string sql = string.Format("SELECT CODIGO FROM F_GEN_CODIGO({0})", tipoNumero);
+
+            using (var reader = db.ExecuteReader(sql))
+            {
+                if (reader.Reader.Read())
+                {
+                    result = reader.Reader.GetString(0);
+                }
+            }
+
+            return result;
+
         }
 
-        public int Delete<T>(T record, DataConnection connection)
+        public NUMEROBLOQ BloquearNumero(DataConnection db, int tipoNumero, string numero)
         {
-            return connection.Delete(record);
+
+            NUMEROBLOQ result = null;
+
+            result = (
+                from n in db.GetTable<NUMEROBLOQ>()
+                where
+                    (n.TIPONUMERO == tipoNumero)
+                    &&
+                    (n.NUMERO == numero)
+                select n).FirstOrDefault();
+
+            if (result == null)
+            {
+
+                int id = 0;
+
+                result = new NUMEROBLOQ();
+                result.TIPONUMERO = tipoNumero;
+                result.NUMERO = numero;
+
+                id = Convert.ToInt32(db.InsertWithIdentity(result));
+
+                result.NUMEROBLOQID = id;
+
+            }
+
+            return result;
+
+        }
+
+        public void DesbloquearNumero(DataConnection db, NUMEROBLOQ numero)
+        {
+            db.Delete(numero);
         }
 
     }

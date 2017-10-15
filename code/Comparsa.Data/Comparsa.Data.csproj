@@ -59,6 +59,7 @@
       <DependentUpon>COMPARSA.Firebird.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\INSUMO_EXT.cs" />
+    <Compile Include="Model\INVENTARIODET_EXT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
