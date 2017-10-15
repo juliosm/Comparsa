@@ -32,6 +32,8 @@ namespace Comparsa
 
             LoadWindowConfig();
 
+            CargarListados();
+
             switch (mode)
             {
                 case CRUDMode.Create:
@@ -48,6 +50,8 @@ namespace Comparsa
 
             lbTitulo.Text = titulo;
             this.Text = titulo;
+
+            
 
             edCodigo.Focus();
 
@@ -74,7 +78,7 @@ namespace Comparsa
 
             if (ValidarCaptura())
             {
-
+                int id = 0;
                 MapearPantallaAObjeto();
 
                 using (var db = Globals.DataContext.CreateDataConnection())
@@ -82,13 +86,15 @@ namespace Comparsa
 
                     if (mode == CRUDMode.Create)
                     {
-                        db.InsertWithIdentity(registro);
+                        id = db.InsertWithInt32Identity(registro);
+                        registro.COLABORADORID = id;
                     }
                     else if (mode == CRUDMode.Update)
                     {
                         db.Update(registro);
                     }
 
+                    GuardarAportacionesColaborador(db);
                 }
 
                 this.DialogResult = DialogResult.OK;
@@ -162,6 +168,12 @@ namespace Comparsa
             edMunicipio.Text = registro.MUNICIPIO;
             edEstado.Text = registro.ESTADO;
             edNotas.Text = registro.NOTAS;
+
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                CargarAportacionesColaborador(db);
+                
+            }
         }
 
         private void LoadWindowConfig()
@@ -188,6 +200,144 @@ namespace Comparsa
                     e.Cancel = true;
                 }
             }
+        }
+
+
+        private void CargarListaAportaciones(DataConnection db)
+        {
+            try
+            {
+
+                checkListAportaciones.BeginUpdate();
+
+                checkListAportaciones.Items.Clear();
+
+                foreach (var tipoInsumo in db.GetTable<TIPOINSUMO>().ToList())
+                {
+                    checkListAportaciones.Items.Add(tipoInsumo, false);
+                }
+
+                checkListAportaciones.ValueMember = "TIPOINSUMOID";
+                checkListAportaciones.DisplayMember = "NOMBRE";
+
+            }
+            finally
+            {
+                checkListAportaciones.EndUpdate();
+            }
+
+        }
+
+
+
+
+        private void CargarListados()
+        {
+
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                CargarListaAportaciones(db);
+
+            }
+
+        }
+
+        private void GuardarAportacionesColaborador(DataConnection db)
+        {
+
+            // Borrar los proyectos relacionados que se hayan desmarcado
+            List<object> deleteList = new List<object>();
+
+            
+            var reg = db.GetTable<COLABORADOR>().LoadWith(a => a.COLABORADORAPORTACOLABs).FirstOrDefault(x => x.COLABORADORID == registro.COLABORADORID);
+
+            if (reg.COLABORADORAPORTACOLABs != null)
+            {
+
+                foreach (var colaboradorAportaColab in reg.COLABORADORAPORTACOLABs)
+                {
+
+                    var tipoInsumo = (
+                        from t in db.GetTable<TIPOINSUMO>()
+                        where t.TIPOINSUMOID == colaboradorAportaColab.TIPOINSUMOID
+                        select t).FirstOrDefault();
+
+                    int itemIndex = checkListAportaciones.FindStringExact(tipoInsumo.NOMBRE);
+
+                    if (itemIndex != -1)
+                    {
+                        if (checkListAportaciones.GetItemChecked(itemIndex) == false)
+                        {
+                            deleteList.Add(colaboradorAportaColab);
+                        }
+                    }
+
+                }
+
+                foreach (COLABORADORAPORTA colaboradorAporta in deleteList)
+                {
+                    db.Delete(colaboradorAporta);
+                }
+
+            }
+            // Guardar los proyectos relacionados que se hayan marcado
+            foreach (object item in checkListAportaciones.CheckedItems)
+            {
+
+                int tipoInsumoId = 0;
+
+                tipoInsumoId = ((TIPOINSUMO)item).TIPOINSUMOID;
+
+                COLABORADORAPORTA colaboradorAporta = null;
+
+                if (reg.COLABORADORAPORTACOLABs != null)
+                {
+                    colaboradorAporta = reg.COLABORADORAPORTACOLABs.FirstOrDefault(
+                        x => x.TIPOINSUMOID == tipoInsumoId);
+                }
+
+                if (colaboradorAporta == null)
+                {
+
+                    colaboradorAporta = new COLABORADORAPORTA();
+                    colaboradorAporta.TIPOINSUMOID = tipoInsumoId;
+                    colaboradorAporta.COLABORADORID = reg.COLABORADORID;
+
+                    db.Insert(colaboradorAporta);
+
+                }
+
+            }
+
+        }
+
+
+        private void CargarAportacionesColaborador(DataConnection db)
+        {
+
+            var reg = db.GetTable<COLABORADOR>().LoadWith(a => a.COLABORADORAPORTACOLABs).FirstOrDefault(x => x.COLABORADORID == registro.COLABORADORID);
+
+            foreach (var colaboradorAportaColab in reg.COLABORADORAPORTACOLABs)
+            {
+
+                var tipoInsumo = (
+                    from t in db.GetTable<TIPOINSUMO>()
+                    where t.TIPOINSUMOID == colaboradorAportaColab.TIPOINSUMOID
+                    select t).FirstOrDefault();
+
+                int itemIndex = checkListAportaciones.FindStringExact(tipoInsumo.NOMBRE);
+
+                if (itemIndex != -1)
+                {
+                    checkListAportaciones.SetItemChecked(itemIndex, true);
+                }
+
+            }
+
+        }
+        private void checkListReqs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

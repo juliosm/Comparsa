@@ -66,12 +66,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.edNotas = new System.Windows.Forms.TextBox();
+            this.tabAportaciones = new System.Windows.Forms.TabPage();
+            this.checkListAportaciones = new System.Windows.Forms.CheckedListBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabAportaciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -168,6 +171,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabAportaciones);
             this.tabControl1.Location = new System.Drawing.Point(12, 95);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -417,10 +421,10 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.edNotas);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(480, 193);
+            this.tabPage3.Size = new System.Drawing.Size(480, 191);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Notas";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -431,8 +435,31 @@
             this.edNotas.Location = new System.Drawing.Point(3, 3);
             this.edNotas.Multiline = true;
             this.edNotas.Name = "edNotas";
-            this.edNotas.Size = new System.Drawing.Size(474, 187);
+            this.edNotas.Size = new System.Drawing.Size(474, 185);
             this.edNotas.TabIndex = 0;
+            // 
+            // tabAportaciones
+            // 
+            this.tabAportaciones.Controls.Add(this.checkListAportaciones);
+            this.tabAportaciones.Location = new System.Drawing.Point(4, 24);
+            this.tabAportaciones.Name = "tabAportaciones";
+            this.tabAportaciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAportaciones.Size = new System.Drawing.Size(480, 191);
+            this.tabAportaciones.TabIndex = 3;
+            this.tabAportaciones.Text = "Aportaciones";
+            this.tabAportaciones.UseVisualStyleBackColor = true;
+            // 
+            // checkListAportaciones
+            // 
+            this.checkListAportaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkListAportaciones.CheckOnClick = true;
+            this.checkListAportaciones.FormattingEnabled = true;
+            this.checkListAportaciones.Location = new System.Drawing.Point(6, 11);
+            this.checkListAportaciones.Name = "checkListAportaciones";
+            this.checkListAportaciones.Size = new System.Drawing.Size(291, 166);
+            this.checkListAportaciones.TabIndex = 1;
+            this.checkListAportaciones.SelectedIndexChanged += new System.EventHandler(this.checkListReqs_SelectedIndexChanged);
             // 
             // frmDetColaborador
             // 
@@ -464,6 +491,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabAportaciones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -509,5 +537,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox edNotas;
+        private System.Windows.Forms.TabPage tabAportaciones;
+        private System.Windows.Forms.CheckedListBox checkListAportaciones;
     }
 }
