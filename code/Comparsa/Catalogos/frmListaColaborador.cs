@@ -369,6 +369,11 @@ namespace Comparsa
         {
             this.MdiParent.Refresh();
         }
+
+        private void gridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ModificarRegistro();
+        }
     }
 
 }
