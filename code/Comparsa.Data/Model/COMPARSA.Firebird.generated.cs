@@ -6,9 +6,12 @@
 //---------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 using LinqToDB;
+using LinqToDB.Common;
+using LinqToDB.Data;
 using LinqToDB.Mapping;
 
 namespace Comparsa.Data
@@ -20,13 +23,17 @@ namespace Comparsa.Data
 	/// </summary>
 	public partial class COMPARSADB : LinqToDB.Data.DataConnection
 	{
-		public ITable<AFECTADO>    AFECTADOes   { get { return this.GetTable<AFECTADO>(); } }
-		public ITable<AFECTADOREQ> AFECTADOREQs { get { return this.GetTable<AFECTADOREQ>(); } }
-		public ITable<COLABORADOR> COLABORADORs { get { return this.GetTable<COLABORADOR>(); } }
-		public ITable<ENTRADA>     ENTRADAs     { get { return this.GetTable<ENTRADA>(); } }
-		public ITable<INSUMO>      INSUMOes     { get { return this.GetTable<INSUMO>(); } }
-		public ITable<LOCALIDAD>   LOCALIDADs   { get { return this.GetTable<LOCALIDAD>(); } }
-		public ITable<TIPOINSUMO>  TIPOINSUMOes { get { return this.GetTable<TIPOINSUMO>(); } }
+		public ITable<AFECTADO>          AFECTADOes         { get { return this.GetTable<AFECTADO>(); } }
+		public ITable<AFECTADOREQ>       AFECTADOREQs       { get { return this.GetTable<AFECTADOREQ>(); } }
+		public ITable<COLABORADOR>       COLABORADORs       { get { return this.GetTable<COLABORADOR>(); } }
+		public ITable<COLABORADORAPORTA> COLABORADORAPORTAs { get { return this.GetTable<COLABORADORAPORTA>(); } }
+		public ITable<ENTRADA>           ENTRADAs           { get { return this.GetTable<ENTRADA>(); } }
+		public ITable<INSUMO>            INSUMOes           { get { return this.GetTable<INSUMO>(); } }
+		public ITable<INVENTARIO>        INVENTARIOs        { get { return this.GetTable<INVENTARIO>(); } }
+		public ITable<INVENTARIODET>     INVENTARIODETs     { get { return this.GetTable<INVENTARIODET>(); } }
+		public ITable<LOCALIDAD>         LOCALIDADs         { get { return this.GetTable<LOCALIDAD>(); } }
+		public ITable<NUMEROBLOQ>        NUMEROBLOQs        { get { return this.GetTable<NUMEROBLOQ>(); } }
+		public ITable<TIPOINSUMO>        TIPOINSUMOes       { get { return this.GetTable<TIPOINSUMO>(); } }
 
 		public COMPARSADB()
 		{
@@ -133,6 +140,40 @@ namespace Comparsa.Data
 		[Column,        Nullable] public string EMAIL         { get; set; } // varchar(50)
 		[Column,        Nullable] public string POBLACION     { get; set; } // varchar(50)
 		[Column,        Nullable] public string REFERIDOPOR   { get; set; } // varchar(100)
+
+		#region Associations
+
+		/// <summary>
+		/// FK_COLABORADORAPORTA_COLAB_BackReference
+		/// </summary>
+		[Association(ThisKey="COLABORADORID", OtherKey="COLABORADORID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<COLABORADORAPORTA> COLABORADORAPORTACOLABs { get; set; }
+
+		#endregion
+	}
+
+	[Table("COLABORADORAPORTA")]
+	public partial class COLABORADORAPORTA
+	{
+		[PrimaryKey, NotNull    ] public int  COLABORADORAPORTAID { get; set; } // integer
+		[Column,        Nullable] public int? COLABORADORID       { get; set; } // integer
+		[Column,        Nullable] public int? TIPOINSUMOID        { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_COLABORADORAPORTA_COLAB
+		/// </summary>
+		[Association(ThisKey="COLABORADORID", OtherKey="COLABORADORID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_COLABORADORAPORTA_COLAB", BackReferenceName="COLABORADORAPORTACOLABs")]
+		public COLABORADOR COLAB { get; set; }
+
+		/// <summary>
+		/// FK_COLABORADORAPORTA_TIPOINS
+		/// </summary>
+		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_COLABORADORAPORTA_TIPOINS", BackReferenceName="COLABORADORAPORTATIPOINS")]
+		public TIPOINSUMO TIPOIN { get; set; }
+
+		#endregion
 	}
 
 	[Table("ENTRADA")]
@@ -162,10 +203,63 @@ namespace Comparsa.Data
 		#region Associations
 
 		/// <summary>
+		/// FK_INVENTARIODET_INSUMO_BackReference
+		/// </summary>
+		[Association(ThisKey="INSUMOID", OtherKey="INSUMOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<INVENTARIODET> INVENTARIODETs { get; set; }
+
+		/// <summary>
 		/// FK_INSUMO
 		/// </summary>
 		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_INSUMO", BackReferenceName="INSUMOes")]
 		public TIPOINSUMO TIPOINSUMO { get; set; }
+
+		#endregion
+	}
+
+	[Table("INVENTARIO")]
+	public partial class INVENTARIO
+	{
+		[PrimaryKey, NotNull    ] public int       INVENTARIOID { get; set; } // integer
+		[Column,        Nullable] public string    NUMERO       { get; set; } // varchar(10)
+		[Column,        Nullable] public DateTime? FECHA        { get; set; } // date
+		[Column,        Nullable] public TimeSpan? HORA         { get; set; } // time
+		[Column,        Nullable] public string    NOTAS        { get; set; } // blob sub_type 1
+
+		#region Associations
+
+		/// <summary>
+		/// FK_INVENTARIODET_INVENTARIO_BackReference
+		/// </summary>
+		[Association(ThisKey="INVENTARIOID", OtherKey="INVENTARIOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<INVENTARIODET> INVENTARIODETs { get; set; }
+
+		#endregion
+	}
+
+	[Table("INVENTARIODET")]
+	public partial class INVENTARIODET
+	{
+		[PrimaryKey, NotNull    ] public int      INVENTARIODETID { get; set; } // integer
+		[Column,        Nullable] public int?     INVENTARIOID    { get; set; } // integer
+		[Column,        Nullable] public int?     INSUMOID        { get; set; } // integer
+		[Column,        Nullable] public decimal? STOCKTEORICO    { get; set; } // numeric(15,4)
+		[Column,        Nullable] public decimal? STOCKREAL       { get; set; } // numeric(15,4)
+		[Column,        Nullable] public decimal? STOCKDIFERENCIA { get; set; } // decimal(8,4)
+
+		#region Associations
+
+		/// <summary>
+		/// FK_INVENTARIODET_INSUMO
+		/// </summary>
+		[Association(ThisKey="INSUMOID", OtherKey="INSUMOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_INVENTARIODET_INSUMO", BackReferenceName="INVENTARIODETs")]
+		public INSUMO INSUMO { get; set; }
+
+		/// <summary>
+		/// FK_INVENTARIODET_INVENTARIO
+		/// </summary>
+		[Association(ThisKey="INVENTARIOID", OtherKey="INVENTARIOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_INVENTARIODET_INVENTARIO", BackReferenceName="INVENTARIODETs")]
+		public INVENTARIO INVENTARIO { get; set; }
 
 		#endregion
 	}
@@ -190,6 +284,17 @@ namespace Comparsa.Data
 		#endregion
 	}
 
+	[Table("NUMEROBLOQ")]
+	public partial class NUMEROBLOQ
+	{
+		[PrimaryKey, NotNull    ] public int       NUMEROBLOQID { get; set; } // integer
+		[Column,        Nullable] public int?      TIPONUMERO   { get; set; } // integer
+		[Column,        Nullable] public string    NUMERO       { get; set; } // varchar(20)
+		[Column,        Nullable] public DateTime? FECHAHORA    { get; set; } // timestamp
+		[Column,        Nullable] public int?      USUARIOID    { get; set; } // integer
+		[Column,        Nullable] public string    NOMBREPC     { get; set; } // varchar(50)
+	}
+
 	[Table("TIPOINSUMO")]
 	public partial class TIPOINSUMO
 	{
@@ -205,10 +310,38 @@ namespace Comparsa.Data
 		public IEnumerable<AFECTADOREQ> AFECTADOREQs { get; set; }
 
 		/// <summary>
+		/// FK_COLABORADORAPORTA_TIPOINS_BackReference
+		/// </summary>
+		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<COLABORADORAPORTA> COLABORADORAPORTATIPOINS { get; set; }
+
+		/// <summary>
 		/// FK_INSUMO_BackReference
 		/// </summary>
 		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public IEnumerable<INSUMO> INSUMOes { get; set; }
+
+		#endregion
+	}
+
+	public static partial class COMPARSADBStoredProcedures
+	{
+		#region FGENCODIGO
+
+		public static IEnumerable<FGENCODIGOResult> FGENCODIGO(this DataConnection dataConnection, int? TIPOCODIGO, out string CODIGO)
+		{
+			var ret = dataConnection.QueryProc<FGENCODIGOResult>("F_GEN_CODIGO",
+				new DataParameter("TIPOCODIGO", TIPOCODIGO, DataType.Int32));
+
+			CODIGO = Converter.ChangeTypeTo<string>(((IDbDataParameter)dataConnection.Command.Parameters["CODIGO"]).Value);
+
+			return ret;
+		}
+
+		public partial class FGENCODIGOResult
+		{
+			public string CODIGO { get; set; }
+		}
 
 		#endregion
 	}
@@ -233,6 +366,12 @@ namespace Comparsa.Data
 				t.COLABORADORID == COLABORADORID);
 		}
 
+		public static COLABORADORAPORTA Find(this ITable<COLABORADORAPORTA> table, int COLABORADORAPORTAID)
+		{
+			return table.FirstOrDefault(t =>
+				t.COLABORADORAPORTAID == COLABORADORAPORTAID);
+		}
+
 		public static ENTRADA Find(this ITable<ENTRADA> table, int ENTRADAID)
 		{
 			return table.FirstOrDefault(t =>
@@ -245,10 +384,28 @@ namespace Comparsa.Data
 				t.INSUMOID == INSUMOID);
 		}
 
+		public static INVENTARIO Find(this ITable<INVENTARIO> table, int INVENTARIOID)
+		{
+			return table.FirstOrDefault(t =>
+				t.INVENTARIOID == INVENTARIOID);
+		}
+
+		public static INVENTARIODET Find(this ITable<INVENTARIODET> table, int INVENTARIODETID)
+		{
+			return table.FirstOrDefault(t =>
+				t.INVENTARIODETID == INVENTARIODETID);
+		}
+
 		public static LOCALIDAD Find(this ITable<LOCALIDAD> table, int LOCALIDADID)
 		{
 			return table.FirstOrDefault(t =>
 				t.LOCALIDADID == LOCALIDADID);
+		}
+
+		public static NUMEROBLOQ Find(this ITable<NUMEROBLOQ> table, int NUMEROBLOQID)
+		{
+			return table.FirstOrDefault(t =>
+				t.NUMEROBLOQID == NUMEROBLOQID);
 		}
 
 		public static TIPOINSUMO Find(this ITable<TIPOINSUMO> table, int TIPOINSUMOID)
