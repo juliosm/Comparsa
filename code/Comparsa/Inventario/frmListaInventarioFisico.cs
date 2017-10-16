@@ -63,7 +63,7 @@ namespace Comparsa
         {
             using (var db = Globals.DataContext.CreateDataConnection())
             {
-                bindingSourceGrid.DataSource = db.GetTable<INVENTARIO>();
+                bindingSourceGrid.DataSource = db.GetTable<INVENTARIO>().ToList();
             }
         }
 

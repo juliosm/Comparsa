@@ -43,37 +43,38 @@
             this.edHora = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.menuDetalle = new System.Windows.Forms.ToolStrip();
-            this.btnQuitarInsumo = new System.Windows.Forms.ToolStripButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.edInsumo = new System.Windows.Forms.ComboBox();
-            this.edCantidad = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
+            this.gridViewDetalle = new System.Windows.Forms.DataGridView();
+            this.bindingSourceDetalle = new System.Windows.Forms.BindingSource(this.components);
+            this.panelAgregarInsumo = new System.Windows.Forms.Panel();
+            this.edExistTeorica = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnAgregarInsumo = new System.Windows.Forms.Button();
-            this.nOMBREINSUMODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label6 = new System.Windows.Forms.Label();
+            this.edExistReal = new System.Windows.Forms.NumericUpDown();
+            this.edInsumo = new System.Windows.Forms.ComboBox();
+            this.bindingSourceInsumo = new System.Windows.Forms.BindingSource(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.menuDetalle = new System.Windows.Forms.ToolStrip();
+            this.btnModificarDetalle = new System.Windows.Forms.ToolStripButton();
+            this.btnQuitarInsumo = new System.Windows.Forms.ToolStripButton();
+            this.edNotas = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.iNVENTARIODETIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iNVENTARIOIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iNSUMOIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sTOCKTEORICODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sTOCKREALDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sTOCKDIFERENCIADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iNSUMODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colINSUMONOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iNVENTARIODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSourceDetalle = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSourceInsumo = new System.Windows.Forms.BindingSource(this.components);
-            this.edNotas = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.colEXISTREAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEXISTDIFERENCIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel4.SuspendLayout();
-            this.menuDetalle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.edCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewDetalle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceDetalle)).BeginInit();
+            this.panelAgregarInsumo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edExistReal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceInsumo)).BeginInit();
+            this.menuDetalle.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -83,7 +84,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(641, 37);
+            this.panel1.Size = new System.Drawing.Size(695, 37);
             this.panel1.TabIndex = 1;
             // 
             // lbTitulo
@@ -105,13 +106,13 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 458);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(641, 58);
+            this.panel2.Size = new System.Drawing.Size(695, 58);
             this.panel2.TabIndex = 5;
             // 
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar.Location = new System.Drawing.Point(539, 15);
+            this.btnCancelar.Location = new System.Drawing.Point(593, 15);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(90, 31);
             this.btnCancelar.TabIndex = 26;
@@ -122,7 +123,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(443, 15);
+            this.btnAceptar.Location = new System.Drawing.Point(497, 15);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(90, 31);
             this.btnAceptar.TabIndex = 25;
@@ -198,74 +199,123 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.dataGridView1);
-            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Controls.Add(this.gridViewDetalle);
+            this.panel3.Controls.Add(this.panelAgregarInsumo);
             this.panel3.Controls.Add(this.menuDetalle);
             this.panel3.Location = new System.Drawing.Point(12, 199);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(615, 243);
+            this.panel3.Size = new System.Drawing.Size(669, 243);
             this.panel3.TabIndex = 11;
             // 
-            // dataGridView1
+            // gridViewDetalle
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nOMBREINSUMODataGridViewTextBoxColumn,
+            this.gridViewDetalle.AllowUserToAddRows = false;
+            this.gridViewDetalle.AllowUserToDeleteRows = false;
+            this.gridViewDetalle.AutoGenerateColumns = false;
+            this.gridViewDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridViewDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iNVENTARIODETIDDataGridViewTextBoxColumn,
             this.iNVENTARIOIDDataGridViewTextBoxColumn,
             this.iNSUMOIDDataGridViewTextBoxColumn,
-            this.sTOCKTEORICODataGridViewTextBoxColumn,
-            this.sTOCKREALDataGridViewTextBoxColumn,
-            this.sTOCKDIFERENCIADataGridViewTextBoxColumn,
-            this.iNSUMODataGridViewTextBoxColumn,
-            this.iNVENTARIODataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.bindingSourceDetalle;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 65);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.ShowCellErrors = false;
-            this.dataGridView1.ShowCellToolTips = false;
-            this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.ShowRowErrors = false;
-            this.dataGridView1.Size = new System.Drawing.Size(615, 178);
-            this.dataGridView1.TabIndex = 2;
+            this.colINSUMONOMBRE,
+            this.iNVENTARIODataGridViewTextBoxColumn,
+            this.colEXISTREAL,
+            this.colEXISTDIFERENCIA});
+            this.gridViewDetalle.DataSource = this.bindingSourceDetalle;
+            this.gridViewDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridViewDetalle.Location = new System.Drawing.Point(0, 65);
+            this.gridViewDetalle.MultiSelect = false;
+            this.gridViewDetalle.Name = "gridViewDetalle";
+            this.gridViewDetalle.ReadOnly = true;
+            this.gridViewDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridViewDetalle.ShowCellErrors = false;
+            this.gridViewDetalle.ShowCellToolTips = false;
+            this.gridViewDetalle.ShowEditingIcon = false;
+            this.gridViewDetalle.ShowRowErrors = false;
+            this.gridViewDetalle.Size = new System.Drawing.Size(669, 178);
+            this.gridViewDetalle.TabIndex = 2;
+            this.gridViewDetalle.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridViewDetalle_CellFormatting);
             // 
-            // panel4
+            // bindingSourceDetalle
             // 
-            this.panel4.Controls.Add(this.btnAgregarInsumo);
-            this.panel4.Controls.Add(this.label6);
-            this.panel4.Controls.Add(this.edCantidad);
-            this.panel4.Controls.Add(this.edInsumo);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 25);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(615, 40);
-            this.panel4.TabIndex = 0;
+            this.bindingSourceDetalle.DataSource = typeof(Comparsa.Data.INVENTARIODET_EXT);
             // 
-            // menuDetalle
+            // panelAgregarInsumo
             // 
-            this.menuDetalle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnQuitarInsumo});
-            this.menuDetalle.Location = new System.Drawing.Point(0, 0);
-            this.menuDetalle.Name = "menuDetalle";
-            this.menuDetalle.Size = new System.Drawing.Size(615, 25);
-            this.menuDetalle.TabIndex = 1;
-            this.menuDetalle.Text = "toolStrip1";
+            this.panelAgregarInsumo.Controls.Add(this.edExistTeorica);
+            this.panelAgregarInsumo.Controls.Add(this.label7);
+            this.panelAgregarInsumo.Controls.Add(this.btnAgregarInsumo);
+            this.panelAgregarInsumo.Controls.Add(this.label6);
+            this.panelAgregarInsumo.Controls.Add(this.edExistReal);
+            this.panelAgregarInsumo.Controls.Add(this.edInsumo);
+            this.panelAgregarInsumo.Controls.Add(this.label5);
+            this.panelAgregarInsumo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelAgregarInsumo.Location = new System.Drawing.Point(0, 25);
+            this.panelAgregarInsumo.Name = "panelAgregarInsumo";
+            this.panelAgregarInsumo.Size = new System.Drawing.Size(669, 40);
+            this.panelAgregarInsumo.TabIndex = 0;
             // 
-            // btnQuitarInsumo
+            // edExistTeorica
             // 
-            this.btnQuitarInsumo.Image = ((System.Drawing.Image)(resources.GetObject("btnQuitarInsumo.Image")));
-            this.btnQuitarInsumo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnQuitarInsumo.Name = "btnQuitarInsumo";
-            this.btnQuitarInsumo.Size = new System.Drawing.Size(60, 22);
-            this.btnQuitarInsumo.Text = "Quitar";
+            this.edExistTeorica.Location = new System.Drawing.Point(335, 8);
+            this.edExistTeorica.Multiline = true;
+            this.edExistTeorica.Name = "edExistTeorica";
+            this.edExistTeorica.ReadOnly = true;
+            this.edExistTeorica.Size = new System.Drawing.Size(64, 23);
+            this.edExistTeorica.TabIndex = 11;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(259, 12);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 15);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Exist. teórica:";
+            // 
+            // btnAgregarInsumo
+            // 
+            this.btnAgregarInsumo.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarInsumo.Image")));
+            this.btnAgregarInsumo.Location = new System.Drawing.Point(534, 5);
+            this.btnAgregarInsumo.Name = "btnAgregarInsumo";
+            this.btnAgregarInsumo.Size = new System.Drawing.Size(81, 28);
+            this.btnAgregarInsumo.TabIndex = 3;
+            this.btnAgregarInsumo.Text = "Agregar";
+            this.btnAgregarInsumo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarInsumo.UseVisualStyleBackColor = true;
+            this.btnAgregarInsumo.Click += new System.EventHandler(this.btnAgregarInsumo_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(405, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(55, 15);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Exist. real";
+            // 
+            // edExistReal
+            // 
+            this.edExistReal.Location = new System.Drawing.Point(462, 8);
+            this.edExistReal.Name = "edExistReal";
+            this.edExistReal.Size = new System.Drawing.Size(64, 23);
+            this.edExistReal.TabIndex = 2;
+            // 
+            // edInsumo
+            // 
+            this.edInsumo.DataSource = this.bindingSourceInsumo;
+            this.edInsumo.DisplayMember = "NOMBRE";
+            this.edInsumo.FormattingEnabled = true;
+            this.edInsumo.Location = new System.Drawing.Point(55, 8);
+            this.edInsumo.Name = "edInsumo";
+            this.edInsumo.Size = new System.Drawing.Size(198, 23);
+            this.edInsumo.TabIndex = 1;
+            this.edInsumo.ValueMember = "INSUMOID";
+            this.edInsumo.SelectedIndexChanged += new System.EventHandler(this.edInsumo_SelectedIndexChanged);
+            // 
+            // bindingSourceInsumo
+            // 
+            this.bindingSourceInsumo.DataSource = typeof(Comparsa.Data.INSUMO);
             // 
             // label5
             // 
@@ -276,49 +326,51 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Insumo";
             // 
-            // edInsumo
+            // menuDetalle
             // 
-            this.edInsumo.FormattingEnabled = true;
-            this.edInsumo.Location = new System.Drawing.Point(55, 8);
-            this.edInsumo.Name = "edInsumo";
-            this.edInsumo.Size = new System.Drawing.Size(198, 23);
-            this.edInsumo.TabIndex = 1;
+            this.menuDetalle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnModificarDetalle,
+            this.btnQuitarInsumo});
+            this.menuDetalle.Location = new System.Drawing.Point(0, 0);
+            this.menuDetalle.Name = "menuDetalle";
+            this.menuDetalle.Size = new System.Drawing.Size(669, 25);
+            this.menuDetalle.TabIndex = 1;
+            this.menuDetalle.Text = "toolStrip1";
             // 
-            // edCantidad
+            // btnModificarDetalle
             // 
-            this.edCantidad.Location = new System.Drawing.Point(315, 8);
-            this.edCantidad.Name = "edCantidad";
-            this.edCantidad.Size = new System.Drawing.Size(82, 23);
-            this.edCantidad.TabIndex = 2;
+            this.btnModificarDetalle.Image = ((System.Drawing.Image)(resources.GetObject("btnModificarDetalle.Image")));
+            this.btnModificarDetalle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnModificarDetalle.Name = "btnModificarDetalle";
+            this.btnModificarDetalle.Size = new System.Drawing.Size(78, 22);
+            this.btnModificarDetalle.Text = "Modificar";
+            this.btnModificarDetalle.Click += new System.EventHandler(this.btnModificarDetalle_Click);
             // 
-            // label6
+            // btnQuitarInsumo
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(258, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 15);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Exist. real";
+            this.btnQuitarInsumo.Image = ((System.Drawing.Image)(resources.GetObject("btnQuitarInsumo.Image")));
+            this.btnQuitarInsumo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnQuitarInsumo.Name = "btnQuitarInsumo";
+            this.btnQuitarInsumo.Size = new System.Drawing.Size(60, 22);
+            this.btnQuitarInsumo.Text = "Quitar";
+            this.btnQuitarInsumo.Click += new System.EventHandler(this.btnQuitarInsumo_Click);
             // 
-            // btnAgregarInsumo
+            // edNotas
             // 
-            this.btnAgregarInsumo.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarInsumo.Image")));
-            this.btnAgregarInsumo.Location = new System.Drawing.Point(409, 5);
-            this.btnAgregarInsumo.Name = "btnAgregarInsumo";
-            this.btnAgregarInsumo.Size = new System.Drawing.Size(81, 28);
-            this.btnAgregarInsumo.TabIndex = 3;
-            this.btnAgregarInsumo.Text = "Agregar";
-            this.btnAgregarInsumo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarInsumo.UseVisualStyleBackColor = true;
-            this.btnAgregarInsumo.Click += new System.EventHandler(this.btnAgregarInsumo_Click);
+            this.edNotas.Location = new System.Drawing.Point(12, 116);
+            this.edNotas.Multiline = true;
+            this.edNotas.Name = "edNotas";
+            this.edNotas.Size = new System.Drawing.Size(340, 49);
+            this.edNotas.TabIndex = 17;
             // 
-            // nOMBREINSUMODataGridViewTextBoxColumn
+            // label13
             // 
-            this.nOMBREINSUMODataGridViewTextBoxColumn.DataPropertyName = "NOMBREINSUMO";
-            this.nOMBREINSUMODataGridViewTextBoxColumn.HeaderText = "Insumo";
-            this.nOMBREINSUMODataGridViewTextBoxColumn.Name = "nOMBREINSUMODataGridViewTextBoxColumn";
-            this.nOMBREINSUMODataGridViewTextBoxColumn.ReadOnly = true;
-            this.nOMBREINSUMODataGridViewTextBoxColumn.Width = 200;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 98);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(38, 15);
+            this.label13.TabIndex = 16;
+            this.label13.Text = "Notas";
             // 
             // iNVENTARIODETIDDataGridViewTextBoxColumn
             // 
@@ -344,72 +396,39 @@
             this.iNSUMOIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.iNSUMOIDDataGridViewTextBoxColumn.Visible = false;
             // 
-            // sTOCKTEORICODataGridViewTextBoxColumn
+            // colINSUMONOMBRE
             // 
-            this.sTOCKTEORICODataGridViewTextBoxColumn.DataPropertyName = "STOCKTEORICO";
-            this.sTOCKTEORICODataGridViewTextBoxColumn.HeaderText = "Exist. teórica";
-            this.sTOCKTEORICODataGridViewTextBoxColumn.Name = "sTOCKTEORICODataGridViewTextBoxColumn";
-            this.sTOCKTEORICODataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sTOCKREALDataGridViewTextBoxColumn
-            // 
-            this.sTOCKREALDataGridViewTextBoxColumn.DataPropertyName = "STOCKREAL";
-            this.sTOCKREALDataGridViewTextBoxColumn.HeaderText = "Exist. real";
-            this.sTOCKREALDataGridViewTextBoxColumn.Name = "sTOCKREALDataGridViewTextBoxColumn";
-            this.sTOCKREALDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sTOCKDIFERENCIADataGridViewTextBoxColumn
-            // 
-            this.sTOCKDIFERENCIADataGridViewTextBoxColumn.DataPropertyName = "STOCKDIFERENCIA";
-            this.sTOCKDIFERENCIADataGridViewTextBoxColumn.HeaderText = "Diferencia";
-            this.sTOCKDIFERENCIADataGridViewTextBoxColumn.Name = "sTOCKDIFERENCIADataGridViewTextBoxColumn";
-            this.sTOCKDIFERENCIADataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // iNSUMODataGridViewTextBoxColumn
-            // 
-            this.iNSUMODataGridViewTextBoxColumn.DataPropertyName = "INSUMO";
-            this.iNSUMODataGridViewTextBoxColumn.HeaderText = "INSUMO";
-            this.iNSUMODataGridViewTextBoxColumn.Name = "iNSUMODataGridViewTextBoxColumn";
-            this.iNSUMODataGridViewTextBoxColumn.ReadOnly = true;
-            this.iNSUMODataGridViewTextBoxColumn.Visible = false;
+            this.colINSUMONOMBRE.DataPropertyName = "INSUMO.NOMBRE";
+            this.colINSUMONOMBRE.HeaderText = "Insumo";
+            this.colINSUMONOMBRE.Name = "colINSUMONOMBRE";
+            this.colINSUMONOMBRE.ReadOnly = true;
+            this.colINSUMONOMBRE.Width = 200;
             // 
             // iNVENTARIODataGridViewTextBoxColumn
             // 
-            this.iNVENTARIODataGridViewTextBoxColumn.DataPropertyName = "INVENTARIO";
-            this.iNVENTARIODataGridViewTextBoxColumn.HeaderText = "INVENTARIO";
+            this.iNVENTARIODataGridViewTextBoxColumn.DataPropertyName = "EXISTTEORICA";
+            this.iNVENTARIODataGridViewTextBoxColumn.HeaderText = "Exist. teórica";
             this.iNVENTARIODataGridViewTextBoxColumn.Name = "iNVENTARIODataGridViewTextBoxColumn";
             this.iNVENTARIODataGridViewTextBoxColumn.ReadOnly = true;
-            this.iNVENTARIODataGridViewTextBoxColumn.Visible = false;
             // 
-            // bindingSourceDetalle
+            // colEXISTREAL
             // 
-            this.bindingSourceDetalle.DataSource = typeof(Comparsa.Data.INVENTARIODET_EXT);
+            this.colEXISTREAL.DataPropertyName = "EXISTREAL";
+            this.colEXISTREAL.HeaderText = "Exist. real";
+            this.colEXISTREAL.Name = "colEXISTREAL";
+            this.colEXISTREAL.ReadOnly = true;
             // 
-            // bindingSourceInsumo
+            // colEXISTDIFERENCIA
             // 
-            this.bindingSourceInsumo.DataSource = typeof(Comparsa.Data.INSUMO);
-            // 
-            // edNotas
-            // 
-            this.edNotas.Location = new System.Drawing.Point(12, 116);
-            this.edNotas.Multiline = true;
-            this.edNotas.Name = "edNotas";
-            this.edNotas.Size = new System.Drawing.Size(340, 49);
-            this.edNotas.TabIndex = 17;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 98);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(38, 15);
-            this.label13.TabIndex = 16;
-            this.label13.Text = "Notas";
+            this.colEXISTDIFERENCIA.DataPropertyName = "EXISTDIFERENCIA";
+            this.colEXISTDIFERENCIA.HeaderText = "Diferencia";
+            this.colEXISTDIFERENCIA.Name = "colEXISTDIFERENCIA";
+            this.colEXISTDIFERENCIA.ReadOnly = true;
             // 
             // frmDetInventarioFisico
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(641, 516);
+            this.ClientSize = new System.Drawing.Size(695, 516);
             this.Controls.Add(this.edNotas);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.panel3);
@@ -436,14 +455,14 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewDetalle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceDetalle)).EndInit();
+            this.panelAgregarInsumo.ResumeLayout(false);
+            this.panelAgregarInsumo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edExistReal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceInsumo)).EndInit();
             this.menuDetalle.ResumeLayout(false);
             this.menuDetalle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.edCantidad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceDetalle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceInsumo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,27 +483,28 @@
         private System.Windows.Forms.DateTimePicker edHora;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Panel panelAgregarInsumo;
+        private System.Windows.Forms.DataGridView gridViewDetalle;
         private System.Windows.Forms.ToolStrip menuDetalle;
         private System.Windows.Forms.ToolStripButton btnQuitarInsumo;
         private System.Windows.Forms.Button btnAgregarInsumo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown edCantidad;
+        private System.Windows.Forms.NumericUpDown edExistReal;
         private System.Windows.Forms.ComboBox edInsumo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.BindingSource bindingSourceDetalle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nOMBREINSUMODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iNVENTARIODETIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iNVENTARIOIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iNSUMOIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sTOCKTEORICODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sTOCKREALDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sTOCKDIFERENCIADataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iNSUMODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iNVENTARIODataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource bindingSourceInsumo;
         private System.Windows.Forms.TextBox edNotas;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox edExistTeorica;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ToolStripButton btnModificarDetalle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iNVENTARIODETIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iNVENTARIOIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iNSUMOIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colINSUMONOMBRE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iNVENTARIODataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEXISTREAL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEXISTDIFERENCIA;
     }
 }

@@ -153,6 +153,12 @@
     <Compile Include="General\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inventario\frmDetInventarioInsumo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\frmDetInventarioInsumo.Designer.cs">
+      <DependentUpon>frmDetInventarioInsumo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inventario\frmDetInventarioFisico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="General\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\frmDetInventarioInsumo.resx">
+      <DependentUpon>frmDetInventarioInsumo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario\frmDetInventarioFisico.resx">
       <DependentUpon>frmDetInventarioFisico.cs</DependentUpon>

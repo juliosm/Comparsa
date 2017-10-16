@@ -405,7 +405,6 @@ namespace Comparsa
                 edEstado.Text = "";
             }
 
-
         }
 
         private void edLocalidad_SelectedIndexChanged(object sender, EventArgs e)

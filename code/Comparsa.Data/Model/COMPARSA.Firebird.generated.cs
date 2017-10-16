@@ -191,14 +191,14 @@ namespace Comparsa.Data
 	[Table("INSUMO")]
 	public partial class INSUMO
 	{
-		[PrimaryKey, NotNull    ] public int    INSUMOID      { get; set; } // integer
-		[Column,        Nullable] public string CODIGO        { get; set; } // varchar(20)
-		[Column,        Nullable] public string NOMBRE        { get; set; } // varchar(100)
-		[Column,        Nullable] public int?   TIPOINSUMOID  { get; set; } // integer
-		[Column,        Nullable] public int?   TOTALENTRADAS { get; set; } // integer
-		[Column,        Nullable] public int?   TOTALSALIDAS  { get; set; } // integer
-		[Column,        Nullable] public int?   EXISTENCIA    { get; set; } // integer
-		[Column,        Nullable] public string NOTAS         { get; set; } // blob sub_type 1
+		[PrimaryKey, NotNull    ] public int      INSUMOID      { get; set; } // integer
+		[Column,        Nullable] public string   CODIGO        { get; set; } // varchar(20)
+		[Column,        Nullable] public string   NOMBRE        { get; set; } // varchar(100)
+		[Column,        Nullable] public int?     TIPOINSUMOID  { get; set; } // integer
+		[Column,        Nullable] public decimal? TOTALENTRADAS { get; set; } // numeric(15,4)
+		[Column,        Nullable] public decimal? TOTALSALIDAS  { get; set; } // numeric(15,4)
+		[Column,        Nullable] public decimal? EXISTENCIA    { get; set; } // numeric(15,4)
+		[Column,        Nullable] public string   NOTAS         { get; set; } // blob sub_type 1
 
 		#region Associations
 
@@ -225,6 +225,7 @@ namespace Comparsa.Data
 		[Column,        Nullable] public DateTime? FECHA        { get; set; } // date
 		[Column,        Nullable] public TimeSpan? HORA         { get; set; } // time
 		[Column,        Nullable] public string    NOTAS        { get; set; } // blob sub_type 1
+		[Column,        Nullable] public short?    ACTUAL       { get; set; } // smallint
 
 		#region Associations
 
@@ -241,24 +242,25 @@ namespace Comparsa.Data
 	public partial class INVENTARIODET
 	{
 		[PrimaryKey, NotNull    ] public int      INVENTARIODETID { get; set; } // integer
-		[Column,        Nullable] public int?     INVENTARIOID    { get; set; } // integer
-		[Column,        Nullable] public int?     INSUMOID        { get; set; } // integer
-		[Column,        Nullable] public decimal? STOCKTEORICO    { get; set; } // numeric(15,4)
-		[Column,        Nullable] public decimal? STOCKREAL       { get; set; } // numeric(15,4)
-		[Column,        Nullable] public decimal? STOCKDIFERENCIA { get; set; } // decimal(8,4)
+		[Column,     NotNull    ] public int      INVENTARIOID    { get; set; } // integer
+		[Column,     NotNull    ] public int      INSUMOID        { get; set; } // integer
+		[Column,        Nullable] public decimal? EXISTTEORICA    { get; set; } // numeric(15,4)
+		[Column,        Nullable] public decimal? EXISTREAL       { get; set; } // numeric(15,4)
+		[Column,        Nullable] public decimal? EXISTDIFERENCIA { get; set; } // numeric(15,4)
+		[Column,        Nullable] public string   NOTAS           { get; set; } // blob sub_type 1
 
 		#region Associations
 
 		/// <summary>
 		/// FK_INVENTARIODET_INSUMO
 		/// </summary>
-		[Association(ThisKey="INSUMOID", OtherKey="INSUMOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_INVENTARIODET_INSUMO", BackReferenceName="INVENTARIODETs")]
+		[Association(ThisKey="INSUMOID", OtherKey="INSUMOID", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_INVENTARIODET_INSUMO", BackReferenceName="INVENTARIODETs")]
 		public INSUMO INSUMO { get; set; }
 
 		/// <summary>
 		/// FK_INVENTARIODET_INVENTARIO
 		/// </summary>
-		[Association(ThisKey="INVENTARIOID", OtherKey="INVENTARIOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_INVENTARIODET_INVENTARIO", BackReferenceName="INVENTARIODETs")]
+		[Association(ThisKey="INVENTARIOID", OtherKey="INVENTARIOID", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_INVENTARIODET_INVENTARIO", BackReferenceName="INVENTARIODETs")]
 		public INVENTARIO INVENTARIO { get; set; }
 
 		#endregion

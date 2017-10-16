@@ -279,10 +279,10 @@
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.edCalle);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(480, 316);
+            this.tabPage1.Size = new System.Drawing.Size(480, 314);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Domicilio";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -429,7 +429,7 @@
             this.checkListReqs.FormattingEnabled = true;
             this.checkListReqs.Location = new System.Drawing.Point(11, 10);
             this.checkListReqs.Name = "checkListReqs";
-            this.checkListReqs.Size = new System.Drawing.Size(297, 256);
+            this.checkListReqs.Size = new System.Drawing.Size(297, 238);
             this.checkListReqs.TabIndex = 0;
             // 
             // edEstatus

@@ -117,53 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="colINSUMONOMBRE.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="colEXISTREAL.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="colEXISTDIFERENCIA.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="bindingSourceDetalle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>138, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnAgregarInsumo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAPZJREFUOE/F
-        k00KwkAMhaO0IJ5FsCvpSpAu6h8iHsAzuPAI9mxqbV35OxUEBY/ROJlGF52RWhAMfDD0JY+UmQdUIcA0
-        AlhLrl+y3sgZNbzKhlMJliRVJvIQ5gRFbNt4GY/xMpngtl7XdCYkA1pJEw+tFr4qGQ41nbl+NDi6Lo9L
-        g9FI05lfGlSrePY8FN2u4j6f8zjiY7F4f6ce6tUM9o7D7cW1azQMBs0my8VlNKC1Tu22WpG4zWbcLn8h
-        CFD0+yh8H8+dDkaVisEgxx9uIUeZh2R8ypFloej1MBkMMK7VdD0jhGUWJpNYCKVYJZJNSsWZUgwA8ARv
-        qB2wZzpVmQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="bindingSourceInsumo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>301, 23</value>
-  </metadata>
-  <metadata name="menuDetalle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="bindingSourceTipoInsumo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="btnModificarDetalle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVDhPlZM7CsJQEEUHLGxchXsQLLS2t7KysLfIEqzd
-        gYWFK3APgmj8FBYq4gdTKKggGBAFzZg75oUkmI8XLrw3M/ckgQxBA6LqmGg4ItolsTNbdcM6kWUX+R8j
-        IxD7oqNwbrc5SrtajaeZDB+bTV6Xywqkk/NKbFmW7wlBI2z2egLDLCDIugAoGFL2hpWu3W4ywK/wyzR5
-        WSjEA0LDxaL0YwGbSkXqSt4wHAk4tVq8KpX40GhI73W7+cJwKGCSTvP7fhcDYmiafDN6T8OIB8xzOblD
-        j+2Wx6mU24PUORQwy2Z5X6/zIp/3hYNzoYAoe+cEYB/kV750OtKME+YUAFnqfzfRW0xsLKJspAP5a52/
-        YaIPpidHrAlHqTUAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnQuitarInsumo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPYwCBEwwMcWcYGE6eZmC4TwyGqo2Da97PwPAP
-        KPifFAzSAzYEyDmFLkkCPsUAdRI2SYIYpHeQGXAvKur/w9xcvPhuZCRuA/79+fOfEPj74wduA0CShMCf
-        L19wG3BZReX/NWNjOL5ubg7BVlb/r1tagtmX1dRwG0AqHiQGABmUJeVjkJyITZIgBmVEcI6EGkJSdoZo
-        ZmAAAJSZ8LxBEpMlAAAAAElFTkSuQmCC
-</value>
-  </data>
 </root>

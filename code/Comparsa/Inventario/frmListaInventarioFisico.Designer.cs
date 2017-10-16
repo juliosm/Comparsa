@@ -46,6 +46,7 @@
             this.nUMERODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fECHADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hORADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NOTAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -152,7 +153,8 @@
             this.colID,
             this.nUMERODataGridViewTextBoxColumn,
             this.fECHADataGridViewTextBoxColumn,
-            this.hORADataGridViewTextBoxColumn});
+            this.hORADataGridViewTextBoxColumn,
+            this.NOTAS});
             this.gridView.DataSource = this.bindingSourceGrid;
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.Location = new System.Drawing.Point(0, 62);
@@ -207,6 +209,14 @@
             this.hORADataGridViewTextBoxColumn.Name = "hORADataGridViewTextBoxColumn";
             this.hORADataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // NOTAS
+            // 
+            this.NOTAS.DataPropertyName = "NOTAS";
+            this.NOTAS.HeaderText = "Notas";
+            this.NOTAS.Name = "NOTAS";
+            this.NOTAS.ReadOnly = true;
+            this.NOTAS.Width = 200;
+            // 
             // frmListaInventarioFisico
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -249,5 +259,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nUMERODataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fECHADataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hORADataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NOTAS;
     }
 }

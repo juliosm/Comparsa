@@ -41,6 +41,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnRefrescar = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.colINSUMOID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +49,6 @@
             this.colEXISTENCIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTOTALENTRADAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTOTALSALIDAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -62,7 +62,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(671, 37);
+            this.panel1.Size = new System.Drawing.Size(912, 37);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -88,7 +88,7 @@
             this.btnRefrescar});
             this.toolStrip.Location = new System.Drawing.Point(0, 37);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(671, 25);
+            this.toolStrip.Size = new System.Drawing.Size(912, 25);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -175,7 +175,7 @@
             this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(671, 363);
+            this.gridView.Size = new System.Drawing.Size(912, 363);
             this.gridView.TabIndex = 2;
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
@@ -213,12 +213,14 @@
             // 
             // colEXISTENCIA
             // 
+            this.colEXISTENCIA.DataPropertyName = "EXISTENCIA";
             this.colEXISTENCIA.HeaderText = "Existencia";
             this.colEXISTENCIA.Name = "colEXISTENCIA";
             this.colEXISTENCIA.ReadOnly = true;
             // 
             // colTOTALENTRADAS
             // 
+            this.colTOTALENTRADAS.DataPropertyName = "TOTALENTRADAS";
             this.colTOTALENTRADAS.HeaderText = "Total entradas";
             this.colTOTALENTRADAS.Name = "colTOTALENTRADAS";
             this.colTOTALENTRADAS.ReadOnly = true;
@@ -226,6 +228,7 @@
             // 
             // colTOTALSALIDAS
             // 
+            this.colTOTALSALIDAS.DataPropertyName = "TOTALSALIDAS";
             this.colTOTALSALIDAS.HeaderText = "Total salidas";
             this.colTOTALSALIDAS.Name = "colTOTALSALIDAS";
             this.colTOTALSALIDAS.ReadOnly = true;
@@ -234,7 +237,7 @@
             // frmListaInsumo
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(671, 425);
+            this.ClientSize = new System.Drawing.Size(912, 425);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.panel1);
@@ -267,6 +270,8 @@
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.BindingSource bindingSourceGrid;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnRefrescar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colINSUMOID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCODIGO;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNOMBRE;
@@ -274,7 +279,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEXISTENCIA;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTOTALENTRADAS;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTOTALSALIDAS;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnRefrescar;
     }
 }
