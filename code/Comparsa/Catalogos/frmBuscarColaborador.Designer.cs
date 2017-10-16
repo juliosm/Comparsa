@@ -54,6 +54,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.cbBrigadistas = new System.Windows.Forms.CheckBox();
+            this.cbDonantes = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGrid)).BeginInit();
@@ -107,7 +109,7 @@
             this.colESBRIGADISTA,
             this.colESDONANTEN});
             this.gridView.DataSource = this.bindingSourceGrid;
-            this.gridView.Location = new System.Drawing.Point(10, 93);
+            this.gridView.Location = new System.Drawing.Point(10, 119);
             this.gridView.MultiSelect = false;
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
@@ -121,7 +123,7 @@
             this.gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(650, 263);
+            this.gridView.Size = new System.Drawing.Size(650, 237);
             this.gridView.TabIndex = 2;
             this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellDoubleClick);
             this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
@@ -238,13 +240,15 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cbDonantes);
+            this.panel2.Controls.Add(this.cbBrigadistas);
             this.panel2.Controls.Add(this.btnBuscar);
             this.panel2.Controls.Add(this.edNombre);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 37);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(671, 47);
+            this.panel2.Size = new System.Drawing.Size(671, 73);
             this.panel2.TabIndex = 3;
             // 
             // btnBuscar
@@ -306,6 +310,27 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
+            // cbBrigadistas
+            // 
+            this.cbBrigadistas.AllowDrop = true;
+            this.cbBrigadistas.AutoSize = true;
+            this.cbBrigadistas.Location = new System.Drawing.Point(70, 48);
+            this.cbBrigadistas.Name = "cbBrigadistas";
+            this.cbBrigadistas.Size = new System.Drawing.Size(83, 19);
+            this.cbBrigadistas.TabIndex = 27;
+            this.cbBrigadistas.Text = "Brigadistas";
+            this.cbBrigadistas.UseVisualStyleBackColor = true;
+            // 
+            // cbDonantes
+            // 
+            this.cbDonantes.AutoSize = true;
+            this.cbDonantes.Location = new System.Drawing.Point(179, 48);
+            this.cbDonantes.Name = "cbDonantes";
+            this.cbDonantes.Size = new System.Drawing.Size(76, 19);
+            this.cbDonantes.TabIndex = 28;
+            this.cbDonantes.Text = "Donantes";
+            this.cbDonantes.UseVisualStyleBackColor = true;
+            // 
             // frmBuscarColaborador
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -360,5 +385,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.CheckBox cbDonantes;
+        private System.Windows.Forms.CheckBox cbBrigadistas;
     }
 }

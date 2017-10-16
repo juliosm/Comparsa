@@ -144,6 +144,7 @@
             // 
             this.edCodigo.Location = new System.Drawing.Point(12, 65);
             this.edCodigo.Name = "edCodigo";
+            this.edCodigo.ReadOnly = true;
             this.edCodigo.Size = new System.Drawing.Size(100, 23);
             this.edCodigo.TabIndex = 1;
             // 
@@ -421,10 +422,10 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.edNotas);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(480, 191);
+            this.tabPage3.Size = new System.Drawing.Size(480, 193);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Notas";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -435,16 +436,16 @@
             this.edNotas.Location = new System.Drawing.Point(3, 3);
             this.edNotas.Multiline = true;
             this.edNotas.Name = "edNotas";
-            this.edNotas.Size = new System.Drawing.Size(474, 185);
+            this.edNotas.Size = new System.Drawing.Size(474, 187);
             this.edNotas.TabIndex = 0;
             // 
             // tabAportaciones
             // 
             this.tabAportaciones.Controls.Add(this.checkListAportaciones);
-            this.tabAportaciones.Location = new System.Drawing.Point(4, 24);
+            this.tabAportaciones.Location = new System.Drawing.Point(4, 22);
             this.tabAportaciones.Name = "tabAportaciones";
             this.tabAportaciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAportaciones.Size = new System.Drawing.Size(480, 191);
+            this.tabAportaciones.Size = new System.Drawing.Size(480, 193);
             this.tabAportaciones.TabIndex = 3;
             this.tabAportaciones.Text = "Aportaciones";
             this.tabAportaciones.UseVisualStyleBackColor = true;

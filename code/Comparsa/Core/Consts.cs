@@ -21,8 +21,8 @@ namespace Comparsa
         public const int TIPO_CODIGO_AFECTADO = 2;
         public const int TIPO_CODIGO_INSUMO = 3;
         public const int TIPO_NUMERO_INVENTARIO = 4;
-        public const int TIPO_NUMERO_ENTRADA = 5;
-        public const int TIPO_NUMERO_SALIDA = 6;
+        public const int TIPO_NUMERO_ENTRADA_ALMACEN = 5;
+        public const int TIPO_NUMERO_SALIDA_ALMACEN = 6;
 
     }
 }

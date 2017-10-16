@@ -28,35 +28,87 @@ namespace Comparsa
         private void frmDetColaborador_Load(object sender, EventArgs e)
         {
 
-            string titulo = "";
-
-            LoadWindowConfig();
-
-            CargarListados();
-
-            switch (mode)
+            using (var db = Globals.DataContext.CreateDataConnection())
             {
-                case CRUDMode.Create:
-                    registro = new COLABORADOR();
-                    titulo = "Agregar colaborador";
-                    break;
 
-                case CRUDMode.Update:
-                    MapearObjetoAPantalla();
-                    titulo = "Modificar colaborador";
-                    break;
+                string titulo = "";
+
+                LoadWindowConfig();
+
+                CargarListados(db);
+
+                switch (mode)
+                {
+                    case CRUDMode.Create:
+
+                        registro = new COLABORADOR();
+
+                        GenerarCodigo(db);
+
+                        titulo = "Agregar colaborador";
+
+                        break;
+
+                    case CRUDMode.Update:
+                        MapearObjetoAPantalla();
+                        titulo = "Modificar colaborador";
+                        break;
+
+                }
+
+                lbTitulo.Text = titulo;
+                this.Text = titulo;
+
+                edCodigo.Focus();
 
             }
 
-            lbTitulo.Text = titulo;
-            this.Text = titulo;
-
-            
-
-            edCodigo.Focus();
-
         }
 
+        private void frmDetColaborador_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (mode == CRUDMode.Create)
+            {
+                DesbloquearNumero();
+            }
+            SaveWindowConfig();
+        }
+
+        private void frmDetColaborador_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                if (!AppUtils.MsgConfirmation("¿Desea cancelar los cambios en el registro?", "Por favor confirme"))
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void GenerarCodigo(DataConnection db)
+        {
+            edCodigo.Text = Globals.DataContext.GenerarNumero(db, Consts.TIPO_CODIGO_COLABORADOR);
+            edCodigo.Tag = Globals.DataContext.BloquearNumero(db, Consts.TIPO_CODIGO_COLABORADOR,
+                edCodigo.Text);
+        }
+
+        private void DesbloquearNumero()
+        {
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                Globals.DataContext.DesbloquearNumero(db, (NUMEROBLOQ)edCodigo.Tag);
+            }
+        }
+
+        public void SetBrigadista(bool flag)
+        {
+            cbEsBrigadista.Checked = flag;
+        }
+
+        public void SetDonante(bool flag)
+        {
+            cbEsDonante.Checked = flag;
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -186,23 +238,6 @@ namespace Comparsa
             AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
         }
 
-        private void frmDetColaborador_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            SaveWindowConfig();
-        }
-
-        private void frmDetColaborador_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (this.DialogResult == DialogResult.Cancel)
-            {
-                if (!AppUtils.MsgConfirmation("¿Desea cancelar los cambios en el registro?", "Por favor confirme"))
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
-
-
         private void CargarListaAportaciones(DataConnection db)
         {
             try
@@ -228,18 +263,9 @@ namespace Comparsa
 
         }
 
-
-
-
-        private void CargarListados()
+        private void CargarListados(DataConnection db)
         {
-
-            using (var db = Globals.DataContext.CreateDataConnection())
-            {
-                CargarListaAportaciones(db);
-
-            }
-
+            CargarListaAportaciones(db);
         }
 
         private void GuardarAportacionesColaborador(DataConnection db)

@@ -41,10 +41,10 @@
             this.inventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salidasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.inventariosFísicosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pingConnexion = new System.Windows.Forms.Timer(this.components);
-            this.inventariosFísicosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,20 +131,33 @@
             this.toolStripMenuItem1,
             this.inventariosFísicosToolStripMenuItem});
             this.inventarioToolStripMenuItem.Name = "inventarioToolStripMenuItem";
-            this.inventarioToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.inventarioToolStripMenuItem.Text = "Inventario";
+            this.inventarioToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.inventarioToolStripMenuItem.Text = "Almacén";
             // 
             // entradasToolStripMenuItem
             // 
             this.entradasToolStripMenuItem.Name = "entradasToolStripMenuItem";
-            this.entradasToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.entradasToolStripMenuItem.Text = "Entradas";
+            this.entradasToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.entradasToolStripMenuItem.Text = "Entradas a almacén";
+            this.entradasToolStripMenuItem.Click += new System.EventHandler(this.entradasToolStripMenuItem_Click);
             // 
             // salidasToolStripMenuItem
             // 
             this.salidasToolStripMenuItem.Name = "salidasToolStripMenuItem";
-            this.salidasToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.salidasToolStripMenuItem.Text = "Salidas";
+            this.salidasToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.salidasToolStripMenuItem.Text = "Salidas de almacén";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(173, 6);
+            // 
+            // inventariosFísicosToolStripMenuItem
+            // 
+            this.inventariosFísicosToolStripMenuItem.Name = "inventariosFísicosToolStripMenuItem";
+            this.inventariosFísicosToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.inventariosFísicosToolStripMenuItem.Text = "Inventarios físicos";
+            this.inventariosFísicosToolStripMenuItem.Click += new System.EventHandler(this.inventariosFísicosToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -159,18 +172,6 @@
             // 
             this.pingConnexion.Interval = 120000;
             this.pingConnexion.Tick += new System.EventHandler(this.pingConnexion_Tick);
-            // 
-            // inventariosFísicosToolStripMenuItem
-            // 
-            this.inventariosFísicosToolStripMenuItem.Name = "inventariosFísicosToolStripMenuItem";
-            this.inventariosFísicosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.inventariosFísicosToolStripMenuItem.Text = "Inventarios físicos";
-            this.inventariosFísicosToolStripMenuItem.Click += new System.EventHandler(this.inventariosFísicosToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(165, 6);
             // 
             // frmMain
             // 

@@ -28,6 +28,7 @@ namespace Comparsa.Data
 		public ITable<COLABORADOR>       COLABORADORs       { get { return this.GetTable<COLABORADOR>(); } }
 		public ITable<COLABORADORAPORTA> COLABORADORAPORTAs { get { return this.GetTable<COLABORADORAPORTA>(); } }
 		public ITable<ENTRADA>           ENTRADAs           { get { return this.GetTable<ENTRADA>(); } }
+		public ITable<ENTRADADET>        ENTRADADETs        { get { return this.GetTable<ENTRADADET>(); } }
 		public ITable<INSUMO>            INSUMOes           { get { return this.GetTable<INSUMO>(); } }
 		public ITable<INVENTARIO>        INVENTARIOs        { get { return this.GetTable<INVENTARIO>(); } }
 		public ITable<INVENTARIODET>     INVENTARIODETs     { get { return this.GetTable<INVENTARIODET>(); } }
@@ -149,6 +150,18 @@ namespace Comparsa.Data
 		[Association(ThisKey="COLABORADORID", OtherKey="COLABORADORID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public IEnumerable<COLABORADORAPORTA> COLABORADORAPORTACOLABs { get; set; }
 
+		/// <summary>
+		/// FK_ENTRADA_DONANTE_BackReference
+		/// </summary>
+		[Association(ThisKey="COLABORADORID", OtherKey="DONANTEID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<ENTRADA> ENTRADADONANTEs { get; set; }
+
+		/// <summary>
+		/// FK_ENTRADA_RESPONSABLE_BackReference
+		/// </summary>
+		[Association(ThisKey="COLABORADORID", OtherKey="RESPONSABLEID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<ENTRADA> ENTRADARESPONSABLEs { get; set; }
+
 		#endregion
 	}
 
@@ -186,6 +199,54 @@ namespace Comparsa.Data
 		[Column,        Nullable] public int?      DONANTEID     { get; set; } // integer
 		[Column,        Nullable] public int?      RESPONSABLEID { get; set; } // integer
 		[Column,        Nullable] public string    NOTAS         { get; set; } // blob sub_type 1
+
+		#region Associations
+
+		/// <summary>
+		/// FK_ENTRADA_DONANTE
+		/// </summary>
+		[Association(ThisKey="DONANTEID", OtherKey="COLABORADORID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_ENTRADA_DONANTE", BackReferenceName="ENTRADADONANTEs")]
+		public COLABORADOR DONANTE { get; set; }
+
+		/// <summary>
+		/// FK_ENTRADADET_ENTRADA_BackReference
+		/// </summary>
+		[Association(ThisKey="ENTRADAID", OtherKey="ENTRADAID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<ENTRADADET> ENTRADADETs { get; set; }
+
+		/// <summary>
+		/// FK_ENTRADA_RESPONSABLE
+		/// </summary>
+		[Association(ThisKey="RESPONSABLEID", OtherKey="COLABORADORID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_ENTRADA_RESPONSABLE", BackReferenceName="ENTRADARESPONSABLEs")]
+		public COLABORADOR RESPONSABLE { get; set; }
+
+		#endregion
+	}
+
+	[Table("ENTRADADET")]
+	public partial class ENTRADADET
+	{
+		[PrimaryKey, NotNull    ] public int      ENTRADADETID { get; set; } // integer
+		[Column,     NotNull    ] public int      ENTRADAID    { get; set; } // integer
+		[Column,     NotNull    ] public int      INSUMOID     { get; set; } // integer
+		[Column,        Nullable] public decimal? CANTIDAD     { get; set; } // numeric(15,4)
+		[Column,        Nullable] public string   NOTAS        { get; set; } // blob sub_type 1
+
+		#region Associations
+
+		/// <summary>
+		/// FK_ENTRADADET_ENTRADA
+		/// </summary>
+		[Association(ThisKey="ENTRADAID", OtherKey="ENTRADAID", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_ENTRADADET_ENTRADA", BackReferenceName="ENTRADADETs")]
+		public ENTRADA ENTRADA { get; set; }
+
+		/// <summary>
+		/// FK_ENTRADADET_INSUMO
+		/// </summary>
+		[Association(ThisKey="INSUMOID", OtherKey="INSUMOID", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_ENTRADADET_INSUMO", BackReferenceName="ENTRADADETs")]
+		public INSUMO INSUMO { get; set; }
+
+		#endregion
 	}
 
 	[Table("INSUMO")]
@@ -201,6 +262,12 @@ namespace Comparsa.Data
 		[Column,        Nullable] public string   NOTAS         { get; set; } // blob sub_type 1
 
 		#region Associations
+
+		/// <summary>
+		/// FK_ENTRADADET_INSUMO_BackReference
+		/// </summary>
+		[Association(ThisKey="INSUMOID", OtherKey="INSUMOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<ENTRADADET> ENTRADADETs { get; set; }
 
 		/// <summary>
 		/// FK_INVENTARIODET_INSUMO_BackReference
@@ -378,6 +445,12 @@ namespace Comparsa.Data
 		{
 			return table.FirstOrDefault(t =>
 				t.ENTRADAID == ENTRADAID);
+		}
+
+		public static ENTRADADET Find(this ITable<ENTRADADET> table, int ENTRADADETID)
+		{
+			return table.FirstOrDefault(t =>
+				t.ENTRADADETID == ENTRADADETID);
 		}
 
 		public static INSUMO Find(this ITable<INSUMO> table, int INSUMOID)

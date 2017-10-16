@@ -108,6 +108,11 @@ namespace Comparsa
             ShowMDIChild(typeof(frmListaInventarioFisico));
         }
 
+        private void entradasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMDIChild(typeof(frmListaEntradas));
+        }
+
     }
 
 }

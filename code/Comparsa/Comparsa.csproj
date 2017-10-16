@@ -153,6 +153,12 @@
     <Compile Include="General\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inventario\frmDetEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\frmDetEntrada.Designer.cs">
+      <DependentUpon>frmDetEntrada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inventario\frmDetInventarioInsumo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,12 @@
     </Compile>
     <Compile Include="Inventario\frmDetInventarioFisico.Designer.cs">
       <DependentUpon>frmDetInventarioFisico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\frmListaEntradas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\frmListaEntradas.Designer.cs">
+      <DependentUpon>frmListaEntradas.cs</DependentUpon>
     </Compile>
     <Compile Include="Inventario\frmListaInventarioFisico.cs">
       <SubType>Form</SubType>
@@ -218,11 +230,17 @@
     <EmbeddedResource Include="General\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\frmDetEntrada.resx">
+      <DependentUpon>frmDetEntrada.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inventario\frmDetInventarioInsumo.resx">
       <DependentUpon>frmDetInventarioInsumo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario\frmDetInventarioFisico.resx">
       <DependentUpon>frmDetInventarioFisico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\frmListaEntradas.resx">
+      <DependentUpon>frmListaEntradas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario\frmListaInventarioFisico.resx">
       <DependentUpon>frmListaInventarioFisico.cs</DependentUpon>
@@ -238,6 +256,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\Comparsa.Data.ENTRADA.datasource" />
+    <None Include="Properties\DataSources\Comparsa.Data.ENTRADADET.datasource" />
     <None Include="Properties\DataSources\Comparsa.Data.INSUMO.datasource" />
     <None Include="Properties\DataSources\Comparsa.Data.INVENTARIO.datasource" />
     <None Include="Properties\DataSources\Comparsa.Data.INVENTARIODET_EXT.datasource" />

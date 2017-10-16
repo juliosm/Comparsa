@@ -21,9 +21,17 @@ namespace Comparsa
 
         public COLABORADOR registro = null;
 
+        public bool FlagSoloBrigadistas { get; set; }
+        public bool FlagSoloDonantes { get; set; }
+
         public frmBuscarColaborador()
         {
+
             InitializeComponent();
+
+            FlagSoloBrigadistas = false;
+            FlagSoloDonantes = false;
+
         }
 
         public static void ShowAsMDIChild(Form mdiParent)
@@ -41,6 +49,34 @@ namespace Comparsa
 
         private void frmBuscarColaborador_Load(object sender, EventArgs e)
         {
+
+            if (FlagSoloBrigadistas)
+            {
+
+                cbBrigadistas.Checked = true;
+                cbDonantes.Checked = false;
+
+                cbBrigadistas.Enabled = false;
+                cbDonantes.Enabled = false;
+
+            }
+            else if (FlagSoloDonantes)
+            {
+
+                cbBrigadistas.Checked = false;
+                cbDonantes.Checked = true;
+
+                cbBrigadistas.Enabled = false;
+                cbDonantes.Enabled = false;
+
+            }
+            else
+            {
+
+                cbBrigadistas.Checked = true;
+                cbDonantes.Checked = true;
+
+            }
 
             LoadWindowConfig();
             LoadGridData();
@@ -72,11 +108,17 @@ namespace Comparsa
             {
 
                 string nombre = edNombre.Text;
+                bool flagBrigadista = cbBrigadistas.Checked;
+                bool flagDonante = cbDonantes.Checked;
 
                 var query = (
                     from c in db.GetTable<COLABORADOR>()
                     where
-                        c.NOMBRE.ToUpper().Contains(nombre.ToUpper())
+                        (c.NOMBRE.ToUpper().Contains(nombre.ToUpper()))
+                        &&
+                        (((flagBrigadista) && (c.ESBRIGADISTA == 1)) || ((!flagBrigadista) && (c.ESBRIGADISTA != 1)))
+                        &&
+                        (((flagDonante) && (c.ESDONANTE == 1)) || ((!flagDonante) && (c.ESDONANTE != 1)))
                     select c);
 
                 bindingSourceGrid.DataSource = query.ToList();
