@@ -17,7 +17,7 @@ namespace Comparsa
     public partial class frmListaInsumo : Form
     {
 
-        private static frmListaInsumo Instance = null;
+        public static frmListaInsumo Instance = null;
 
         public frmListaInsumo()
         {
@@ -266,7 +266,7 @@ namespace Comparsa
             RefreshGridData();
         }
 
-        private void RefreshGridData()
+        public void RefreshGridData()
         {
             LoadGridData();
         }

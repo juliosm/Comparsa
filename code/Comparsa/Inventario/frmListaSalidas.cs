@@ -118,6 +118,7 @@ namespace Comparsa
             if (InfoRegistro(CRUDMode.Create))
             {
                 LoadGridData();
+                RefrescarListaInsumos();
             }
 
             return result;
@@ -134,6 +135,7 @@ namespace Comparsa
                 if (InfoRegistro(CRUDMode.Update))
                 {
                     LoadGridData();
+                    RefrescarListaInsumos();
                 }
             }
 
@@ -167,6 +169,7 @@ namespace Comparsa
                         }
 
                         LoadGridData();
+                        RefrescarListaInsumos();
 
                     }
 
@@ -176,6 +179,14 @@ namespace Comparsa
 
             return result;
 
+        }
+
+        private void RefrescarListaInsumos()
+        {
+            if (frmListaInsumo.Instance != null)
+            {
+                frmListaInsumo.Instance.RefreshGridData();
+            }
         }
 
         private bool InfoRegistro(CRUDMode mode)

@@ -63,7 +63,7 @@ namespace Comparsa
         {
             using (var db = Globals.DataContext.CreateDataConnection())
             {
-                bindingSourceGrid.DataSource = db.GetTable<INVENTARIO>().ToList();
+                bindingSourceGrid.DataSource = db.GetTable<INVENTARIO>().OrderBy(x => x.NUMERO).ToList();
             }
         }
 
@@ -95,6 +95,7 @@ namespace Comparsa
             if (InfoRegistro(CRUDMode.Create))
             {
                 LoadGridData();
+                RefrescarListaInsumos();
             }
 
             return result;
@@ -111,6 +112,7 @@ namespace Comparsa
                 if (InfoRegistro(CRUDMode.Update))
                 {
                     LoadGridData();
+                    RefrescarListaInsumos();
                 }
             }
 
@@ -153,6 +155,14 @@ namespace Comparsa
 
             return result;
 
+        }
+
+        private void RefrescarListaInsumos()
+        {
+            if (frmListaInsumo.Instance != null)
+            {
+                frmListaInsumo.Instance.RefreshGridData();
+            }
         }
 
         private bool InfoRegistro(CRUDMode mode)

@@ -62,6 +62,9 @@ namespace Comparsa
                         break;
 
                     case CRUDMode.Update:
+
+                        registro = db.GetTable<INVENTARIO>().LoadWith(x => x.INVENTARIODETs).FirstOrDefault(x => x.INVENTARIOID == registro.INVENTARIOID);
+
                         MapearObjetoAPantalla(db);
                         titulo = "Modificar inventario físico";
                         break;
