@@ -317,7 +317,6 @@
       <Name>Comparsa.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Icon.ico" />
   </ItemGroup>

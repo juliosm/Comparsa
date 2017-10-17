@@ -149,13 +149,18 @@ namespace Comparsa
             bool result = false;
             DialogResult dr = DialogResult.Cancel;
 
-            frmDetColaborador frmDetColaborador = new frmDetColaborador();
-            frmDetColaborador.mode = CRUDMode.Create;
-            dr = frmDetColaborador.ShowDialog();
-            frmDetColaborador.Dispose();
-            frmDetColaborador = null;
+            do
+            {
 
-            result = dr == DialogResult.OK;
+                frmDetColaborador frmDetColaborador = new frmDetColaborador();
+                frmDetColaborador.mode = CRUDMode.Create;
+                dr = frmDetColaborador.ShowDialog();
+                frmDetColaborador.Dispose();
+                frmDetColaborador = null;
+
+                result = dr == DialogResult.OK;
+
+            } while (result);
 
             return result;
 
@@ -167,13 +172,18 @@ namespace Comparsa
             bool result = false;
             DialogResult dr = DialogResult.Cancel;
 
-            frmDetAfectado frmDetAfectado = new frmDetAfectado();
-            frmDetAfectado.mode = CRUDMode.Create;
-            dr = frmDetAfectado.ShowDialog();
-            frmDetAfectado.Dispose();
-            frmDetAfectado = null;
+            do
+            {
 
-            result = dr == DialogResult.OK;
+                frmDetAfectado frmDetAfectado = new frmDetAfectado();
+                frmDetAfectado.mode = CRUDMode.Create;
+                dr = frmDetAfectado.ShowDialog();
+                frmDetAfectado.Dispose();
+                frmDetAfectado = null;
+
+                result = dr == DialogResult.OK;
+
+            } while (result);
 
             return result;
 

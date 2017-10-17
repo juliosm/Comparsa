@@ -333,7 +333,7 @@ namespace Comparsa
                                 c.NOMBRE.ToUpper().Contains(keyword) ||
                                 c.CALLE.ToUpper().Contains(keyword) ||
                                 c.COLONIA.ToUpper().Contains(keyword)
-
+                            orderby c.CODIGO
                             select c);
 
                         bindingSourceGrid.DataSource = query.ToList();
@@ -341,7 +341,14 @@ namespace Comparsa
                     }
                     else
                     {
-                        bindingSourceGrid.DataSource = db.GetTable<COLABORADOR>().ToList();
+
+                        var query = (
+                            from c in db.GetTable<COLABORADOR>()
+                            orderby c.CODIGO
+                            select c);
+
+                        bindingSourceGrid.DataSource = query.ToList();
+
                     }
 
                 }

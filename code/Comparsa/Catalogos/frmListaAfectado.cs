@@ -406,6 +406,7 @@ namespace Comparsa
                                 a.NOMBRE.ToUpper().Contains(keyword) ||
                                 a.CALLE.ToUpper().Contains(keyword) ||
                                 a.COLONIA.ToUpper().Contains(keyword)
+                            orderby a.CODIGO
                             select new AFECTADO_EXT
                             {
                                 AFECTADOID = a.AFECTADOID,
@@ -432,6 +433,7 @@ namespace Comparsa
                         var query = (
                             from a in db.GetTable<AFECTADO>()
                             join l in db.GetTable<LOCALIDAD>() on a.LOCALIDADID equals l.LOCALIDADID
+                            orderby a.CODIGO
                             select new AFECTADO_EXT
                             {
                                 AFECTADOID = a.AFECTADOID,

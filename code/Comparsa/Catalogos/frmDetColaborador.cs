@@ -247,7 +247,7 @@ namespace Comparsa
 
                 checkListAportaciones.Items.Clear();
 
-                foreach (var tipoInsumo in db.GetTable<TIPOINSUMO>().ToList())
+                foreach (var tipoInsumo in db.GetTable<TIPOINSUMO>().OrderBy(x => x.NOMBRE).ToList())
                 {
                     checkListAportaciones.Items.Add(tipoInsumo, false);
                 }

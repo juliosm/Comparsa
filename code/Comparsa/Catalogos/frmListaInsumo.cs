@@ -68,6 +68,7 @@ namespace Comparsa
                 var queryInsumos = (
                     from a in db.GetTable<INSUMO>()
                     join ti in db.GetTable<TIPOINSUMO>() on a.TIPOINSUMOID equals ti.TIPOINSUMOID
+                    orderby a.CODIGO
                     select new INSUMO_EXT
                     {
                         INSUMOID = a.INSUMOID,
