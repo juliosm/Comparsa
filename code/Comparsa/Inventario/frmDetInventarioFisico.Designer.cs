@@ -44,6 +44,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.gridViewDetalle = new System.Windows.Forms.DataGridView();
+            this.iNVENTARIODETIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iNVENTARIOIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iNSUMOIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colINSUMONOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iNVENTARIODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEXISTREAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEXISTDIFERENCIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSourceDetalle = new System.Windows.Forms.BindingSource(this.components);
             this.panelAgregarInsumo = new System.Windows.Forms.Panel();
             this.edExistTeorica = new System.Windows.Forms.TextBox();
@@ -59,13 +66,6 @@
             this.btnQuitarInsumo = new System.Windows.Forms.ToolStripButton();
             this.edNotas = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.iNVENTARIODETIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iNVENTARIOIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iNSUMOIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colINSUMONOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iNVENTARIODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEXISTREAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEXISTDIFERENCIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -236,6 +236,59 @@
             this.gridViewDetalle.TabIndex = 2;
             this.gridViewDetalle.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridViewDetalle_CellFormatting);
             // 
+            // iNVENTARIODETIDDataGridViewTextBoxColumn
+            // 
+            this.iNVENTARIODETIDDataGridViewTextBoxColumn.DataPropertyName = "INVENTARIODETID";
+            this.iNVENTARIODETIDDataGridViewTextBoxColumn.HeaderText = "INVENTARIODETID";
+            this.iNVENTARIODETIDDataGridViewTextBoxColumn.Name = "iNVENTARIODETIDDataGridViewTextBoxColumn";
+            this.iNVENTARIODETIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iNVENTARIODETIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // iNVENTARIOIDDataGridViewTextBoxColumn
+            // 
+            this.iNVENTARIOIDDataGridViewTextBoxColumn.DataPropertyName = "INVENTARIOID";
+            this.iNVENTARIOIDDataGridViewTextBoxColumn.HeaderText = "INVENTARIOID";
+            this.iNVENTARIOIDDataGridViewTextBoxColumn.Name = "iNVENTARIOIDDataGridViewTextBoxColumn";
+            this.iNVENTARIOIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iNVENTARIOIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // iNSUMOIDDataGridViewTextBoxColumn
+            // 
+            this.iNSUMOIDDataGridViewTextBoxColumn.DataPropertyName = "INSUMOID";
+            this.iNSUMOIDDataGridViewTextBoxColumn.HeaderText = "INSUMOID";
+            this.iNSUMOIDDataGridViewTextBoxColumn.Name = "iNSUMOIDDataGridViewTextBoxColumn";
+            this.iNSUMOIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iNSUMOIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // colINSUMONOMBRE
+            // 
+            this.colINSUMONOMBRE.DataPropertyName = "INSUMO.NOMBRE";
+            this.colINSUMONOMBRE.HeaderText = "Insumo";
+            this.colINSUMONOMBRE.Name = "colINSUMONOMBRE";
+            this.colINSUMONOMBRE.ReadOnly = true;
+            this.colINSUMONOMBRE.Width = 200;
+            // 
+            // iNVENTARIODataGridViewTextBoxColumn
+            // 
+            this.iNVENTARIODataGridViewTextBoxColumn.DataPropertyName = "EXISTTEORICA";
+            this.iNVENTARIODataGridViewTextBoxColumn.HeaderText = "Exist. teórica";
+            this.iNVENTARIODataGridViewTextBoxColumn.Name = "iNVENTARIODataGridViewTextBoxColumn";
+            this.iNVENTARIODataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // colEXISTREAL
+            // 
+            this.colEXISTREAL.DataPropertyName = "EXISTREAL";
+            this.colEXISTREAL.HeaderText = "Exist. real";
+            this.colEXISTREAL.Name = "colEXISTREAL";
+            this.colEXISTREAL.ReadOnly = true;
+            // 
+            // colEXISTDIFERENCIA
+            // 
+            this.colEXISTDIFERENCIA.DataPropertyName = "EXISTDIFERENCIA";
+            this.colEXISTDIFERENCIA.HeaderText = "Diferencia";
+            this.colEXISTDIFERENCIA.Name = "colEXISTDIFERENCIA";
+            this.colEXISTDIFERENCIA.ReadOnly = true;
+            // 
             // bindingSourceDetalle
             // 
             this.bindingSourceDetalle.DataSource = typeof(Comparsa.Data.INVENTARIODET_EXT);
@@ -303,6 +356,8 @@
             // 
             // edInsumo
             // 
+            this.edInsumo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.edInsumo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.edInsumo.DataSource = this.bindingSourceInsumo;
             this.edInsumo.DisplayMember = "NOMBRE";
             this.edInsumo.FormattingEnabled = true;
@@ -371,59 +426,6 @@
             this.label13.Size = new System.Drawing.Size(38, 15);
             this.label13.TabIndex = 16;
             this.label13.Text = "Notas";
-            // 
-            // iNVENTARIODETIDDataGridViewTextBoxColumn
-            // 
-            this.iNVENTARIODETIDDataGridViewTextBoxColumn.DataPropertyName = "INVENTARIODETID";
-            this.iNVENTARIODETIDDataGridViewTextBoxColumn.HeaderText = "INVENTARIODETID";
-            this.iNVENTARIODETIDDataGridViewTextBoxColumn.Name = "iNVENTARIODETIDDataGridViewTextBoxColumn";
-            this.iNVENTARIODETIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iNVENTARIODETIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // iNVENTARIOIDDataGridViewTextBoxColumn
-            // 
-            this.iNVENTARIOIDDataGridViewTextBoxColumn.DataPropertyName = "INVENTARIOID";
-            this.iNVENTARIOIDDataGridViewTextBoxColumn.HeaderText = "INVENTARIOID";
-            this.iNVENTARIOIDDataGridViewTextBoxColumn.Name = "iNVENTARIOIDDataGridViewTextBoxColumn";
-            this.iNVENTARIOIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iNVENTARIOIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // iNSUMOIDDataGridViewTextBoxColumn
-            // 
-            this.iNSUMOIDDataGridViewTextBoxColumn.DataPropertyName = "INSUMOID";
-            this.iNSUMOIDDataGridViewTextBoxColumn.HeaderText = "INSUMOID";
-            this.iNSUMOIDDataGridViewTextBoxColumn.Name = "iNSUMOIDDataGridViewTextBoxColumn";
-            this.iNSUMOIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iNSUMOIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // colINSUMONOMBRE
-            // 
-            this.colINSUMONOMBRE.DataPropertyName = "INSUMO.NOMBRE";
-            this.colINSUMONOMBRE.HeaderText = "Insumo";
-            this.colINSUMONOMBRE.Name = "colINSUMONOMBRE";
-            this.colINSUMONOMBRE.ReadOnly = true;
-            this.colINSUMONOMBRE.Width = 200;
-            // 
-            // iNVENTARIODataGridViewTextBoxColumn
-            // 
-            this.iNVENTARIODataGridViewTextBoxColumn.DataPropertyName = "EXISTTEORICA";
-            this.iNVENTARIODataGridViewTextBoxColumn.HeaderText = "Exist. teórica";
-            this.iNVENTARIODataGridViewTextBoxColumn.Name = "iNVENTARIODataGridViewTextBoxColumn";
-            this.iNVENTARIODataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // colEXISTREAL
-            // 
-            this.colEXISTREAL.DataPropertyName = "EXISTREAL";
-            this.colEXISTREAL.HeaderText = "Exist. real";
-            this.colEXISTREAL.Name = "colEXISTREAL";
-            this.colEXISTREAL.ReadOnly = true;
-            // 
-            // colEXISTDIFERENCIA
-            // 
-            this.colEXISTDIFERENCIA.DataPropertyName = "EXISTDIFERENCIA";
-            this.colEXISTDIFERENCIA.HeaderText = "Diferencia";
-            this.colEXISTDIFERENCIA.Name = "colEXISTDIFERENCIA";
-            this.colEXISTDIFERENCIA.ReadOnly = true;
             // 
             // frmDetInventarioFisico
             // 

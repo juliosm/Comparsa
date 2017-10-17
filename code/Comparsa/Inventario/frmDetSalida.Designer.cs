@@ -70,11 +70,11 @@
             this.btnAgregarResponsable = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.edLocalidad = new System.Windows.Forms.ComboBox();
+            this.bindingSourceLocalidad = new System.Windows.Forms.BindingSource(this.components);
             this.edEstado = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.edMunicipio = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.bindingSourceLocalidad = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -349,8 +349,11 @@
             // 
             // edInsumo
             // 
+            this.edInsumo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.edInsumo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.edInsumo.DataSource = this.bindingSourceInsumo;
             this.edInsumo.DisplayMember = "NOMBRE";
+            this.edInsumo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.edInsumo.FormattingEnabled = true;
             this.edInsumo.Location = new System.Drawing.Point(55, 8);
             this.edInsumo.Name = "edInsumo";
@@ -483,6 +486,10 @@
             this.edLocalidad.ValueMember = "LOCALIDADID";
             this.edLocalidad.SelectedIndexChanged += new System.EventHandler(this.edLocalidad_SelectedIndexChanged);
             // 
+            // bindingSourceLocalidad
+            // 
+            this.bindingSourceLocalidad.DataSource = typeof(Comparsa.Data.LOCALIDAD);
+            // 
             // edEstado
             // 
             this.edEstado.Location = new System.Drawing.Point(446, 115);
@@ -516,10 +523,6 @@
             this.label11.Size = new System.Drawing.Size(61, 15);
             this.label11.TabIndex = 30;
             this.label11.Text = "Municipio";
-            // 
-            // bindingSourceLocalidad
-            // 
-            this.bindingSourceLocalidad.DataSource = typeof(Comparsa.Data.LOCALIDAD);
             // 
             // frmDetSalida
             // 

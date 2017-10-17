@@ -336,6 +336,8 @@
             // 
             // edInsumo
             // 
+            this.edInsumo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.edInsumo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.edInsumo.DataSource = this.bindingSourceInsumo;
             this.edInsumo.DisplayMember = "NOMBRE";
             this.edInsumo.FormattingEnabled = true;
