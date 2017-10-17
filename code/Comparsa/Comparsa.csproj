@@ -153,6 +153,24 @@
     <Compile Include="General\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inventario\frmDetEntradaInsumo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\frmDetEntradaInsumo.Designer.cs">
+      <DependentUpon>frmDetEntradaInsumo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\frmDetSalidaInsumo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\frmDetSalidaInsumo.Designer.cs">
+      <DependentUpon>frmDetSalidaInsumo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\frmDetSalida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\frmDetSalida.Designer.cs">
+      <DependentUpon>frmDetSalida.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inventario\frmDetEntrada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +188,12 @@
     </Compile>
     <Compile Include="Inventario\frmDetInventarioFisico.Designer.cs">
       <DependentUpon>frmDetInventarioFisico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\frmListaSalidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\frmListaSalidas.Designer.cs">
+      <DependentUpon>frmListaSalidas.cs</DependentUpon>
     </Compile>
     <Compile Include="Inventario\frmListaEntradas.cs">
       <SubType>Form</SubType>
@@ -230,6 +254,15 @@
     <EmbeddedResource Include="General\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\frmDetEntradaInsumo.resx">
+      <DependentUpon>frmDetEntradaInsumo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\frmDetSalidaInsumo.resx">
+      <DependentUpon>frmDetSalidaInsumo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\frmDetSalida.resx">
+      <DependentUpon>frmDetSalida.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inventario\frmDetEntrada.resx">
       <DependentUpon>frmDetEntrada.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario\frmDetInventarioFisico.resx">
       <DependentUpon>frmDetInventarioFisico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\frmListaSalidas.resx">
+      <DependentUpon>frmListaSalidas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario\frmListaEntradas.resx">
       <DependentUpon>frmListaEntradas.cs</DependentUpon>
@@ -262,6 +298,8 @@
     <None Include="Properties\DataSources\Comparsa.Data.INVENTARIO.datasource" />
     <None Include="Properties\DataSources\Comparsa.Data.INVENTARIODET_EXT.datasource" />
     <None Include="Properties\DataSources\Comparsa.Data.LOCALIDAD.datasource" />
+    <None Include="Properties\DataSources\Comparsa.Data.SALIDA.datasource" />
+    <None Include="Properties\DataSources\Comparsa.Data.SALIDADET.datasource" />
     <None Include="Properties\DataSources\Comparsa.Data.TIPOINSUMO.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

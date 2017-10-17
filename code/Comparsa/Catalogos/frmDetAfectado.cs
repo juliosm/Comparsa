@@ -28,56 +28,96 @@ namespace Comparsa
         private void frmDetAfectado_Load(object sender, EventArgs e)
         {
 
-            string titulo = "";
-
-            LoadWindowConfig();
-
-            CargarListados();
-
-            edEstatus.SelectedIndex = -1;
-            edLocalidad.SelectedIndex = -1;
-
-            switch (mode)
+            using (var db = Globals.DataContext.CreateDataConnection())
             {
-                case CRUDMode.Create:
-                    registro = new AFECTADO();
-                    titulo = "Agregar afectado";
-                    edEstatus.SelectedIndex = edEstatus.FindStringExact(
-                        AppUtils.GetNombreEstatusAfectado(Consts.ESTATUS_AFECTADO_POR_REVISAR));
-                    break;
 
-                case CRUDMode.Update:
-                    MapearObjetoAPantalla();
-                    titulo = "Modificar afectado";
-                    break;
+                string titulo = "";
+
+                LoadWindowConfig();
+
+                CargarListados(db);
+
+                edEstatus.SelectedIndex = -1;
+                edLocalidad.SelectedIndex = -1;
+
+                switch (mode)
+                {
+                    case CRUDMode.Create:
+
+                        registro = new AFECTADO();
+
+                        GenerarCodigo(db);
+
+                        titulo = "Agregar afectado";
+
+                        edEstatus.SelectedIndex = edEstatus.FindStringExact(
+                            AppUtils.GetNombreEstatusAfectado(Consts.ESTATUS_AFECTADO_POR_REVISAR));
+
+                        break;
+
+                    case CRUDMode.Update:
+                        MapearObjetoAPantalla();
+                        titulo = "Modificar afectado";
+                        break;
+
+                }
+
+                lbTitulo.Text = titulo;
+                this.Text = titulo;
+
+                edCodigo.Focus();
 
             }
 
-            lbTitulo.Text = titulo;
-            this.Text = titulo;
-
-            edCodigo.Focus();
-
         }
 
+        private void frmDetAfectado_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (mode == CRUDMode.Create)
+            {
+                DesbloquearNumero();
+            }
+            SaveWindowConfig();
+        }
+
+        private void frmDetAfectado_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                if (!AppUtils.MsgConfirmation("¿Desea cancelar los cambios en el registro?", "Por favor confirme"))
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void GenerarCodigo(DataConnection db)
+        {
+            edCodigo.Text = Globals.DataContext.GenerarNumero(db, Consts.TIPO_CODIGO_AFECTADO);
+            edCodigo.Tag = Globals.DataContext.BloquearNumero(db, Consts.TIPO_CODIGO_AFECTADO,
+                edCodigo.Text);
+        }
+
+        private void DesbloquearNumero()
+        {
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                Globals.DataContext.DesbloquearNumero(db, (NUMEROBLOQ)edCodigo.Tag);
+            }
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             CancelarCaptura();
         }
 
-        private void CargarListados()
+        private void CargarListados(DataConnection db)
         {
 
-            using (var db = Globals.DataContext.CreateDataConnection())
-            {
+            CargarComboEstatus();
 
-                CargarComboEstatus();
-
-                CargarComboLocalidades(db);
-                CargarListaRequerimientos(db);
-
-            }
+            CargarComboLocalidades(db);
+            CargarListaRequerimientos(db);
 
         }
 
@@ -357,28 +397,12 @@ namespace Comparsa
 
         private void LoadWindowConfig()
         {
-            AppUtils.LoadWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
+            AppUtils.LoadWindowConfig(Globals.GXmlConfigUser, this, false, true, true);
         }
 
         private void SaveWindowConfig()
         {
-            AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
-        }
-
-        private void frmDetAfectado_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            SaveWindowConfig();
-        }
-
-        private void frmDetAfectado_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (this.DialogResult == DialogResult.Cancel)
-            {
-                if (!AppUtils.MsgConfirmation("¿Desea cancelar los cambios en el registro?", "Por favor confirme"))
-                {
-                    e.Cancel = true;
-                }
-            }
+            AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, false, true, true);
         }
 
         private void CargarInfoLocalidadSeleccionada()

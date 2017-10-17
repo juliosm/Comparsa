@@ -20,12 +20,27 @@ namespace Comparsa
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+
+            RefreshVersion();
+            RefreshDBPath();
+
             LoadWindowConfig();
+
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveWindowConfig();
+        }
+
+        private void RefreshVersion()
+        {
+            lbVersion.Text = String.Format("Versión: {0}", this.GetType().Assembly.GetName().Version);
+        }
+
+        private void RefreshDBPath()
+        {
+            lbDatabase.Text = Globals.GDBParams.DBName + "@" + Globals.GDBParams.Server;
         }
 
         private void LoadWindowConfig()
@@ -111,6 +126,57 @@ namespace Comparsa
         private void entradasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowMDIChild(typeof(frmListaEntradas));
+        }
+
+        private void salidasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowMDIChild(typeof(frmListaSalidas));
+        }
+
+        private void nuevoColaboradorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AgregarColaborador();
+        }
+
+        private void agregarAfectadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AgregarAfectado();
+        }
+
+        private bool AgregarColaborador()
+        {
+
+            bool result = false;
+            DialogResult dr = DialogResult.Cancel;
+
+            frmDetColaborador frmDetColaborador = new frmDetColaborador();
+            frmDetColaborador.mode = CRUDMode.Create;
+            dr = frmDetColaborador.ShowDialog();
+            frmDetColaborador.Dispose();
+            frmDetColaborador = null;
+
+            result = dr == DialogResult.OK;
+
+            return result;
+
+        }
+
+        private bool AgregarAfectado()
+        {
+
+            bool result = false;
+            DialogResult dr = DialogResult.Cancel;
+
+            frmDetAfectado frmDetAfectado = new frmDetAfectado();
+            frmDetAfectado.mode = CRUDMode.Create;
+            dr = frmDetAfectado.ShowDialog();
+            frmDetAfectado.Dispose();
+            frmDetAfectado = null;
+
+            result = dr == DialogResult.OK;
+
+            return result;
+
         }
 
     }

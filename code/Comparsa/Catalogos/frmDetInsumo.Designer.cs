@@ -42,13 +42,13 @@
             this.edCodigo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.edTipoInsumo = new System.Windows.Forms.ComboBox();
+            this.bindingSourceTipoInsumo = new System.Windows.Forms.BindingSource(this.components);
             this.edExistencia = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.edTotalEntradas = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.edTotalSalidas = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.bindingSourceTipoInsumo = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceTipoInsumo)).BeginInit();
@@ -81,7 +81,7 @@
             this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Controls.Add(this.btnAceptar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 351);
+            this.panel2.Location = new System.Drawing.Point(0, 296);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(383, 58);
             this.panel2.TabIndex = 5;
@@ -138,7 +138,7 @@
             this.edNotas.Location = new System.Drawing.Point(16, 206);
             this.edNotas.Multiline = true;
             this.edNotas.Name = "edNotas";
-            this.edNotas.Size = new System.Drawing.Size(342, 129);
+            this.edNotas.Size = new System.Drawing.Size(342, 76);
             this.edNotas.TabIndex = 7;
             // 
             // label1
@@ -154,6 +154,7 @@
             // 
             this.edCodigo.Location = new System.Drawing.Point(16, 71);
             this.edCodigo.Name = "edCodigo";
+            this.edCodigo.ReadOnly = true;
             this.edCodigo.Size = new System.Drawing.Size(118, 23);
             this.edCodigo.TabIndex = 1;
             // 
@@ -173,9 +174,14 @@
             this.edTipoInsumo.FormattingEnabled = true;
             this.edTipoInsumo.Location = new System.Drawing.Point(16, 116);
             this.edTipoInsumo.Name = "edTipoInsumo";
+            this.edTipoInsumo.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.edTipoInsumo.Size = new System.Drawing.Size(218, 23);
             this.edTipoInsumo.TabIndex = 3;
             this.edTipoInsumo.ValueMember = "TIPOINSUMOID";
+            // 
+            // bindingSourceTipoInsumo
+            // 
+            this.bindingSourceTipoInsumo.DataSource = typeof(Comparsa.Data.TIPOINSUMO);
             // 
             // edExistencia
             // 
@@ -228,14 +234,10 @@
             this.label6.TabIndex = 32;
             this.label6.Text = "Total salidas";
             // 
-            // bindingSourceTipoInsumo
-            // 
-            this.bindingSourceTipoInsumo.DataSource = typeof(Comparsa.Data.TIPOINSUMO);
-            // 
             // frmDetInsumo
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(383, 409);
+            this.ClientSize = new System.Drawing.Size(383, 354);
             this.Controls.Add(this.edTotalSalidas);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.edTotalEntradas);
@@ -253,9 +255,11 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmDetInsumo";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Insumo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDetInsumo_FormClosing);

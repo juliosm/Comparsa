@@ -230,12 +230,12 @@ namespace Comparsa
 
         private void LoadWindowConfig()
         {
-            AppUtils.LoadWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
+            AppUtils.LoadWindowConfig(Globals.GXmlConfigUser, this, false, true, true);
         }
 
         private void SaveWindowConfig()
         {
-            AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
+            AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, false, true, true);
         }
 
         private void CargarListaAportaciones(DataConnection db)

@@ -34,6 +34,8 @@ namespace Comparsa.Data
 		public ITable<INVENTARIODET>     INVENTARIODETs     { get { return this.GetTable<INVENTARIODET>(); } }
 		public ITable<LOCALIDAD>         LOCALIDADs         { get { return this.GetTable<LOCALIDAD>(); } }
 		public ITable<NUMEROBLOQ>        NUMEROBLOQs        { get { return this.GetTable<NUMEROBLOQ>(); } }
+		public ITable<SALIDA>            SALIDAs            { get { return this.GetTable<SALIDA>(); } }
+		public ITable<SALIDADET>         SALIDADETs         { get { return this.GetTable<SALIDADET>(); } }
 		public ITable<TIPOINSUMO>        TIPOINSUMOes       { get { return this.GetTable<TIPOINSUMO>(); } }
 
 		public COMPARSADB()
@@ -162,6 +164,12 @@ namespace Comparsa.Data
 		[Association(ThisKey="COLABORADORID", OtherKey="RESPONSABLEID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public IEnumerable<ENTRADA> ENTRADARESPONSABLEs { get; set; }
 
+		/// <summary>
+		/// FK_SALIDA_RESPONSABLE_BackReference
+		/// </summary>
+		[Association(ThisKey="COLABORADORID", OtherKey="RESPONSABLEID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<SALIDA> SALIDARESPONSABLEs { get; set; }
+
 		#endregion
 	}
 
@@ -276,6 +284,12 @@ namespace Comparsa.Data
 		public IEnumerable<INVENTARIODET> INVENTARIODETs { get; set; }
 
 		/// <summary>
+		/// FK_SALIDADET_INSUMO_BackReference
+		/// </summary>
+		[Association(ThisKey="INSUMOID", OtherKey="INSUMOID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<SALIDADET> SALIDADETs { get; set; }
+
+		/// <summary>
 		/// FK_INSUMO
 		/// </summary>
 		[Association(ThisKey="TIPOINSUMOID", OtherKey="TIPOINSUMOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_INSUMO", BackReferenceName="INSUMOes")]
@@ -350,6 +364,12 @@ namespace Comparsa.Data
 		[Association(ThisKey="LOCALIDADID", OtherKey="LOCALIDADID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public IEnumerable<AFECTADO> AFECTADOes { get; set; }
 
+		/// <summary>
+		/// FK_SALIDA_LOCALIDAD_BackReference
+		/// </summary>
+		[Association(ThisKey="LOCALIDADID", OtherKey="LOCALIDADID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<SALIDA> SALIDAs { get; set; }
+
 		#endregion
 	}
 
@@ -362,6 +382,67 @@ namespace Comparsa.Data
 		[Column,        Nullable] public DateTime? FECHAHORA    { get; set; } // timestamp
 		[Column,        Nullable] public int?      USUARIOID    { get; set; } // integer
 		[Column,        Nullable] public string    NOMBREPC     { get; set; } // varchar(50)
+	}
+
+	[Table("SALIDA")]
+	public partial class SALIDA
+	{
+		[PrimaryKey, NotNull    ] public int       SALIDAID      { get; set; } // integer
+		[Column,        Nullable] public string    NUMERO        { get; set; } // varchar(10)
+		[Column,        Nullable] public DateTime? FECHA         { get; set; } // date
+		[Column,        Nullable] public TimeSpan? HORA          { get; set; } // time
+		[Column,        Nullable] public int?      RESPONSABLEID { get; set; } // integer
+		[Column,        Nullable] public int?      LOCALIDADID   { get; set; } // integer
+		[Column,        Nullable] public string    NOTAS         { get; set; } // blob sub_type 1
+
+		#region Associations
+
+		/// <summary>
+		/// FK_SALIDA_LOCALIDAD
+		/// </summary>
+		[Association(ThisKey="LOCALIDADID", OtherKey="LOCALIDADID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_SALIDA_LOCALIDAD", BackReferenceName="SALIDAs")]
+		public LOCALIDAD LOCALIDAD { get; set; }
+
+		/// <summary>
+		/// FK_SALIDA_RESPONSABLE
+		/// </summary>
+		[Association(ThisKey="RESPONSABLEID", OtherKey="COLABORADORID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_SALIDA_RESPONSABLE", BackReferenceName="SALIDARESPONSABLEs")]
+		public COLABORADOR RESPONSABLE { get; set; }
+
+		/// <summary>
+		/// FK_SALIDADET_SALIDA_BackReference
+		/// </summary>
+		[Association(ThisKey="SALIDAID", OtherKey="SALIDAID", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<SALIDADET> SALIDADETs { get; set; }
+
+		#endregion
+	}
+
+	[Table("SALIDADET")]
+	public partial class SALIDADET
+	{
+		[PrimaryKey, NotNull    ] public int      SALIDADETID { get; set; } // integer
+		[Column,     NotNull    ] public int      SALIDAID    { get; set; } // integer
+		[Column,        Nullable] public int?     INSUMOID    { get; set; } // integer
+		[Column,        Nullable] public decimal? CANTIDAD    { get; set; } // numeric(15,4)
+		[Column,        Nullable] public decimal? CANTIDADRET { get; set; } // numeric(15,4)
+		[Column,        Nullable] public string   NOTAS       { get; set; } // blob sub_type 1
+
+		#region Associations
+
+		/// <summary>
+		/// FK_SALIDADET_INSUMO
+		/// </summary>
+		[Association(ThisKey="INSUMOID", OtherKey="INSUMOID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_SALIDADET_INSUMO", BackReferenceName="SALIDADETs")]
+		public INSUMO INSUMO { get; set; }
+
+		/// <summary>
+		/// FK_SALIDADET_SALIDA
+		/// </summary>
+		[Association(ThisKey="SALIDAID", OtherKey="SALIDAID", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_SALIDADET_SALIDA", BackReferenceName="SALIDADETs")]
+		public SALIDA SALIDA { get; set; }
+
+		#endregion
 	}
 
 	[Table("TIPOINSUMO")]
@@ -481,6 +562,18 @@ namespace Comparsa.Data
 		{
 			return table.FirstOrDefault(t =>
 				t.NUMEROBLOQID == NUMEROBLOQID);
+		}
+
+		public static SALIDA Find(this ITable<SALIDA> table, int SALIDAID)
+		{
+			return table.FirstOrDefault(t =>
+				t.SALIDAID == SALIDAID);
+		}
+
+		public static SALIDADET Find(this ITable<SALIDADET> table, int SALIDADETID)
+		{
+			return table.FirstOrDefault(t =>
+				t.SALIDADETID == SALIDADETID);
 		}
 
 		public static TIPOINSUMO Find(this ITable<TIPOINSUMO> table, int TIPOINSUMOID)

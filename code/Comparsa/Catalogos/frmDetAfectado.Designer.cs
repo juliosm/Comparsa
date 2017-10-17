@@ -40,6 +40,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.checkListReqs = new System.Windows.Forms.CheckedListBox();
             this.edNotas = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.edDictamen = new System.Windows.Forms.TextBox();
@@ -64,8 +67,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.edCalle = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.checkListReqs = new System.Windows.Forms.CheckedListBox();
             this.bindingSourceReq = new System.Windows.Forms.BindingSource(this.components);
             this.edEstatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -75,7 +76,6 @@
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).BeginInit();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +86,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(509, 37);
+            this.panel1.Size = new System.Drawing.Size(717, 37);
             this.panel1.TabIndex = 1;
             // 
             // lbTitulo
@@ -106,15 +106,15 @@
             this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Controls.Add(this.btnAceptar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 445);
+            this.panel2.Location = new System.Drawing.Point(0, 402);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(509, 58);
+            this.panel2.Size = new System.Drawing.Size(717, 58);
             this.panel2.TabIndex = 4;
             // 
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar.Location = new System.Drawing.Point(407, 15);
+            this.btnCancelar.Location = new System.Drawing.Point(615, 15);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(90, 31);
             this.btnCancelar.TabIndex = 26;
@@ -125,7 +125,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(311, 15);
+            this.btnAceptar.Location = new System.Drawing.Point(519, 15);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(90, 31);
             this.btnAceptar.TabIndex = 25;
@@ -146,6 +146,7 @@
             // 
             this.edCodigo.Location = new System.Drawing.Point(12, 65);
             this.edCodigo.Name = "edCodigo";
+            this.edCodigo.ReadOnly = true;
             this.edCodigo.Size = new System.Drawing.Size(100, 23);
             this.edCodigo.TabIndex = 1;
             // 
@@ -172,15 +173,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 95);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(488, 342);
+            this.tabControl1.Size = new System.Drawing.Size(696, 299);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.panel3);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.checkListReqs);
             this.tabPage2.Controls.Add(this.edNotas);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.edDictamen);
@@ -192,23 +195,49 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(480, 314);
+            this.tabPage2.Size = new System.Drawing.Size(688, 271);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Generales";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Location = new System.Drawing.Point(354, 31);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(4, 221);
+            this.panel3.TabIndex = 21;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(364, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 15);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Requerimientos";
+            // 
+            // checkListReqs
+            // 
+            this.checkListReqs.CheckOnClick = true;
+            this.checkListReqs.FormattingEnabled = true;
+            this.checkListReqs.Location = new System.Drawing.Point(367, 31);
+            this.checkListReqs.Name = "checkListReqs";
+            this.checkListReqs.Size = new System.Drawing.Size(297, 220);
+            this.checkListReqs.TabIndex = 16;
+            // 
             // edNotas
             // 
-            this.edNotas.Location = new System.Drawing.Point(18, 172);
+            this.edNotas.Location = new System.Drawing.Point(18, 177);
             this.edNotas.Multiline = true;
             this.edNotas.Name = "edNotas";
-            this.edNotas.Size = new System.Drawing.Size(326, 73);
+            this.edNotas.Size = new System.Drawing.Size(326, 75);
             this.edNotas.TabIndex = 15;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(18, 154);
+            this.label13.Location = new System.Drawing.Point(18, 157);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(38, 15);
             this.label13.TabIndex = 14;
@@ -219,7 +248,7 @@
             this.edDictamen.Location = new System.Drawing.Point(18, 76);
             this.edDictamen.Multiline = true;
             this.edDictamen.Name = "edDictamen";
-            this.edDictamen.Size = new System.Drawing.Size(326, 73);
+            this.edDictamen.Size = new System.Drawing.Size(326, 75);
             this.edDictamen.TabIndex = 13;
             // 
             // label10
@@ -279,10 +308,10 @@
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.edCalle);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(480, 314);
+            this.tabPage1.Size = new System.Drawing.Size(688, 273);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Domicilio";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -410,28 +439,6 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Calle";
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.checkListReqs);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(480, 314);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Requerimientos";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // checkListReqs
-            // 
-            this.checkListReqs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkListReqs.CheckOnClick = true;
-            this.checkListReqs.FormattingEnabled = true;
-            this.checkListReqs.Location = new System.Drawing.Point(11, 10);
-            this.checkListReqs.Name = "checkListReqs";
-            this.checkListReqs.Size = new System.Drawing.Size(297, 238);
-            this.checkListReqs.TabIndex = 0;
-            // 
             // edEstatus
             // 
             this.edEstatus.DisplayMember = "Display";
@@ -460,7 +467,7 @@
             // frmDetAfectado
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(509, 503);
+            this.ClientSize = new System.Drawing.Size(717, 460);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.edEstatus);
             this.Controls.Add(this.tabControl1);
@@ -471,6 +478,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmDetAfectado";
@@ -488,7 +496,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).EndInit();
-            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceReq)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -534,8 +541,9 @@
         private System.Windows.Forms.TextBox edMunicipio;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.BindingSource bindingSourceLocalidad;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.BindingSource bindingSourceReq;
+        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckedListBox checkListReqs;
+        private System.Windows.Forms.Panel panel3;
     }
 }

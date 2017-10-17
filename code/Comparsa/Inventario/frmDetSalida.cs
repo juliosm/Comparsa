@@ -14,25 +14,25 @@ using QuanterLibNET;
 
 namespace Comparsa
 {
-    public partial class frmDetEntrada : Form
+    public partial class frmDetSalida : Form
     {
 
-        public ENTRADA registro = null;
+        public SALIDA registro = null;
         public CRUDMode mode = CRUDMode.Create;
 
-        private List<ENTRADADET> listaDetalle = null;
+        private List<SALIDADET> listaDetalle = null;
         private List<INSUMO> listaInsumos = null;
 
         private INSUMO insumoSeleccionado = null;
         private COLABORADOR responsableSeleccionado = null;
-        private COLABORADOR donanteSeleccionado = null;
+        private LOCALIDAD localidadSeleccionada = null;
 
-        public frmDetEntrada()
+        public frmDetSalida()
         {
             InitializeComponent();
         }
 
-        private void frmDetEntrada_Load(object sender, EventArgs e)
+        private void frmDetSalida_Load(object sender, EventArgs e)
         {
 
             using (var db = Globals.DataContext.CreateDataConnection())
@@ -42,19 +42,22 @@ namespace Comparsa
 
                 LoadWindowConfig();
 
-                listaDetalle = new List<ENTRADADET>();
+                listaDetalle = new List<SALIDADET>();
                 listaInsumos = new List<INSUMO>();
 
                 CargarComboInsumos(db);
                 edInsumo.SelectedIndex = -1;
 
+                CargarComboLocalidades(db);
+                edLocalidad.SelectedIndex = -1;
+
                 switch (mode)
                 {
                     case CRUDMode.Create:
 
-                        registro = new ENTRADA();
+                        registro = new SALIDA();
 
-                        titulo = "Nueva entrada a almacén";
+                        titulo = "Nueva salida de almacén";
 
                         GenerarNumero(db);
 
@@ -65,7 +68,7 @@ namespace Comparsa
 
                     case CRUDMode.Update:
                         MapearObjetoAPantalla(db);
-                        titulo = "Modificar salida a almacén";
+                        titulo = "Modificar salida de almacén";
                         break;
 
                 }
@@ -81,7 +84,7 @@ namespace Comparsa
 
         }
 
-        private void frmDetEntrada_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmDetSalida_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (mode == CRUDMode.Create)
             {
@@ -90,7 +93,7 @@ namespace Comparsa
             SaveWindowConfig();
         }
 
-        private void frmDetEntrada_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmDetSalida_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.DialogResult == DialogResult.Cancel)
             {
@@ -114,8 +117,8 @@ namespace Comparsa
         private void GenerarNumero(DataConnection db)
         {
 
-            edNumero.Text = Globals.DataContext.GenerarNumero(db, Consts.TIPO_NUMERO_ENTRADA_ALMACEN);
-            edNumero.Tag = Globals.DataContext.BloquearNumero(db, Consts.TIPO_NUMERO_ENTRADA_ALMACEN,
+            edNumero.Text = Globals.DataContext.GenerarNumero(db, Consts.TIPO_NUMERO_SALIDA_ALMACEN);
+            edNumero.Tag = Globals.DataContext.BloquearNumero(db, Consts.TIPO_NUMERO_SALIDA_ALMACEN,
                 edNumero.Text);
 
         }
@@ -124,6 +127,11 @@ namespace Comparsa
         {
             listaInsumos = db.GetTable<INSUMO>().ToList();
             bindingSourceInsumo.DataSource = listaInsumos;
+        }
+
+        private void CargarComboLocalidades(DataConnection db)
+        {
+            bindingSourceLocalidad.DataSource = db.GetTable<LOCALIDAD>().ToList();
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -147,7 +155,7 @@ namespace Comparsa
                     if (mode == CRUDMode.Create)
                     {
                         id = Convert.ToInt32(db.InsertWithIdentity(registro));
-                        registro.ENTRADAID = id;
+                        registro.SALIDAID = id;
                     }
                     else if (mode == CRUDMode.Update)
                     {
@@ -173,18 +181,18 @@ namespace Comparsa
             if (mode != CRUDMode.Create)
             {
 
-                var reg = db.GetTable<ENTRADA>().LoadWith(a => a.ENTRADADETs).FirstOrDefault(x => x.ENTRADAID == registro.ENTRADAID);
+                var reg = db.GetTable<SALIDA>().LoadWith(a => a.SALIDADETs).FirstOrDefault(x => x.SALIDAID == registro.SALIDAID);
 
                 if (reg != null)
                 {
 
-                    if (reg.ENTRADADETs != null)
+                    if (reg.SALIDADETs != null)
                     {
 
-                        foreach (var entradaDet in reg.ENTRADADETs)
+                        foreach (var entradaDet in reg.SALIDADETs)
                         {
 
-                            bool found = listaDetalle.FirstOrDefault(x => x.ENTRADADETID == entradaDet.ENTRADADETID) != null;
+                            bool found = listaDetalle.FirstOrDefault(x => x.SALIDADETID == entradaDet.SALIDADETID) != null;
 
                             if (!found)
                             {
@@ -208,9 +216,9 @@ namespace Comparsa
             foreach (var entradaDet in listaDetalle)
             {
 
-                if (entradaDet.ENTRADAID == 0)
+                if (entradaDet.SALIDAID == 0)
                 {
-                    entradaDet.ENTRADAID = registro.ENTRADAID;
+                    entradaDet.SALIDAID = registro.SALIDAID;
                 }
 
                 db.InsertOrReplace(entradaDet);
@@ -240,9 +248,9 @@ namespace Comparsa
                 mensaje += "Debe especificar la hora.\n";
             }
 
-            if (donanteSeleccionado == null)
+            if (localidadSeleccionada == null)
             {
-                mensaje += "Debe especificar el donante.\n";
+                mensaje += "Debe especificar la localidad.\n";
             }
 
             if (responsableSeleccionado == null)
@@ -272,36 +280,37 @@ namespace Comparsa
             registro.FECHA = edFecha.Value;
             registro.HORA = edHora.Value.TimeOfDay;
             registro.NOTAS = edNotas.Text;
-            if (donanteSeleccionado != null)
-            {
-                registro.DONANTEID = donanteSeleccionado.COLABORADORID;
-            }
             if (responsableSeleccionado != null)
             {
                 registro.RESPONSABLEID = responsableSeleccionado.COLABORADORID;
             }
+            if (localidadSeleccionada != null)
+            {
+                registro.LOCALIDADID = localidadSeleccionada.LOCALIDADID;
+            }
+
         }
 
         private void MapearObjetoAPantalla(DataConnection db)
         {
 
-            registro.DONANTE = db.GetTable<COLABORADOR>().FirstOrDefault(x => x.COLABORADORID == registro.DONANTEID);
             registro.RESPONSABLE = db.GetTable<COLABORADOR>().FirstOrDefault(x => x.COLABORADORID == registro.RESPONSABLEID);
+            registro.LOCALIDAD = db.GetTable<LOCALIDAD>().FirstOrDefault(x => x.LOCALIDADID == registro.LOCALIDADID);
 
-            donanteSeleccionado = registro.DONANTE;
             responsableSeleccionado = registro.RESPONSABLE;
+            localidadSeleccionada = registro.LOCALIDAD;
 
             edNumero.Text = registro.NUMERO;
             edFecha.Value = registro.FECHA.Value;
             edHora.Value = Consts.BaseDateTime.Add(registro.HORA.Value);
             edNotas.Text = registro.NOTAS;
-            if (donanteSeleccionado != null)
-            {
-                edDonante.Text = donanteSeleccionado.NOMBRE;
-            }
             if (responsableSeleccionado != null)
             {
                 edResponsable.Text = responsableSeleccionado.NOMBRE;
+            }
+            if (localidadSeleccionada != null)
+            {
+                edLocalidad.SelectedIndex = edLocalidad.FindStringExact(localidadSeleccionada.NOMBRE);
             }
 
             CargarDetalle(db);
@@ -312,14 +321,14 @@ namespace Comparsa
         {
 
             var q = (
-                from d in db.GetTable<ENTRADADET>().LoadWith(a => a.INSUMO)
+                from d in db.GetTable<SALIDADET>().LoadWith(a => a.INSUMO)
                 where
-                    (d.ENTRADAID == registro.ENTRADAID)
+                    (d.SALIDAID == registro.SALIDAID)
                 select d);
 
-            foreach (var inventarioDet in q)
+            foreach (var salidaDet in q)
             {
-                listaDetalle.Add(inventarioDet);
+                listaDetalle.Add(salidaDet);
             }
 
             bindingSourceDetalle.ResetBindings(false);
@@ -355,12 +364,13 @@ namespace Comparsa
             if (ValidarInsumo())
             {
 
-                ENTRADADET entradaDet = new ENTRADADET();
-                entradaDet.INSUMOID = insumoSeleccionado.INSUMOID;
-                entradaDet.INSUMO = insumoSeleccionado;
-                entradaDet.CANTIDAD = edCantidad.Value;
+                SALIDADET salidaDet = new SALIDADET();
+                salidaDet.INSUMOID = insumoSeleccionado.INSUMOID;
+                salidaDet.INSUMO = insumoSeleccionado;
+                salidaDet.CANTIDAD = edCantidad.Value;
+                salidaDet.CANTIDADRET = 0;
 
-                listaDetalle.Add(entradaDet);
+                listaDetalle.Add(salidaDet);
 
                 bindingSourceDetalle.ResetBindings(false);
 
@@ -499,10 +509,10 @@ namespace Comparsa
             {
 
                 DataGridViewRow row = null;
-                ENTRADADET registro = null;
+                SALIDADET registro = null;
 
                 row = gridViewDetalle.SelectedRows[0];
-                registro = (ENTRADADET)row.DataBoundItem;
+                registro = (SALIDADET)row.DataBoundItem;
 
                 if (registro != null)
                 {
@@ -537,57 +547,25 @@ namespace Comparsa
             DialogResult dr = DialogResult.Cancel;
 
             DataGridViewRow row = null;
-            ENTRADADET registro = null;
+            SALIDADET registro = null;
 
             if (mode == CRUDMode.Update)
             {
                 row = gridViewDetalle.SelectedRows[0];
-                registro = (ENTRADADET)row.DataBoundItem;
+                registro = (SALIDADET)row.DataBoundItem;
             }
 
-            frmDetEntradaInsumo frmDetEntradaInsumo = new frmDetEntradaInsumo();
-            frmDetEntradaInsumo.mode = mode;
+            frmDetSalidaInsumo frmDetSalidaInsumo = new frmDetSalidaInsumo();
+            frmDetSalidaInsumo.mode = mode;
             if (mode == CRUDMode.Update)
             {
-                frmDetEntradaInsumo.registro = registro;
+                frmDetSalidaInsumo.registro = registro;
             }
-            dr = frmDetEntradaInsumo.ShowDialog();
-            frmDetEntradaInsumo.Dispose();
-            frmDetEntradaInsumo = null;
+            dr = frmDetSalidaInsumo.ShowDialog();
+            frmDetSalidaInsumo.Dispose();
+            frmDetSalidaInsumo = null;
 
             result = dr == DialogResult.OK;
-
-            return result;
-
-        }
-
-        private void btnBuscarDonante_Click(object sender, EventArgs e)
-        {
-            BuscarDonante();
-        }
-
-        private bool BuscarDonante()
-        {
-
-            bool result = false;
-            DialogResult dr = DialogResult.Cancel;
-
-            frmBuscarColaborador frmBuscarColaborador = new frmBuscarColaborador();
-            frmBuscarColaborador.FlagSoloDonantes = true;
-            dr = frmBuscarColaborador.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                donanteSeleccionado = frmBuscarColaborador.registro;
-            }
-            frmBuscarColaborador.Dispose();
-            frmBuscarColaborador = null;
-
-            if (donanteSeleccionado != null)
-            {
-                edDonante.Text = donanteSeleccionado.NOMBRE;
-            }
-
-            result = (dr == DialogResult.OK);
 
             return result;
 
@@ -625,25 +603,9 @@ namespace Comparsa
             BuscarResponsable();
         }
 
-        private void btnAgregarDonante_Click(object sender, EventArgs e)
-        {
-            AgregarDonante();
-        }
-
         private void btnAgregarResponsable_Click(object sender, EventArgs e)
         {
             AgregarBrigadista();
-        }
-
-        private bool AgregarDonante()
-        {
-
-            bool result = false;
-
-            result = AgregarColaborador(true, false);
-
-            return result;
-
         }
 
         private bool AgregarBrigadista()
@@ -674,6 +636,37 @@ namespace Comparsa
             result = dr == DialogResult.OK;
 
             return result;
+
+        }
+
+        private void edLocalidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarInfoLocalidadSeleccionada();
+        }
+
+        private void CargarInfoLocalidadSeleccionada()
+        {
+
+            if (edLocalidad.Text != "")
+            {
+
+                using (var db = Globals.DataContext.CreateDataConnection())
+                {
+
+                    int localidadId = Convert.ToInt32(edLocalidad.SelectedValue);
+                    localidadSeleccionada = TableExtensions.Find(db.GetTable<LOCALIDAD>(), localidadId);
+
+                    edMunicipio.Text = localidadSeleccionada.MUNICIPIO;
+                    edEstado.Text = localidadSeleccionada.ESTADO;
+
+                }
+
+            }
+            else
+            {
+                edMunicipio.Text = "";
+                edEstado.Text = "";
+            }
 
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace Comparsa
 {
-    partial class frmDetEntrada
+    partial class frmDetSalida
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetEntrada));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetSalida));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbTitulo = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -47,6 +47,7 @@
             this.iNSUMOIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colINSUMONOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCANTIDAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCANTIDADRET = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNOTAS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSourceDetalle = new System.Windows.Forms.BindingSource(this.components);
             this.panelAgregarInsumo = new System.Windows.Forms.Panel();
@@ -61,16 +62,19 @@
             this.menuDetalle = new System.Windows.Forms.ToolStrip();
             this.btnModificarDetalle = new System.Windows.Forms.ToolStripButton();
             this.btnQuitarInsumo = new System.Windows.Forms.ToolStripButton();
+            this.edNotas = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.edDonante = new System.Windows.Forms.TextBox();
-            this.btnBuscarDonante = new System.Windows.Forms.Button();
             this.btnBuscarResponsable = new System.Windows.Forms.Button();
             this.edResponsable = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.btnAgregarDonante = new System.Windows.Forms.Button();
             this.btnAgregarResponsable = new System.Windows.Forms.Button();
-            this.edNotas = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.edLocalidad = new System.Windows.Forms.ComboBox();
+            this.edEstado = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.edMunicipio = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.bindingSourceLocalidad = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -80,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceInsumo)).BeginInit();
             this.menuDetalle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -100,16 +105,16 @@
             this.lbTitulo.ForeColor = System.Drawing.Color.White;
             this.lbTitulo.Location = new System.Drawing.Point(8, 10);
             this.lbTitulo.Name = "lbTitulo";
-            this.lbTitulo.Size = new System.Drawing.Size(134, 17);
+            this.lbTitulo.Size = new System.Drawing.Size(131, 17);
             this.lbTitulo.TabIndex = 2;
-            this.lbTitulo.Text = "Entrada a almacén";
+            this.lbTitulo.Text = "Salida de almacén";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Controls.Add(this.btnAceptar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 486);
+            this.panel2.Location = new System.Drawing.Point(0, 485);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(722, 58);
             this.panel2.TabIndex = 5;
@@ -193,7 +198,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 211);
+            this.label4.Location = new System.Drawing.Point(12, 217);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(135, 19);
             this.label4.TabIndex = 10;
@@ -207,9 +212,9 @@
             this.panel3.Controls.Add(this.gridViewDetalle);
             this.panel3.Controls.Add(this.panelAgregarInsumo);
             this.panel3.Controls.Add(this.menuDetalle);
-            this.panel3.Location = new System.Drawing.Point(12, 237);
+            this.panel3.Location = new System.Drawing.Point(12, 245);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(696, 238);
+            this.panel3.Size = new System.Drawing.Size(696, 230);
             this.panel3.TabIndex = 11;
             // 
             // gridViewDetalle
@@ -222,6 +227,7 @@
             this.iNSUMOIDDataGridViewTextBoxColumn,
             this.colINSUMONOMBRE,
             this.colCANTIDAD,
+            this.colCANTIDADRET,
             this.colNOTAS});
             this.gridViewDetalle.DataSource = this.bindingSourceDetalle;
             this.gridViewDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -234,7 +240,7 @@
             this.gridViewDetalle.ShowCellToolTips = false;
             this.gridViewDetalle.ShowEditingIcon = false;
             this.gridViewDetalle.ShowRowErrors = false;
-            this.gridViewDetalle.Size = new System.Drawing.Size(696, 173);
+            this.gridViewDetalle.Size = new System.Drawing.Size(696, 165);
             this.gridViewDetalle.TabIndex = 2;
             this.gridViewDetalle.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridViewDetalle_CellFormatting);
             // 
@@ -261,6 +267,13 @@
             this.colCANTIDAD.Name = "colCANTIDAD";
             this.colCANTIDAD.ReadOnly = true;
             // 
+            // colCANTIDADRET
+            // 
+            this.colCANTIDADRET.DataPropertyName = "CANTIDADRET";
+            this.colCANTIDADRET.HeaderText = "Retornado";
+            this.colCANTIDADRET.Name = "colCANTIDADRET";
+            this.colCANTIDADRET.ReadOnly = true;
+            // 
             // colNOTAS
             // 
             this.colNOTAS.DataPropertyName = "NOTAS";
@@ -271,7 +284,7 @@
             // 
             // bindingSourceDetalle
             // 
-            this.bindingSourceDetalle.DataSource = typeof(Comparsa.Data.ENTRADADET);
+            this.bindingSourceDetalle.DataSource = typeof(Comparsa.Data.SALIDADET);
             // 
             // panelAgregarInsumo
             // 
@@ -388,49 +401,27 @@
             this.btnQuitarInsumo.Text = "Quitar";
             this.btnQuitarInsumo.Click += new System.EventHandler(this.btnQuitarInsumo_Click);
             // 
+            // edNotas
+            // 
+            this.edNotas.Location = new System.Drawing.Point(11, 162);
+            this.edNotas.Multiline = true;
+            this.edNotas.Name = "edNotas";
+            this.edNotas.Size = new System.Drawing.Size(340, 46);
+            this.edNotas.TabIndex = 10;
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 144);
+            this.label13.Location = new System.Drawing.Point(8, 144);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(38, 15);
             this.label13.TabIndex = 16;
             this.label13.Text = "Notas";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 100);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 15);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "Donante";
-            // 
-            // edDonante
-            // 
-            this.edDonante.Location = new System.Drawing.Point(12, 118);
-            this.edDonante.Multiline = true;
-            this.edDonante.Name = "edDonante";
-            this.edDonante.ReadOnly = true;
-            this.edDonante.Size = new System.Drawing.Size(270, 23);
-            this.edDonante.TabIndex = 7;
-            // 
-            // btnBuscarDonante
-            // 
-            this.btnBuscarDonante.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscarDonante.Image")));
-            this.btnBuscarDonante.Location = new System.Drawing.Point(288, 114);
-            this.btnBuscarDonante.Name = "btnBuscarDonante";
-            this.btnBuscarDonante.Size = new System.Drawing.Size(31, 28);
-            this.btnBuscarDonante.TabIndex = 8;
-            this.btnBuscarDonante.TabStop = false;
-            this.btnBuscarDonante.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBuscarDonante.UseVisualStyleBackColor = true;
-            this.btnBuscarDonante.Click += new System.EventHandler(this.btnBuscarDonante_Click);
-            // 
             // btnBuscarResponsable
             // 
             this.btnBuscarResponsable.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscarResponsable.Image")));
-            this.btnBuscarResponsable.Location = new System.Drawing.Point(634, 66);
+            this.btnBuscarResponsable.Location = new System.Drawing.Point(584, 66);
             this.btnBuscarResponsable.Name = "btnBuscarResponsable";
             this.btnBuscarResponsable.Size = new System.Drawing.Size(31, 28);
             this.btnBuscarResponsable.TabIndex = 5;
@@ -445,7 +436,7 @@
             this.edResponsable.Multiline = true;
             this.edResponsable.Name = "edResponsable";
             this.edResponsable.ReadOnly = true;
-            this.edResponsable.Size = new System.Drawing.Size(270, 23);
+            this.edResponsable.Size = new System.Drawing.Size(220, 23);
             this.edResponsable.TabIndex = 4;
             // 
             // label9
@@ -457,22 +448,10 @@
             this.label9.TabIndex = 23;
             this.label9.Text = "Responsable";
             // 
-            // btnAgregarDonante
-            // 
-            this.btnAgregarDonante.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarDonante.Image")));
-            this.btnAgregarDonante.Location = new System.Drawing.Point(321, 114);
-            this.btnAgregarDonante.Name = "btnAgregarDonante";
-            this.btnAgregarDonante.Size = new System.Drawing.Size(31, 28);
-            this.btnAgregarDonante.TabIndex = 9;
-            this.btnAgregarDonante.TabStop = false;
-            this.btnAgregarDonante.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarDonante.UseVisualStyleBackColor = true;
-            this.btnAgregarDonante.Click += new System.EventHandler(this.btnAgregarDonante_Click);
-            // 
             // btnAgregarResponsable
             // 
             this.btnAgregarResponsable.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarResponsable.Image")));
-            this.btnAgregarResponsable.Location = new System.Drawing.Point(667, 66);
+            this.btnAgregarResponsable.Location = new System.Drawing.Point(617, 66);
             this.btnAgregarResponsable.Name = "btnAgregarResponsable";
             this.btnAgregarResponsable.Size = new System.Drawing.Size(31, 28);
             this.btnAgregarResponsable.TabIndex = 6;
@@ -481,27 +460,82 @@
             this.btnAgregarResponsable.UseVisualStyleBackColor = true;
             this.btnAgregarResponsable.Click += new System.EventHandler(this.btnAgregarResponsable_Click);
             // 
-            // edNotas
+            // label8
             // 
-            this.edNotas.Location = new System.Drawing.Point(12, 162);
-            this.edNotas.Multiline = true;
-            this.edNotas.Name = "edNotas";
-            this.edNotas.Size = new System.Drawing.Size(340, 46);
-            this.edNotas.TabIndex = 10;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 97);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 15);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Localidad";
             // 
-            // frmDetEntrada
+            // edLocalidad
+            // 
+            this.edLocalidad.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.edLocalidad.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.edLocalidad.DataSource = this.bindingSourceLocalidad;
+            this.edLocalidad.DisplayMember = "NOMBRE";
+            this.edLocalidad.FormattingEnabled = true;
+            this.edLocalidad.Location = new System.Drawing.Point(12, 115);
+            this.edLocalidad.Name = "edLocalidad";
+            this.edLocalidad.Size = new System.Drawing.Size(220, 23);
+            this.edLocalidad.TabIndex = 7;
+            this.edLocalidad.ValueMember = "LOCALIDADID";
+            this.edLocalidad.SelectedIndexChanged += new System.EventHandler(this.edLocalidad_SelectedIndexChanged);
+            // 
+            // edEstado
+            // 
+            this.edEstado.Location = new System.Drawing.Point(446, 115);
+            this.edEstado.Name = "edEstado";
+            this.edEstado.ReadOnly = true;
+            this.edEstado.Size = new System.Drawing.Size(202, 23);
+            this.edEstado.TabIndex = 9;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(446, 97);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 15);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Estado";
+            // 
+            // edMunicipio
+            // 
+            this.edMunicipio.Location = new System.Drawing.Point(238, 115);
+            this.edMunicipio.Name = "edMunicipio";
+            this.edMunicipio.ReadOnly = true;
+            this.edMunicipio.Size = new System.Drawing.Size(202, 23);
+            this.edMunicipio.TabIndex = 8;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(238, 97);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(61, 15);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Municipio";
+            // 
+            // bindingSourceLocalidad
+            // 
+            this.bindingSourceLocalidad.DataSource = typeof(Comparsa.Data.LOCALIDAD);
+            // 
+            // frmDetSalida
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(722, 544);
-            this.Controls.Add(this.edNotas);
+            this.ClientSize = new System.Drawing.Size(722, 543);
+            this.Controls.Add(this.edEstado);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.edMunicipio);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.edLocalidad);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.btnAgregarResponsable);
-            this.Controls.Add(this.btnAgregarDonante);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnBuscarResponsable);
             this.Controls.Add(this.edResponsable);
-            this.Controls.Add(this.btnBuscarDonante);
-            this.Controls.Add(this.edDonante);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.edNotas);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label4);
@@ -516,12 +550,12 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmDetEntrada";
+            this.Name = "frmDetSalida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Entrada a almacén";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDetEntrada_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDetEntrada_FormClosed);
-            this.Load += new System.EventHandler(this.frmDetEntrada_Load);
+            this.Text = "Salida de almacén";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDetSalida_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDetSalida_FormClosed);
+            this.Load += new System.EventHandler(this.frmDetSalida_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -535,6 +569,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceInsumo)).EndInit();
             this.menuDetalle.ResumeLayout(false);
             this.menuDetalle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceLocalidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -566,22 +601,26 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.BindingSource bindingSourceDetalle;
         private System.Windows.Forms.BindingSource bindingSourceInsumo;
+        private System.Windows.Forms.TextBox edNotas;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox edExistTeorica;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripButton btnModificarDetalle;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox edDonante;
-        private System.Windows.Forms.Button btnBuscarDonante;
         private System.Windows.Forms.Button btnBuscarResponsable;
         private System.Windows.Forms.TextBox edResponsable;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnAgregarResponsable;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox edLocalidad;
+        private System.Windows.Forms.TextBox edEstado;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox edMunicipio;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridViewTextBoxColumn iNSUMOIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colINSUMONOMBRE;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCANTIDAD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCANTIDADRET;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNOTAS;
-        private System.Windows.Forms.Button btnAgregarDonante;
-        private System.Windows.Forms.Button btnAgregarResponsable;
-        private System.Windows.Forms.TextBox edNotas;
+        private System.Windows.Forms.BindingSource bindingSourceLocalidad;
     }
 }

@@ -28,42 +28,86 @@ namespace Comparsa
         private void frmDetInsumo_Load(object sender, EventArgs e)
         {
 
-            string titulo = "";
-
-            LoadWindowConfig();
-
-            CargarListados();
-
-            edTipoInsumo.SelectedIndex = -1;
-
-            switch (mode)
+            using (var db = Globals.DataContext.CreateDataConnection())
             {
-                case CRUDMode.Create:
-                    registro = new INSUMO();
-                    registro.TOTALENTRADAS = 0;
-                    registro.TOTALSALIDAS = 0;
-                    registro.EXISTENCIA = 0;
-                    titulo = "Agregar insumo";
-                    break;
 
-                case CRUDMode.Update:
-                    MapearObjetoAPantalla();
-                    titulo = "Modificar insumo";
-                    break;
+                string titulo = "";
+
+                LoadWindowConfig();
+
+                CargarListados();
+
+                edTipoInsumo.SelectedIndex = -1;
+
+                switch (mode)
+                {
+                    case CRUDMode.Create:
+
+                        registro = new INSUMO();
+                        registro.TOTALENTRADAS = 0;
+                        registro.TOTALSALIDAS = 0;
+                        registro.EXISTENCIA = 0;
+
+                        GenerarCodigo(db);
+
+                        titulo = "Agregar insumo";
+
+                        break;
+
+                    case CRUDMode.Update:
+                        MapearObjetoAPantalla();
+                        titulo = "Modificar insumo";
+                        break;
+
+                }
+
+                lbTitulo.Text = titulo;
+                this.Text = titulo;
+
+                edCodigo.Focus();
 
             }
 
-            lbTitulo.Text = titulo;
-            this.Text = titulo;
-
-            edCodigo.Focus();
-
         }
 
+        private void frmDetInsumo_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (mode == CRUDMode.Create)
+            {
+                DesbloquearNumero();
+            }
+            SaveWindowConfig();
+        }
+
+        private void frmDetInsumo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                if (!AppUtils.MsgConfirmation("¿Desea cancelar los cambios en el registro?", "Por favor confirme"))
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             CancelarCaptura();
+        }
+
+        private void GenerarCodigo(DataConnection db)
+        {
+            edCodigo.Text = Globals.DataContext.GenerarNumero(db, Consts.TIPO_CODIGO_INSUMO);
+            edCodigo.Tag = Globals.DataContext.BloquearNumero(db, Consts.TIPO_CODIGO_INSUMO,
+                edCodigo.Text);
+        }
+
+        private void DesbloquearNumero()
+        {
+            using (var db = Globals.DataContext.CreateDataConnection())
+            {
+                Globals.DataContext.DesbloquearNumero(db, (NUMEROBLOQ)edCodigo.Tag);
+            }
         }
 
         private void CargarListados()
@@ -183,28 +227,14 @@ namespace Comparsa
 
         private void LoadWindowConfig()
         {
-            AppUtils.LoadWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
+            AppUtils.LoadWindowConfig(Globals.GXmlConfigUser, this, false, true, true);
         }
 
         private void SaveWindowConfig()
         {
-            AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, true, true, true);
+            AppUtils.SaveWindowConfig(Globals.GXmlConfigUser, this, false, true, true);
         }
 
-        private void frmDetInsumo_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            SaveWindowConfig();
-        }
-
-        private void frmDetInsumo_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (this.DialogResult == DialogResult.Cancel)
-            {
-                if (!AppUtils.MsgConfirmation("¿Desea cancelar los cambios en el registro?", "Por favor confirme"))
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
     }
+
 }
