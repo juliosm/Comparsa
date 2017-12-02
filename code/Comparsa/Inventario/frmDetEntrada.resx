@@ -146,24 +146,39 @@
   <metadata name="menuDetalle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="colINSUMONOMBRE.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colCANTIDAD.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colNOTAS.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="bindingSourceDetalle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>138, 17</value>
+  </metadata>
+  <metadata name="bindingSourceInsumo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>301, 23</value>
+  </metadata>
   <data name="btnModificarDetalle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVDhPlZM7CsJQEEUHLGxchXsQLLS2t7KysLfIEqzd
-        gYWFK3APovgvLFTED6ZQUEEwIAqaMXfMC0kwHy9ceG9m7kkCGYL6ROUx0WBEtItje7bshLtEplXkf4yM
+        gYWFK3APivgvLFTED6ZQUEEwIAqaMXfMC0kwHy9ceG9m7kkCGYL6ROUx0WBEtItje7bshLtEplXkf4yM
         QKzLEIVzs8lh2lUqPE2l+Fiv87pYVKAh2a/Epml6nuA3wkanIzDMAoKsA4D8IWV3WOnabscD/Aq/DIOX
         uVw0IDCcz0s/ErAplaSu5A7DoYBTo8GrQoEPtZr0XrebJwwHAibJJL/vdzEguqbJN6P31PVowDyTkTv0
         2G55nEg4PUidAwGzdJr31SovsllP2D8XCAize04A1kF+5UurJc0oYU4BkKXedxPdxdjGIspG2pC/1vkb
-        JvoAgUdHojay3N4AAAAASUVORK5CYII=
+        JvoAeedHoNek1dkAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnQuitarInsumo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPYwCBEwwMcWcYGE6eZmC4TwyGqo2Da97FwPAP
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPYwCBEwwMcWcYGE6eZmC4TwyGqo2Da97JwPAP
         KPifFAzSAzYEyDmFLkkCPsUAdRI2SYIYpHeQGXAvKur/w9xcvPhuZCRuA/79+fOfEPj74wduA0CShMCf
         L19wG3BZReX/NWNjOL5ubg7BVlb/r1tagtmX1dRwG0AqHiQGABmUJeVjkJyITZIgBmVEcI6EGkJSdoZo
-        ZmAAAG+58LJog0FGAAAAAElFTkSuQmCC
+        ZmAAAGhZ8LDBlfpwAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnBuscarDonante.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

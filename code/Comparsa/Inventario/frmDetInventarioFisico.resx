@@ -146,24 +146,39 @@
   <metadata name="menuDetalle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="colINSUMONOMBRE.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colEXISTREAL.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colEXISTDIFERENCIA.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="bindingSourceDetalle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>138, 17</value>
+  </metadata>
+  <metadata name="bindingSourceInsumo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>301, 23</value>
+  </metadata>
   <data name="btnModificarDetalle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVDhPlZM7CsJQEEUHLGxchXsQLGJtb2VlYW/hEqzd
-        gYWFK3APgvgvLFTED6ZQUEFIQBQ0Y+6YF5JgPl648N7M3JMEMgQNiCoTouGYaJ/EzmzFDQ+JLLvI/xgZ
-        gdiXEQqXdpujtK9WeZbJ8KnZ5E2ppEAjcl6JLcvyPSFohM1eT2CYBQRZFwAFQ8resNKt200G+BV+mSav
-        NC0eEBouFKQfC9iWy1JX8obhSMC51eJ1scjHRkN6L8PwheFQwDSd5vf9LgZEr9flm9F76no8YJHLyR16
-        7HY8SaXcHqTOoYB5NsuHWo2X+bwvHJwLBUTZOycA+yC/8rXTkWacMKcAyFL/u4neYmJjEWUjHchf6/wN
-        E30AnsdHqoreI9MAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAETSURBVDhPlZM9CsJQEIQXLGw8hXcQLLS2t7KysLfwCNbe
+        IIWFJ/AOgvhfWKiIRkyhoIJgQBQ0a2bNC0kwPw4MvLe78yWBLEEDouqEaDgm2iWxM1t1w7Ytu8j/GBmB
+        2JcRCud2m6O0q9V4lsnwsdXiTbmsQCNyXokty/I9IWiEzV5PYJgFBFkXAAVDyt6w0rXbTQb4FX6ZJq8K
+        hXhAaLhYlH4sYFupSF3JG4YjASdN43WpxIdmU3qv280XhkMB03Sa3/e7GBCj0ZBvRu9pGPGARS4nd+ih
+        6zxJpdwepM6hgHk2y/t6nZf5vC8cnAsFRNk7JwD7IL/ypdORZpwwpwDIUv+7id5iYmMRZSMdyF/r/A0T
+        fQCXZ0eoFThwPgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnQuitarInsumo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPYwCBEwwMcWcYGE6eZmC4TwyGqo2Da97HwPAP
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPYwCBEwwMcWcYGE6eZmC4TwyGqo2Da97LwPAP
         KPifFAzSAzYEyDmFLkkCPsUAdRI2SYIYpHeQGXAvKur/w9xcvPhuZCRuA/79+fOfEPj74wduA0CShMCf
         L19wG3BZReX/NWNjOL5ubg7BVlb/r1tagtmX1dRwG0AqHiQGABmUJeVjkJyITZIgBmVEcI6EGkJSdoZo
-        ZmAAAI058LoB0a9nAAAAAElFTkSuQmCC
+        ZmAAAIXZ8LjwpAQHAAAAAElFTkSuQmCC
 </value>
   </data>
 </root>

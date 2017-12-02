@@ -151,6 +151,11 @@
             // edCantidad
             // 
             this.edCantidad.Location = new System.Drawing.Point(16, 124);
+            this.edCantidad.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.edCantidad.Name = "edCantidad";
             this.edCantidad.Size = new System.Drawing.Size(97, 23);
             this.edCantidad.TabIndex = 2;

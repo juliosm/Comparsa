@@ -189,6 +189,11 @@
             // edExistReal
             // 
             this.edExistReal.Location = new System.Drawing.Point(119, 122);
+            this.edExistReal.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.edExistReal.Name = "edExistReal";
             this.edExistReal.Size = new System.Drawing.Size(97, 23);
             this.edExistReal.TabIndex = 33;
